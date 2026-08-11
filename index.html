@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Craft — Websites Built Like Software, Designed Like Products</title>
+<meta name="description" content="Web Craft designs and builds premium websites and web apps for ambitious businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B0C10;
+  --panel:#14161C;
+  --paper:#F5F3EE;
+  --paper-dim:#EBE8E0;
+  --teal:#35D0C4;
+  --amber:#E8A33D;
+  --danger:#E8776B;
+  --line:rgba(11,12,16,0.12);
+  --line-dark:rgba(245,243,238,0.14);
+  --max:1240px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:'Manrope',sans-serif; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 40px;}
+@media (max-width:720px){.wrap{padding:0 22px;}}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em;}
+a{color:inherit;}
+code{font-family:'JetBrains Mono',monospace;}
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--teal); outline-offset:3px;
+}
+.tag{
+  font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.02em;
+  color:var(--teal); display:inline-flex; align-items:center; gap:8px;
+}
+.tag .brk{opacity:.55;}
+
+/* NAV */
+header{position:sticky; top:0; z-index:60; background:rgba(245,243,238,0.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+nav.wrap{display:flex; align-items:center; justify-content:space-between; height:76px;}
+.logo{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; display:flex; align-items:center; gap:2px;}
+.logo .dot{color:var(--teal);}
+.navlinks{display:flex; gap:32px; font-size:14.5px;}
+.navlinks a{text-decoration:none; opacity:.7; transition:opacity .2s;}
+.navlinks a:hover{opacity:1;}
+.btn{
+  font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.02em; text-decoration:none;
+  padding:11px 20px; border-radius:8px; border:1px solid var(--ink); color:var(--ink);
+  transition:all .25s; white-space:nowrap; cursor:pointer; background:none;
+}
+.btn:hover{background:var(--ink); color:var(--paper);}
+.btn.solid{background:var(--ink); color:var(--paper);}
+.btn.solid:hover{background:var(--teal); border-color:var(--teal); color:var(--ink);}
+@media (max-width:860px){.navlinks{display:none;}}
+
+/* HERO */
+.hero{position:relative; background:var(--panel); color:var(--paper); overflow:hidden; padding:90px 0 60px;}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(600px 400px at 15% 10%, rgba(53,208,196,0.16), transparent 60%),
+    radial-gradient(500px 500px at 90% 30%, rgba(232,163,61,0.10), transparent 60%);
+  pointer-events:none;
+}
+.hero-grid{position:relative; display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+.hero .tag{color:var(--teal);}
+.hero h1{font-size:clamp(38px,5.4vw,64px); line-height:1.05; margin-top:20px;}
+.hero h1 .accent{color:var(--teal);}
+.hero p.lede{max-width:440px; margin-top:22px; font-size:16.5px; line-height:1.65; color:rgba(245,243,238,0.68);}
+.hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+.hero .btn{border-color:rgba(245,243,238,0.3); color:var(--paper);}
+.hero .btn:hover{background:var(--paper); color:var(--ink);}
+.hero .btn.solid{background:var(--teal); color:var(--ink); border-color:var(--teal);}
+.hero .btn.solid:hover{background:var(--amber); border-color:var(--amber);}
+
+/* Laptop mockup */
+.stage{perspective:1400px; display:flex; flex-direction:column; align-items:center; cursor:grab;}
+.stage:active{cursor:grabbing;}
+.laptop{
+  width:min(480px,100%); transform-style:preserve-3d;
+  opacity:0;
+  animation:settle 1.4s cubic-bezier(.2,.8,.2,1) forwards;
+  will-change:transform;
+}
+@keyframes settle{
+  0%{opacity:0;}
+  15%{opacity:1;}
+  100%{opacity:1;}
+}
+.screen{
+  background:#05070a; border-radius:14px 14px 4px 4px; padding:16px 16px 0;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,243,238,0.06);
+  position:relative;
+}
+.webcam{
+  position:absolute; top:6px; left:50%; transform:translateX(-50%);
+  width:6px; height:6px; border-radius:50%; background:#1c2128;
+  box-shadow:0 0 0 1px rgba(245,243,238,0.06), inset 0 0 2px rgba(53,208,196,0.4);
+}
+.screen-inner{
+  background:#0A0C10; border-radius:6px; aspect-ratio:16/10; overflow:hidden; position:relative;
+  font-family:'JetBrains Mono',monospace; font-size:12px; line-height:1.7; padding:16px;
+  color:#7de8dc;
+}
+.glare{
+  position:absolute; inset:0; pointer-events:none; z-index:5;
+  background:linear-gradient(115deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 18%, transparent 34%, transparent 100%);
+}
+.code-line{white-space:pre; opacity:0; animation:reveal .01s forwards;}
+.render-overlay{
+  position:absolute; inset:0; background:linear-gradient(160deg,#0F2E2C,#0A0C10 55%, #14161C);
+  opacity:0; display:flex; flex-direction:column; padding:20px; gap:10px;
+  animation:showRender .3s ease forwards; animation-delay:5.2s;
+}
+@keyframes showRender{ to{opacity:1;} }
+.render-nav{display:flex; justify-content:space-between; align-items:center;}
+.render-dot{width:44px; height:8px; background:rgba(245,243,238,0.8); border-radius:4px;}
+.render-links{display:flex; gap:8px;}
+.render-links span{width:24px; height:6px; background:rgba(245,243,238,0.35); border-radius:3px;}
+.render-hero-line{width:70%; height:14px; background:var(--teal); border-radius:3px; margin-top:16px;}
+.render-hero-line.sm{width:45%; height:8px; background:rgba(245,243,238,0.5); margin-top:8px;}
+.render-cards{display:flex; gap:8px; margin-top:16px;}
+.render-cards div{flex:1; height:46px; background:rgba(245,243,238,0.08); border-radius:6px; border:1px solid rgba(245,243,238,0.1);}
+.keyboard{
+  height:22px; background:linear-gradient(180deg,#e2ded1,#c7c2b3);
+  border-radius:0 0 10px 10px; margin:0 -6px; transform-origin:top;
+  transform:scaleY(0.55) translateY(2px);
+  position:relative;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,0.4), inset 0 -2px 3px rgba(0,0,0,0.15);
+}
+.keyboard::before{
+  content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+  width:60px; height:6px; border-radius:3px; background:rgba(11,12,16,0.12);
+}
+.trackbase{
+  width:calc(100% - 60px); height:9px; background:linear-gradient(180deg,#c7c2b3,#a8a394);
+  margin:0 auto; border-radius:0 0 8px 8px;
+}
+.shadow-pool{
+  width:70%; max-width:340px; height:34px; margin:14px auto 0;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 55%, transparent 75%);
+  filter:blur(2px);
+  animation:shadowPulse 6s ease-in-out infinite;
+}
+@keyframes shadowPulse{
+  0%,100%{opacity:0.9; transform:scaleX(1);}
+  50%{opacity:0.6; transform:scaleX(0.92);}
+}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  .stage{margin-top:20px;}
+}
+
+section{padding:104px 0;}
+@media (max-width:720px){section{padding:64px 0;}}
+.divider{border:none; border-top:1px solid var(--line);}
+
+/* MANIFESTO */
+.manifesto{display:grid; grid-template-columns:0.4fr 1fr; gap:56px;}
+.manifesto p{font-size:clamp(21px,2.6vw,29px); line-height:1.5; max-width:760px; font-family:'Space Grotesk',sans-serif; font-weight:500;}
+@media (max-width:820px){.manifesto{grid-template-columns:1fr; gap:20px;}}
+
+/* SERVICES */
+.svc-head{margin-bottom:50px;}
+.svc-head h2{font-size:clamp(30px,4vw,42px);}
+.services{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line);}
+.svc{background:var(--paper); padding:34px 30px; min-height:200px; transition:background .25s;}
+.svc:hover{background:var(--paper-dim);}
+.svc .tag{color:var(--ink); opacity:.45;}
+.svc h3{font-size:21px; margin-top:14px;}
+.svc p{font-size:14.5px; line-height:1.6; color:rgba(11,12,16,0.65); margin-top:10px;}
+@media (max-width:820px){.services{grid-template-columns:1fr;}}
+
+/* PORTFOLIO */
+.work{background:var(--panel); color:var(--paper);}
+.work .tag{color:var(--teal);}
+.work h2{color:var(--paper); font-size:clamp(30px,4vw,42px); margin-bottom:46px;}
+.work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+.card{
+  border-radius:14px; border:1px solid var(--line-dark); overflow:hidden;
+  transition:transform .3s, border-color .3s;
+}
+.card:hover{transform:translateY(-4px); border-color:var(--teal);}
+.card-top{height:150px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,243,238,0.55);}
+.card-body{padding:20px;}
+.card-body .k{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:.06em;}
+.card-body h3{font-size:19px; margin-top:10px;}
+.card-body p{font-size:13.5px; color:rgba(245,243,238,0.6); margin-top:8px; line-height:1.5;}
+@media (max-width:900px){.work-grid{grid-template-columns:1fr;}}
+
+/* PROCESS */
+.process-head{margin-bottom:52px;}
+.process-head h2{font-size:clamp(30px,4vw,42px);}
+.steps{display:grid; grid-template-columns:repeat(4,1fr); gap:32px;}
+.step{border-top:2px solid var(--ink); padding-top:18px;}
+.step .num{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--teal);}
+.step h3{font-size:20px; margin-top:12px;}
+.step p{font-size:14px; line-height:1.6; color:rgba(11,12,16,0.65); margin-top:8px;}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr; row-gap:36px;}}
+@media (max-width:520px){.steps{grid-template-columns:1fr;}}
+
+/* TESTIMONIALS + PRICING */
+.testrow{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line);}
+.test{background:var(--paper); padding:30px 28px;}
+.test p{font-family:'Space Grotesk',sans-serif; font-size:16.5px; line-height:1.5;}
+.test cite{display:block; margin-top:16px; font-style:normal; font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(11,12,16,0.5);}
+@media (max-width:820px){.testrow{grid-template-columns:1fr;}}
+
+.pricing{background:var(--paper-dim);}
+.price-head{text-align:center; margin-bottom:50px;}
+.price-head h2{font-size:clamp(30px,4vw,42px);}
+.plans{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+.plan{background:var(--paper); border-radius:14px; padding:30px 26px; border:1px solid var(--line); display:flex; flex-direction:column;}
+.plan.feat{border-color:var(--ink); box-shadow:0 20px 40px -20px rgba(11,12,16,0.25);}
+.plan .k{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--teal);}
+.plan h3{font-size:24px; margin-top:10px;}
+.plan .price{font-family:'Space Grotesk',sans-serif; font-size:34px; margin-top:12px;}
+.plan .price span{font-family:'Manrope',sans-serif; font-size:13px; color:rgba(11,12,16,0.5); font-weight:500;}
+.plan ul{list-style:none; padding:0; margin:20px 0 0; display:flex; flex-direction:column; gap:10px; flex:1;}
+.plan li{font-size:13.5px; color:rgba(11,12,16,0.7); display:flex; gap:8px;}
+.plan li::before{content:"—"; color:var(--teal);}
+.plan .btn{margin-top:22px; text-align:center;}
+@media (max-width:900px){.plans{grid-template-columns:1fr;}}
+
+/* FAQ */
+.faq-list{max-width:760px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  width:100%; text-align:left; background:none; border:none; padding:22px 0; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center; font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:500; color:var(--ink);
+}
+.faq-q .plus{font-family:'JetBrains Mono',monospace; color:var(--teal); transition:transform .25s;}
+.faq-item[open] .plus{transform:rotate(45deg);}
+.faq-a{padding:0 0 22px; font-size:14.5px; line-height:1.65; color:rgba(11,12,16,0.68); max-width:640px;}
+
+/* CONTACT / BOOKING */
+.contact{background:var(--panel); color:var(--paper);}
+.contact .tag{color:var(--teal);}
+.contact h2{color:var(--paper); font-size:clamp(30px,4vw,42px); margin-top:14px;}
+.contact > .wrap > p.lede{max-width:480px; color:rgba(245,243,238,0.65); margin-top:16px; font-size:15.5px; line-height:1.6;}
+
+.form-shell{
+  margin-top:44px; background:#0F1116; border:1px solid var(--line-dark); border-radius:16px; padding:36px;
+  max-width:720px;
+}
+.audit-plan-banner{
+  background:rgba(53,208,196,0.1); border:1px solid rgba(53,208,196,0.35); border-radius:10px;
+  padding:14px 16px; margin-bottom:24px; font-size:13.5px; line-height:1.6; color:var(--paper);
+}
+.audit-plan-banner strong{color:var(--teal);}
+.progress{display:flex; gap:8px; margin-bottom:30px;}
+.progress span{flex:1; height:3px; background:rgba(245,243,238,0.14); border-radius:2px; overflow:hidden;}
+.progress span i{display:block; height:100%; width:0; background:var(--teal); transition:width .4s;}
+.progress span.done i{width:100%;}
+.progress span.active i{width:60%;}
+
+.fstep{display:none; flex-direction:column; gap:16px;}
+.fstep.active{display:flex;}
+.frow2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+label{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:rgba(245,243,238,0.55); display:block; margin-bottom:8px;}
+input,select,textarea{
+  width:100%; background:#171A20; border:1px solid var(--line-dark); border-radius:8px; padding:12px 13px;
+  font-family:'Manrope',sans-serif; font-size:14.5px; color:var(--paper);
+}
+textarea{resize:vertical; min-height:88px;}
+.slots{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.slot{
+  border:1px solid var(--line-dark); border-radius:8px; padding:10px; text-align:center; cursor:pointer;
+  font-family:'JetBrains Mono',monospace; font-size:12.5px; background:#171A20; transition:all .2s;
+}
+.slot.taken{opacity:.35; cursor:not-allowed; text-decoration:line-through;}
+.slot.selected{border-color:var(--teal); background:rgba(53,208,196,0.14); color:var(--teal);}
+.fnav{display:flex; justify-content:space-between; margin-top:8px;}
+.fnav .btn{border-color:rgba(245,243,238,0.3); color:var(--paper);}
+.fnav .btn:hover{background:var(--paper); color:var(--ink);}
+.fnav .btn.solid{background:var(--teal); border-color:var(--teal); color:var(--ink);}
+.fnav .btn.solid:hover{background:var(--amber); border-color:var(--amber);}
+.fnav .btn:disabled{opacity:.35; cursor:not-allowed;}
+
+.success{display:none; flex-direction:column; align-items:flex-start; gap:6px; text-align:left;}
+.success.active{display:flex;}
+.success .check{
+  width:52px; height:52px; border-radius:50%; background:rgba(53,208,196,0.14); border:1px solid var(--teal);
+  display:flex; align-items:center; justify-content:center; margin-bottom:10px;
+  animation:pop .4s cubic-bezier(.2,.9,.3,1.4);
+}
+@keyframes pop{from{transform:scale(0);} to{transform:scale(1);}}
+.success h3{color:var(--paper); font-size:22px;}
+.success p{color:rgba(245,243,238,0.65); font-size:14.5px; margin-top:6px; line-height:1.6;}
+.success code{display:inline-block; margin-top:10px; background:#171A20; padding:8px 12px; border-radius:6px; color:var(--teal); font-size:13px;}
+
+footer{background:var(--ink); color:rgba(245,243,238,0.6);}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding:70px 0 40px;}
+.foot-grid .logo{color:var(--paper);}
+.foot-grid p{font-size:13.5px; line-height:1.6; margin-top:14px; max-width:280px;}
+.foot-col h4{font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:rgba(245,243,238,0.4); margin-bottom:16px;}
+.foot-col a{display:block; text-decoration:none; font-size:14px; margin-bottom:10px; color:rgba(245,243,238,0.65);}
+.foot-bottom{border-top:1px solid rgba(245,243,238,0.1); padding:24px 0; display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:12px; flex-wrap:wrap; gap:10px;}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr 1fr; row-gap:34px;}}
+
+/* AUDIT FEATURE — matches existing dark-panel CTA sections (hero/work/contact) */
+.audit-section{background:var(--panel); color:var(--paper);}
+.audit-section .tag{color:var(--teal);}
+.audit-section h2{color:var(--paper);}
+.audit-intro{max-width:600px;}
+.audit-form{display:flex; gap:12px; margin-top:30px; flex-wrap:wrap;}
+.audit-form input[type="url"]{
+  flex:1; min-width:220px; background:#171A20; border:1px solid var(--line-dark); border-radius:8px;
+  padding:14px 16px; color:var(--paper); font-family:'Manrope',sans-serif; font-size:15px;
+}
+.audit-section .btn{border-color:rgba(245,243,238,0.3); color:var(--paper);}
+.audit-section .btn:hover{background:var(--paper); color:var(--ink);}
+.audit-section .btn.solid{background:var(--teal); border-color:var(--teal); color:var(--ink);}
+.audit-section .btn.solid:hover{background:var(--amber); border-color:var(--amber);}
+.audit-section .btn:disabled{opacity:.5; cursor:not-allowed;}
+.audit-url-error{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--danger); margin-top:8px; display:none;}
+
+.audit-loading{display:none; margin-top:36px;}
+.audit-spinner{
+  width:32px; height:32px; border-radius:50%; flex-shrink:0;
+  border:3px solid rgba(245,243,238,0.15); border-top-color:var(--teal);
+  animation:auditSpin 0.9s linear infinite;
+}
+@keyframes auditSpin{ to{ transform:rotate(360deg); } }
+
+.audit-error{
+  display:none; margin-top:30px; background:#171A20; border:1px solid rgba(232,119,107,0.4);
+  border-radius:10px; padding:20px 22px; max-width:520px;
+}
+.audit-error p{font-size:14px; color:rgba(245,243,238,0.8); margin:0;}
+.audit-error .btn{margin-top:14px;}
+
+.audit-results{display:none;}
+.audit-score-hero{display:flex; align-items:center; gap:26px; flex-wrap:wrap;}
+.score-badge{
+  width:112px; height:112px; border-radius:50%; flex-shrink:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:4px solid var(--teal); transition:border-color .3s;
+}
+.score-badge .num{font-family:'Space Grotesk',sans-serif; font-size:32px; color:var(--paper);}
+.score-badge .of100{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:rgba(245,243,238,0.5);}
+
+.audit-categories{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:36px;}
+.audit-cat{background:#171A20; border:1px solid var(--line-dark); border-radius:12px; padding:20px 22px;}
+.audit-cat-head{display:flex; justify-content:space-between; align-items:center; gap:10px;}
+.audit-cat-name{font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--paper);}
+.audit-cat-score{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--teal); white-space:nowrap;}
+.audit-bar{height:6px; border-radius:3px; background:rgba(245,243,238,0.12); margin-top:12px; overflow:hidden;}
+.audit-bar i{display:block; height:100%; width:0%; background:var(--teal); transition:width .6s ease;}
+.audit-cat-text{font-size:13px; line-height:1.6; color:rgba(245,243,238,0.65); margin-top:10px;}
+.audit-cat-text.unavailable{font-style:italic; color:rgba(245,243,238,0.45);}
+@media (max-width:720px){.audit-categories{grid-template-columns:1fr;}}
+
+.audit-opportunities{margin-top:40px;}
+.audit-opportunities h4{font-family:'Space Grotesk',sans-serif; font-size:19px; color:var(--paper);}
+.opp-item{border-top:1px solid var(--line-dark); padding:16px 0;}
+.opp-item .cat{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber); text-transform:uppercase; letter-spacing:.05em;}
+.opp-item h5{font-family:'Space Grotesk',sans-serif; font-size:16px; margin:6px 0 0; font-weight:500; color:var(--paper);}
+.opp-item p{font-size:13.5px; color:rgba(245,243,238,0.65); margin-top:6px; line-height:1.55;}
+
+.audit-plans{margin-top:50px;}
+.audit-plans h4{font-family:'Space Grotesk',sans-serif; font-size:19px; color:var(--paper);}
+.audit-plans-sub{font-size:13.5px; color:rgba(245,243,238,0.6); margin-top:6px;}
+.audit-plans-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px;}
+.audit-plan-card{background:#171A20; border:1px solid var(--line-dark); border-radius:12px; padding:22px; text-align:center;}
+.audit-plan-card h5{font-family:'Space Grotesk',sans-serif; font-size:17px; margin:0; color:var(--paper); font-weight:500;}
+.audit-plan-card .p{font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(245,243,238,0.6); margin-top:8px;}
+.audit-plan-card .btn{margin-top:16px; width:100%;}
+@media (max-width:720px){.audit-plans-row{grid-template-columns:1fr;}}
+
+/* Temporary highlight when a plan is chosen from the audit flow, scrolled to in the main pricing section */
+.plan.highlight{border-color:var(--teal) !important; animation:planPulse 1.6s ease;}
+@keyframes planPulse{
+  0%{box-shadow:0 0 0 0 rgba(53,208,196,0.5);}
+  70%{box-shadow:0 0 0 14px rgba(53,208,196,0);}
+  100%{box-shadow:0 0 0 0 rgba(53,208,196,0);}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">WebCraft<span class="dot">.</span></div>
+    <div class="navlinks">
+      <a href="#audit">Free Audit</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#contact" class="btn solid">Book a call</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="tag"><span class="brk">&lt;</span>hero<span class="brk">/&gt;</span></div>
+      <h1>We build websites<br>like <span class="accent">software</span>,<br>not templates.</h1>
+      <p class="lede">Web Craft is a small studio that designs and ships premium websites and web apps — the kind that load fast, convert well, and don't look like everyone else's.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn solid">Book a call</a>
+        <a href="#work" class="btn">See the work</a>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="laptop">
+        <div class="screen">
+          <div class="webcam"></div>
+          <div class="screen-inner" id="screenInner">
+            <div class="code-lines" id="codeLines"></div>
+            <div class="render-overlay">
+              <div class="render-nav"><div class="render-dot"></div><div class="render-links"><span></span><span></span><span></span></div></div>
+              <div class="render-hero-line"></div>
+              <div class="render-hero-line sm"></div>
+              <div class="render-cards"><div></div><div></div><div></div></div>
+            </div>
+            <div class="glare"></div>
+          </div>
+        </div>
+        <div class="keyboard"></div>
+        <div class="trackbase"></div>
+      </div>
+      <div class="shadow-pool" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section class="audit-section" id="audit">
+  <div class="wrap">
+    <div class="tag"><span class="brk">&lt;</span>audit<span class="brk">/&gt;</span></div>
+    <h2 style="font-size:clamp(28px,3.6vw,40px); margin-top:14px;">Free Website Audit</h2>
+    <p class="audit-intro" style="margin-top:14px; color:rgba(245,243,238,0.68); font-size:15.5px; line-height:1.7;">
+      See what's holding your website back. Enter your website URL and get a free AI-powered website audit.
+    </p>
+
+    <form class="audit-form" id="auditForm" novalidate>
+      <input type="url" id="auditUrlInput" placeholder="https://yourwebsite.com" required aria-label="Your website URL">
+      <button type="submit" class="btn solid" id="auditSubmitBtn">Analyze My Website</button>
+    </form>
+    <div class="audit-url-error" id="auditUrlError">Please enter a valid website URL.</div>
+
+    <div class="audit-loading" id="auditLoading">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div class="audit-spinner"></div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-size:16px;">Analyzing your website…</div>
+          <div class="tag" id="auditStatusMsg" style="margin-top:6px;">Checking website structure…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="audit-error" id="auditError">
+      <p id="auditErrorMsg">We couldn't complete the audit for this website.</p>
+      <button type="button" class="btn" id="auditRetryBtn">Try again</button>
+    </div>
+
+    <div class="audit-results" id="auditResults">
+      <hr class="divider" style="border-color:var(--line-dark); margin:44px 0 36px;">
+      <h3 style="color:var(--paper); font-size:26px; font-family:'Space Grotesk',sans-serif;">Your Website Audit</h3>
+
+      <div class="audit-score-hero" style="margin-top:26px;">
+        <div class="score-badge" id="overallScoreBadge">
+          <div class="num" id="overallScoreNum">--</div>
+          <div class="of100">/ 100</div>
+        </div>
+        <p style="max-width:420px; font-size:14.5px; line-height:1.65; color:rgba(245,243,238,0.7);" id="auditSummary"></p>
+      </div>
+
+      <div class="audit-categories" id="auditCategories"></div>
+
+      <div class="audit-opportunities" id="auditOpportunities" style="display:none;">
+        <h4>Top opportunities</h4>
+        <div id="auditOppList"></div>
+      </div>
+
+      <div class="audit-plans">
+        <h4>Ready to fix it?</h4>
+        <p class="audit-plans-sub">Pick a plan and we'll pick up from here.</p>
+        <div class="audit-plans-row">
+          <div class="audit-plan-card">
+            <h5>Starter</h5>
+            <div class="p">$999 setup + $79/mo</div>
+            <button type="button" class="btn" data-plan="Starter">Choose Starter</button>
+          </div>
+          <div class="audit-plan-card">
+            <h5>Growth</h5>
+            <div class="p">$1,999 setup + $149/mo</div>
+            <button type="button" class="btn solid" data-plan="Growth">Choose Growth</button>
+          </div>
+          <div class="audit-plan-card">
+            <h5>Premium</h5>
+            <div class="p">$3,999 setup + $299/mo</div>
+            <button type="button" class="btn" data-plan="Premium">Choose Premium</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap manifesto">
+    <div class="tag"><span class="brk">&lt;</span>about<span class="brk">/&gt;</span></div>
+    <p>Most "custom" websites are the same template with a new logo. We write real code, design every screen on purpose, and stay small enough that your project gets our full attention — not a junior dev's leftover afternoon.</p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="svc-head">
+      <div class="tag"><span class="brk">&lt;</span>services<span class="brk">/&gt;</span></div>
+      <h2 style="margin-top:14px;">What we build</h2>
+    </div>
+    <div class="services">
+      <div class="svc"><span class="tag">01</span><h3>Marketing sites</h3><p>Fast, conversion-focused sites for businesses that need to look as good as they perform.</p></div>
+      <div class="svc"><span class="tag">02</span><h3>Web apps</h3><p>Dashboards, portals, and internal tools built with React and Next.js — real products, not prototypes.</p></div>
+      <div class="svc"><span class="tag">03</span><h3>E-commerce</h3><p>Storefronts that load in under a second and don't fight your customers at checkout.</p></div>
+      <div class="svc"><span class="tag">04</span><h3>Brand &amp; UI systems</h3><p>A design system you can hand to any developer and get a consistent result, every time.</p></div>
+      <div class="svc"><span class="tag">05</span><h3>SEO &amp; performance</h3><p>Core Web Vitals, structured data, and technical SEO baked in from the first commit.</p></div>
+      <div class="svc"><span class="tag">06</span><h3>Ongoing care</h3><p>Monthly retainers for updates, monitoring, and small features — no ticket queues.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="tag"><span class="brk">&lt;</span>work<span class="brk">/&gt;</span></div>
+    <h2>Selected projects</h2>
+    <div class="work-grid">
+      <a class="card" href="https://scaleonline.my.canva.site/lifestyle-men-s-wear-premium-landing" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="card-top" style="background:linear-gradient(135deg,#241a12,#0A0C10);">Fashion / Apparel</div>
+        <div class="card-body"><div class="k">Landing page</div><h3>Lifestyle Men's Wear</h3><p>Premium landing page built for a men's fashion brand.</p></div>
+      </a>
+      <a class="card" href="https://scaleonline.my.canva.site/v-cafe-mobile-first-website" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="card-top" style="background:linear-gradient(135deg,#2a1a0f,#0A0C10);">Food &amp; Beverage</div>
+        <div class="card-body"><div class="k">Mobile-first site</div><h3>Vृndāvan Cafe</h3><p>Mobile-first website built for a cafe's everyday customer flow.</p></div>
+      </a>
+      <a class="card" href="https://scaleonline.my.canva.site/om-mobile-electronics-landing-page" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="card-top" style="background:linear-gradient(135deg,#12242a,#0A0C10);">Electronics Retail</div>
+        <div class="card-body"><div class="k">Landing page</div><h3>Om Mobile &amp; Electronics</h3><p>Product-led landing page for a mobile &amp; electronics retailer.</p></div>
+      </a>
+      <a class="card" href="https://scaleonline.my.canva.site/rupa-opticals-premium-one-page-landing" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="card-top" style="background:linear-gradient(135deg,#1e1533,#0A0C10);">Eyewear / Retail</div>
+        <div class="card-body"><div class="k">One-page landing</div><h3>Rupa Opticals</h3><p>Premium one-page landing site for an optical retail brand.</p></div>
+      </a>
+      <a class="card" href="https://scaleonline.my.canva.site/happy-dent-mobile-first-landing-page" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;">
+        <div class="card-top" style="background:linear-gradient(135deg,#153a37,#0A0C10);">Healthcare / Dental</div>
+        <div class="card-body"><div class="k">Mobile-first landing</div><h3>Happy Dent</h3><p>Mobile-first landing page built for a dental practice.</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="process-head">
+      <div class="tag"><span class="brk">&lt;</span>process<span class="brk">/&gt;</span></div>
+      <h2 style="margin-top:14px;">How a project runs</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01 · discover</div><h3>Scope</h3><p>We map your goals, users, and constraints before opening a design tool.</p></div>
+      <div class="step"><div class="num">02 · design</div><h3>Design</h3><p>Full UI system and key screens, reviewed with you before any code is written.</p></div>
+      <div class="step"><div class="num">03 · build</div><h3>Build</h3><p>Real code from day one — you can click through a working build, not a mockup.</p></div>
+      <div class="step"><div class="num">04 · launch</div><h3>Launch</h3><p>SEO, performance, and security checks, then a monitored go-live.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="wrap">
+    <div class="testrow">
+      <div class="test"><p>"They rebuilt our booking flow in three weeks. Support tickets dropped by half."</p><cite>— founder, Apex Fitness</cite></div>
+      <div class="test"><p>"First agency that asked why before asking what color."</p><cite>— marketing lead, Northline Goods</cite></div>
+      <div class="test"><p>"Fast, direct, no scope creep. The site still feels custom two years on."</p><cite>— partner, Ferro Legal</cite></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="price-head">
+      <div class="tag"><span class="brk">&lt;</span>pricing<span class="brk">/&gt;</span></div>
+      <h2 style="margin-top:14px;">Straightforward pricing</h2>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <div class="k">Starter</div>
+        <h3>Starter</h3>
+        <div class="price">$999<span> one-time setup</span></div>
+        <div class="price" style="font-size:20px; margin-top:2px;">$79<span>/month</span></div>
+        <ul><li>Up to 6 pages</li><li>Custom design system</li><li>SEO &amp; performance setup</li><li>Hosting &amp; monitoring included</li><li>2 weeks turnaround</li></ul>
+        <a href="#contact" class="btn">Book a call</a>
+      </div>
+      <div class="plan feat">
+        <div class="k">Most popular</div>
+        <h3>Growth</h3>
+        <div class="price">$1,999<span> one-time setup</span></div>
+        <div class="price" style="font-size:20px; margin-top:2px;">$149<span>/month</span></div>
+        <ul><li>Unlimited pages</li><li>CMS-driven content</li><li>Booking / forms / integrations</li><li>Priority support &amp; updates</li><li>4–6 weeks turnaround</li></ul>
+        <a href="#contact" class="btn solid" style="background:var(--ink); color:var(--paper);">Book a call</a>
+      </div>
+      <div class="plan">
+        <div class="k">Premium</div>
+        <h3>Premium</h3>
+        <div class="price">$3,999<span> one-time setup</span></div>
+        <div class="price" style="font-size:20px; margin-top:2px;">$299<span>/month</span></div>
+        <ul><li>Everything in Growth</li><li>Auth &amp; user accounts</li><li>Admin dashboard</li><li>Database &amp; API integrations</li><li>Dedicated support line</li></ul>
+        <a href="#contact" class="btn">Book a call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="tag"><span class="brk">&lt;</span>faq<span class="brk">/&gt;</span></div>
+    <h2 style="margin-top:14px; margin-bottom:30px;">Common questions</h2>
+    <div class="faq-list">
+      <details class="faq-item"><summary class="faq-q">How long does a project take?<span class="plus">+</span></summary><div class="faq-a">Marketing sites: 2–3 weeks. Full builds: 4–6 weeks. Web apps: scoped individually after discovery, typically 8–14 weeks.</div></details>
+      <details class="faq-item"><summary class="faq-q">Do you work with existing brands?<span class="plus">+</span></summary><div class="faq-a">Yes — we can design within an existing brand system or build one from scratch if you don't have one yet.</div></details>
+      <details class="faq-item"><summary class="faq-q">Who owns the code?<span class="plus">+</span></summary><div class="faq-a">You do, fully, on delivery. No lock-in, no proprietary platform.</div></details>
+      <details class="faq-item"><summary class="faq-q">Do you offer ongoing support?<span class="plus">+</span></summary><div class="faq-a">Yes, monthly retainers cover updates, monitoring, and small feature work after launch.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="tag"><span class="brk">&lt;</span>contact<span class="brk">/&gt;</span></div>
+    <h2>Book a project call</h2>
+    <p class="lede">Tell us about the project and pick a time. We'll confirm within one business day.</p>
+
+    <div class="form-shell">
+      <div class="audit-plan-banner" id="auditPlanBanner" style="display:none;"></div>
+      <div class="progress">
+        <span class="active" id="p1"><i></i></span>
+        <span id="p2"><i></i></span>
+        <span id="p3"><i></i></span>
+      </div>
+
+      <form id="bookingForm">
+        <input type="hidden" name="access_key" value="11a3034e-693f-4169-abab-e6b1911a3684">
+        <input type="hidden" name="subject" value="New project inquiry — Web Craft">
+        <input type="hidden" name="from_name" value="Web Craft Website">
+        <!-- Audit passthrough fields — only populated when a customer arrives via the
+             Free Website Audit flow and picks a plan. Empty/absent for normal bookings. -->
+        <input type="hidden" name="Audit Website" id="auditWebsiteField" value="">
+        <input type="hidden" name="Audit Score" id="auditScoreField" value="">
+        <input type="hidden" name="Selected Plan" id="selectedPlanField" value="">
+        <input type="hidden" name="Plan Price" id="planPriceField" value="">
+        <div class="fstep active" data-step="1">
+          <div class="frow2">
+            <div><label for="name">Name</label><input id="name" required></div>
+            <div><label for="business">Business</label><input id="business"></div>
+          </div>
+          <div class="frow2">
+            <div><label for="email">Email</label><input id="email" type="email" required></div>
+            <div><label for="phone">Phone</label><input id="phone" type="tel"></div>
+          </div>
+          <div><label for="country">Country</label><input id="country"></div>
+          <div class="fnav"><span></span><button type="button" class="btn solid" onclick="nextStep(1)">Continue</button></div>
+        </div>
+
+        <div class="fstep" data-step="2">
+          <div><label for="details">Project details</label><textarea id="details" placeholder="What are you looking to build?"></textarea></div>
+          <div><label for="budget">Budget range</label>
+            <select id="budget">
+              <option>Under $5k</option>
+              <option>$5k – $15k</option>
+              <option>$15k – $35k</option>
+              <option>$35k+</option>
+            </select>
+          </div>
+          <div class="fnav"><button type="button" class="btn" onclick="prevStep(2)">Back</button><button type="button" class="btn solid" onclick="nextStep(2)">Continue</button></div>
+        </div>
+
+        <div class="fstep" data-step="3">
+          <div><label for="date">Preferred date</label><input id="date" type="date"></div>
+          <div>
+            <label>Preferred time</label>
+            <div class="slots" id="slots"></div>
+          </div>
+          <div class="fnav"><button type="button" class="btn" onclick="prevStep(3)">Back</button><button type="submit" class="btn solid">Send inquiry</button></div>
+        </div>
+      </form>
+
+      <div class="success" id="successBox">
+        <div class="check">✓</div>
+        <h3>Inquiry sent</h3>
+        <p id="successMsg">We'll email you a confirmation shortly.</p>
+        <code id="inquiryIdOut"></code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="logo">WebCraft<span class="dot">.</span></div>
+      <p>We design and build premium websites and web apps for businesses that care how things look and how they run.</p>
+    </div>
+    <div class="foot-col"><h4>Studio</h4><a href="#services">Services</a><a href="#work">Work</a><a href="#pricing">Pricing</a></div>
+    <div class="foot-col"><h4>Company</h4><a href="#faq">FAQ</a><a href="#contact">Contact</a></div>
+    <div class="foot-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">Cookie Notice</a></div>
+  </div>
+  <div class="wrap foot-bottom">
+    <div>© 2026 Web Craft</div>
+    <div>Built with Web Craft</div>
+  </div>
+</footer>
+
+<script>
+// Typewriter code -> render reveal in hero laptop
+const codeSample = [
+"<section class=\"hero\">",
+"  <h1>Welcome</h1>",
+"  <p>Built with care.</p>",
+"</section>",
+"",
+".hero { display:flex; }",
+"h1 { font-weight:600; }",
+""
+];
+const codeEl = document.getElementById('codeLines');
+let full = codeSample.join('\n');
+let i = 0;
+function typeNext(){
+  if(i <= full.length){
+    codeEl.textContent = full.slice(0,i);
+    i += 2;
+    setTimeout(typeNext, 12);
+  }
+}
+typeNext();
+
+// Fully client-side interactive 3D rotation for the hero laptop.
+// No backend, no external libraries — pure CSS transforms driven by rAF.
+(function(){
+  const stage = document.querySelector('.stage');
+  const laptop = document.querySelector('.laptop');
+  if(!stage || !laptop) return;
+
+  const REST = { rx: 8, ry: -8 };     // resting tilt (degrees)
+  const RANGE = { rx: 10, ry: 16 };   // how far it can tilt from rest
+  let target = { ...REST };
+  let current = { ...REST };
+  let t = 0;                          // idle animation clock
+  let hovering = false;
+  let reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pointerFromEvent(clientX, clientY){
+    const r = stage.getBoundingClientRect();
+    const px = (clientX - r.left) / r.width;   // 0..1
+    const py = (clientY - r.top) / r.height;   // 0..1
+    target.ry = REST.ry + (px - 0.5) * RANGE.ry * 2;
+    target.rx = REST.rx - (py - 0.5) * RANGE.rx * 2;
+  }
+
+  stage.addEventListener('mousemove', (e)=>{ hovering = true; pointerFromEvent(e.clientX, e.clientY); });
+  stage.addEventListener('mouseleave', ()=>{ hovering = false; target = { ...REST }; });
+  stage.addEventListener('touchmove', (e)=>{
+    if(e.touches[0]){ hovering = true; pointerFromEvent(e.touches[0].clientX, e.touches[0].clientY); }
+  }, { passive:true });
+  stage.addEventListener('touchend', ()=>{ hovering = false; target = { ...REST }; });
+
+  function frame(){
+    t += 0.01;
+    if(!hovering && !reduceMotion){
+      // gentle idle drift when not being interacted with
+      target.rx = REST.rx + Math.sin(t) * 2.2;
+      target.ry = REST.ry + Math.cos(t * 0.7) * 3;
+    }
+    // smooth easing toward target (lerp) for a fluid, non-jittery feel
+    current.rx += (target.rx - current.rx) * 0.08;
+    current.ry += (target.ry - current.ry) * 0.08;
+    const floatY = reduceMotion ? 0 : Math.sin(t * 1.3) * 6;
+
+    laptop.style.transform = `rotateX(${current.rx}deg) rotateY(${current.ry}deg) translateY(${floatY}px)`;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// Multi-step form
+function showStep(n){
+  document.querySelectorAll('.fstep').forEach(f=>f.classList.toggle('active', f.dataset.step==n));
+  ['p1','p2','p3'].forEach((id,idx)=>{
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    if(idx < n-1) el.classList.add('done');
+    else if(idx === n-1) el.classList.add('active');
+  });
+}
+function nextStep(current){
+  if(current===1){
+    const name=document.getElementById('name').value.trim();
+    const email=document.getElementById('email').value.trim();
+    if(!name || !email){ alert('Please add your name and email to continue.'); return; }
+  }
+  showStep(current+1);
+}
+function prevStep(current){ showStep(current-1); }
+
+// Time slots with basic double-booking prevention via storage
+const SLOT_TIMES = ['10:00 AM','11:30 AM','1:00 PM','2:30 PM','4:00 PM','5:30 PM'];
+let selectedSlot = null;
+
+async function renderSlots(){
+  const dateInput = document.getElementById('date');
+  const date = dateInput.value || new Date().toISOString().slice(0,10);
+  let taken = [];
+  try{
+    const res = await window.storage.get('booked:'+date, true);
+    if(res && res.value) taken = JSON.parse(res.value);
+  }catch(e){ /* no bookings yet for this date */ }
+
+  const slotsEl = document.getElementById('slots');
+  slotsEl.innerHTML = '';
+  SLOT_TIMES.forEach(t=>{
+    const div = document.createElement('div');
+    const isTaken = taken.includes(t);
+    div.className = 'slot' + (isTaken ? ' taken' : '');
+    div.textContent = t;
+    if(!isTaken){
+      div.addEventListener('click', ()=>{
+        document.querySelectorAll('.slot').forEach(s=>s.classList.remove('selected'));
+        div.classList.add('selected');
+        selectedSlot = t;
+      });
+    }
+    slotsEl.appendChild(div);
+  });
+}
+document.getElementById('date').addEventListener('change', renderSlots);
+renderSlots();
+
+function genInquiryId(){
+  return 'WC-' + Date.now().toString(36).toUpperCase().slice(-6);
+}
+
+document.getElementById('bookingForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const date = document.getElementById('date').value || new Date().toISOString().slice(0,10);
+  if(!selectedSlot){ alert('Please pick a time slot.'); return; }
+
+  const inquiry = {
+    id: genInquiryId(),
+    name: document.getElementById('name').value,
+    business: document.getElementById('business').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    country: document.getElementById('country').value,
+    details: document.getElementById('details').value,
+    budget: document.getElementById('budget').value,
+    date, time: selectedSlot,
+    createdAt: new Date().toISOString(),
+    // Audit passthrough — empty strings for a normal booking that never
+    // touched the Audit flow; real values only if a plan was selected there.
+    auditWebsite: (document.getElementById('auditWebsiteField') || {}).value || '',
+    auditScore: (document.getElementById('auditScoreField') || {}).value || '',
+    selectedPlan: (document.getElementById('selectedPlanField') || {}).value || '',
+    planPrice: (document.getElementById('planPriceField') || {}).value || ''
+  };
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+  // 1) Email the site owner via Web3Forms (no backend required)
+  try{
+    const accessKey = document.querySelector('input[name="access_key"]').value;
+    if(accessKey && accessKey !== 'YOUR_WEB3FORMS_ACCESS_KEY_HERE'){
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: 'New project inquiry — Web Craft',
+          from_name: 'Web Craft Website',
+          Name: inquiry.name,
+          Business: inquiry.business,
+          Email: inquiry.email,
+          Phone: inquiry.phone,
+          Country: inquiry.country,
+          'Project details': inquiry.details,
+          Budget: inquiry.budget,
+          'Preferred date': inquiry.date,
+          'Preferred time': inquiry.time,
+          'Inquiry ID': inquiry.id,
+          'Audit Website': inquiry.auditWebsite,
+          'Audit Score': inquiry.auditScore,
+          'Selected Plan': inquiry.selectedPlan,
+          'Plan Price': inquiry.planPrice
+        })
+      });
+    } else {
+      console.warn('Web3Forms access key not set yet — email not sent.');
+    }
+  }catch(err){
+    console.error('Email send error', err);
+  }
+
+  // 2) Save locally too (for slot booking + inquiry record)
+  try{
+    await window.storage.set('inquiry:'+inquiry.id, JSON.stringify(inquiry), true);
+    let taken = [];
+    try{
+      const res = await window.storage.get('booked:'+date, true);
+      if(res && res.value) taken = JSON.parse(res.value);
+    }catch(e){}
+    taken.push(selectedSlot);
+    await window.storage.set('booked:'+date, JSON.stringify(taken), true);
+  }catch(err){
+    console.error('Storage error', err);
+  }
+
+  document.getElementById('bookingForm').style.display = 'none';
+  document.querySelector('.progress').style.display = 'none';
+  document.getElementById('successBox').classList.add('active');
+  document.getElementById('successMsg').textContent =
+    `We'll email ${inquiry.email} a confirmation for ${inquiry.date} at ${inquiry.time}.`;
+  document.getElementById('inquiryIdOut').textContent = 'Inquiry ID: ' + inquiry.id;
+
+  // Prevent this booking's audit info from silently carrying into any
+  // future, unrelated booking submission.
+  ['auditWebsiteField','auditScoreField','selectedPlanField','planPriceField'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  const planBanner = document.getElementById('auditPlanBanner');
+  if(planBanner){ planBanner.style.display = 'none'; planBanner.innerHTML = ''; }
+});
+</script>
+
+<script>
+// ============================================================
+// FREE WEBSITE AUDIT — frontend only.
+// Scores and AI explanations both come directly from the API
+// response. This script never calculates or alters a score.
+// ============================================================
+(function(){
+  const form = document.getElementById('auditForm');
+  const urlInput = document.getElementById('auditUrlInput');
+  const urlError = document.getElementById('auditUrlError');
+  const submitBtn = document.getElementById('auditSubmitBtn');
+
+  const loadingBox = document.getElementById('auditLoading');
+  const statusMsgEl = document.getElementById('auditStatusMsg');
+  const errorBox = document.getElementById('auditError');
+  const errorMsgEl = document.getElementById('auditErrorMsg');
+  const retryBtn = document.getElementById('auditRetryBtn');
+  const resultsBox = document.getElementById('auditResults');
+
+  const overallNum = document.getElementById('overallScoreNum');
+  const overallBadge = document.getElementById('overallScoreBadge');
+  const summaryEl = document.getElementById('auditSummary');
+  const categoriesEl = document.getElementById('auditCategories');
+  const oppSection = document.getElementById('auditOpportunities');
+  const oppList = document.getElementById('auditOppList');
+
+  const CATEGORY_ORDER = ['design', 'mobile', 'performance', 'seo', 'conversion', 'contact', 'trust'];
+  const CATEGORY_LABELS = {
+    design: 'Design',
+    mobile: 'Mobile Experience',
+    performance: 'Performance',
+    seo: 'SEO',
+    conversion: 'Conversion',
+    contact: 'Contact / Lead Capture',
+    trust: 'Trust'
+  };
+  // Maps a score-object key to the `category` string used inside checks[],
+  // so we can build an honest fallback explanation if AI text is unavailable.
+  const CHECK_CATEGORY_MAP = {
+    design: 'Design', mobile: 'Mobile', performance: 'Performance',
+    seo: 'SEO', conversion: 'Conversion', contact: 'Contact', trust: 'Trust'
+  };
+
+  const STATUS_MESSAGES = [
+    'Checking website structure…',
+    'Checking SEO…',
+    'Checking mobile signals…',
+    'Checking conversion elements…',
+    'Checking contact options…',
+    'Preparing your audit…'
+  ];
+
+  let statusInterval = null;
+  let currentAudit = { url: null, score: null }; // set after each successful audit; cleared at the start of every new audit run
+
+  function showOnly(el){
+    [loadingBox, errorBox, resultsBox].forEach(box => { box.style.display = 'none'; });
+    if(el) el.style.display = (el === loadingBox) ? 'block' : (el === resultsBox ? 'block' : 'block');
+  }
+
+  function startLoading(){
+    urlError.style.display = 'none';
+    showOnly(loadingBox);
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Analyzing…';
+    let i = 0;
+    statusMsgEl.textContent = STATUS_MESSAGES[0];
+    statusInterval = setInterval(() => {
+      i = (i + 1) % STATUS_MESSAGES.length;
+      statusMsgEl.textContent = STATUS_MESSAGES[i];
+    }, 1400);
+  }
+
+  function stopLoading(){
+    if(statusInterval){ clearInterval(statusInterval); statusInterval = null; }
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Analyze My Website';
+  }
+
+  function showError(message){
+    stopLoading();
+    errorMsgEl.textContent = message || "We couldn't complete the audit for this website.";
+    showOnly(errorBox);
+  }
+
+  function normalizeUrl(raw){
+    let v = raw.trim();
+    if(!v) return null;
+    if(!/^https?:\/\//i.test(v)) v = 'https://' + v;
+    try {
+      const u = new URL(v);
+      if(!u.hostname || !u.hostname.includes('.')) return null;
+      return u.toString();
+    } catch(e){
+      return null;
+    }
+  }
+
+  function scoreTierColor(score){
+    if(score === null || typeof score !== 'number') return 'rgba(245,243,238,0.3)';
+    if(score >= 80) return 'var(--teal)';
+    if(score >= 50) return 'var(--amber)';
+    return 'var(--danger)';
+  }
+
+  const PLAN_PRICES = { Starter: '$999', Growth: '$1,999', Premium: '$3,999' };
+
+  function clearAuditPlanFields(){
+    const website = document.getElementById('auditWebsiteField');
+    const score = document.getElementById('auditScoreField');
+    const plan = document.getElementById('selectedPlanField');
+    const price = document.getElementById('planPriceField');
+    const banner = document.getElementById('auditPlanBanner');
+    if(website) website.value = '';
+    if(score) score.value = '';
+    if(plan) plan.value = '';
+    if(price) price.value = '';
+    if(banner){ banner.style.display = 'none'; banner.innerHTML = ''; }
+  }
+
+  function renderResults(payload){
+    const scores = payload.scores || {};
+    const insufficient = payload.insufficientData || {};
+    const ai = payload.ai && payload.ai.success ? payload.ai : null;
+
+    // Record the real audited URL and overall score for use if the
+    // customer later selects a plan. Both come straight from the API
+    // response — never invented, never hardcoded.
+    currentAudit = { url: payload.url || null, score: (typeof scores.overall === 'number') ? scores.overall : null };
+
+    // Overall score
+    const overall = scores.overall;
+    overallNum.textContent = (typeof overall === 'number') ? overall : 'N/A';
+    overallBadge.style.borderColor = scoreTierColor(overall);
+
+    // Summary line — use AI summary if available, otherwise a neutral,
+    // non-fabricated fallback line.
+    summaryEl.textContent = ai && ai.summary
+      ? ai.summary
+      : "Here's a breakdown of what we found on your homepage.";
+
+    // Category cards
+    categoriesEl.innerHTML = '';
+    CATEGORY_ORDER.forEach(key => {
+      const score = scores[key];
+      const isInsufficient = insufficient[key] === true || typeof score !== 'number';
+      const aiCat = ai && ai.categories && ai.categories[key];
+
+      let text;
+      if (aiCat && aiCat.summary) {
+        text = aiCat.summary;
+      } else {
+        // Fallback: use the plain-English message from a real check for
+        // this category rather than inventing anything.
+        const checkCategory = CHECK_CATEGORY_MAP[key];
+        const relevant = (payload.checks || []).find(c =>
+          c.category === checkCategory && (c.status === 'fail' || c.status === 'partial'));
+        text = relevant ? relevant.message
+          : (isInsufficient ? 'Not enough information was available to assess this from your homepage.'
+                             : 'No significant issues were found in this area.');
+      }
+
+      const card = document.createElement('div');
+      card.className = 'audit-cat';
+      card.innerHTML = `
+        <div class="audit-cat-head">
+          <div class="audit-cat-name">${CATEGORY_LABELS[key]}</div>
+          <div class="audit-cat-score">${isInsufficient ? 'N/A' : score + '/100'}</div>
+        </div>
+        <div class="audit-bar"><i style="width:${isInsufficient ? 0 : score}%; background:${scoreTierColor(isInsufficient ? null : score)};"></i></div>
+        <div class="audit-cat-text${isInsufficient ? ' unavailable' : ''}">${text}</div>
+      `;
+      categoriesEl.appendChild(card);
+    });
+
+    // Top opportunities
+    let opportunities = [];
+    if (ai && Array.isArray(ai.topOpportunities) && ai.topOpportunities.length > 0) {
+      opportunities = ai.topOpportunities;
+    } else {
+      // Fallback: surface real failed checks rather than AI text, still
+      // 100% factual — not invented.
+      opportunities = (payload.checks || [])
+        .filter(c => c.status === 'fail')
+        .slice(0, 3)
+        .map(c => ({ category: c.category, title: c.check, explanation: c.message }));
+    }
+
+    if (opportunities.length > 0) {
+      oppList.innerHTML = opportunities.map(o => `
+        <div class="opp-item">
+          <div class="cat">${o.category || ''}</div>
+          <h5>${o.title || ''}</h5>
+          <p>${o.explanation || ''}</p>
+        </div>
+      `).join('');
+      oppSection.style.display = 'block';
+    } else {
+      oppSection.style.display = 'none';
+    }
+
+    stopLoading();
+    showOnly(resultsBox);
+    resultsBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const normalized = normalizeUrl(urlInput.value);
+    if (!normalized) {
+      urlError.style.display = 'block';
+      return;
+    }
+    urlError.style.display = 'none';
+    startLoading();
+
+    // A new audit is starting — any previously selected plan/audit info
+    // (from a prior, unrelated audit) must not be allowed to silently
+    // carry into a future booking submission.
+    currentAudit = { url: null, score: null };
+    clearAuditPlanFields();
+
+    try {
+      const res = await fetch('/.netlify/functions/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: normalized })
+      });
+
+      let json;
+      try { json = await res.json(); } catch (parseErr) {
+        showError("We couldn't complete the audit for this website. Please check the URL and try again.");
+        return;
+      }
+
+      if (!res.ok || !json.success) {
+        showError(json && json.error ? json.error : "We couldn't complete the audit for this website. Please check the URL and try again.");
+        return;
+      }
+
+      renderResults(json);
+    } catch (err) {
+      showError("We couldn't complete the audit for this website. Please check your connection and try again.");
+    }
+  });
+
+  retryBtn.addEventListener('click', function(){
+    showOnly(null);
+    loadingBox.style.display = 'none';
+    errorBox.style.display = 'none';
+    resultsBox.style.display = 'none';
+    urlInput.focus();
+  });
+
+  // Plan selection — populates the EXISTING Web3Forms booking form with the
+  // real audited URL + score from this session, plus the chosen plan/price,
+  // then opens that same existing form. No new form, no new endpoint.
+  document.querySelectorAll('.audit-plan-card [data-plan]').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const planName = btn.getAttribute('data-plan');
+      const price = PLAN_PRICES[planName] || '';
+
+      const websiteField = document.getElementById('auditWebsiteField');
+      const scoreField = document.getElementById('auditScoreField');
+      const planField = document.getElementById('selectedPlanField');
+      const priceField = document.getElementById('planPriceField');
+      const banner = document.getElementById('auditPlanBanner');
+
+      if(websiteField) websiteField.value = currentAudit.url || '';
+      if(scoreField) scoreField.value = (typeof currentAudit.score === 'number') ? (currentAudit.score + '/100') : '';
+      if(planField) planField.value = planName;
+      if(priceField) priceField.value = price;
+
+      if(banner){
+        const scoreText = (typeof currentAudit.score === 'number') ? (currentAudit.score + '/100') : 'N/A';
+        const siteText = currentAudit.url || 'your website';
+        banner.innerHTML = `You selected the <strong>${planName}</strong> plan (${price} setup) for <strong>${siteText}</strong> — audit score ${scoreText}. This will be included with your booking below.`;
+        banner.style.display = 'block';
+      }
+
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
