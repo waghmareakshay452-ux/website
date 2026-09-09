@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://webcraft-audit.netlify.app/sitemap.xml
