@@ -69,66 +69,106 @@ button,input,textarea{font:inherit}
 .hero-copy p{max-width:530px;margin:0;color:#566174;font-size:18px;line-height:1.5}
 .actions{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ============ HERO 3D DEVICE STAGE ============ */
+/* ============ PREMIUM HERO DEVICE VISUAL ============ */
+
+.scene-wrap[data-scene="hero"] .scene{
+  background:
+    radial-gradient(circle at 78% 38%,rgba(54,101,180,.18),transparent 24%),
+    radial-gradient(circle at 92% 78%,rgba(112,82,210,.16),transparent 26%),
+    linear-gradient(115deg,#080b12 0%,#0c111c 52%,#111a2b 100%);
+  color:#fff;
+}
+
+.scene-wrap[data-scene="hero"] .scene:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 62% 70%,rgba(81,200,255,.09),transparent 22%),
+    linear-gradient(90deg,rgba(8,11,18,.12),transparent 60%);
+  pointer-events:none;
+}
+
+.scene-wrap[data-scene="hero"] .kicker{
+  color:#aeb9cb;
+}
+
+.scene-wrap[data-scene="hero"] .hero h1{
+  color:#f7f9ff;
+}
+
+.scene-wrap[data-scene="hero"] .hero h1 span{
+  background:linear-gradient(100deg,#69cfff,#8f7cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.scene-wrap[data-scene="hero"] .hero-copy p{
+  color:#aab5c7;
+}
 
 .hero-stage{
   position:absolute;
-  right:-2%;
-  bottom:5%;
-  width:min(46vw,620px);
-  height:44vh;
-  min-height:320px;
-  pointer-events:none
-}
-
-.hero-stage canvas{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  display:block
-}
-
-.hero-stage.scene-active .stage-fallback{
-  opacity:0
-}
-
-.stage-fallback{
-  position:absolute;
-  inset:0;
-  border-radius:32px;
-  background:
-    linear-gradient(150deg,rgba(81,200,255,.14),rgba(139,108,255,.14)),
-    linear-gradient(200deg,#eef2fb,#e3e8f4);
-  border:1px solid rgba(255,255,255,.6);
-  box-shadow:0 40px 100px rgba(35,45,70,.1);
-  transition:opacity .6s var(--ease);
+  z-index:1;
+  right:-8%;
+  bottom:-8%;
+  width:min(67vw,860px);
+  height:min(78vh,760px);
+  pointer-events:none;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:30px
 }
 
-.stage-fallback span{
-  font:600 13px/1.5 'DM Sans';
-  color:#69758a;
-  max-width:240px
+.hero-device-image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  filter:
+    drop-shadow(0 35px 55px rgba(0,0,0,.35))
+    drop-shadow(0 0 35px rgba(76,137,255,.08));
+  user-select:none;
 }
 
 @media(max-width:1000px){
+  .scene-wrap[data-scene="hero"] .scene{
+    min-height:100svh;
+  }
+
   .hero-stage{
     position:relative;
     right:auto;
     bottom:auto;
-    width:100%;
-    max-width:460px;
-    height:260px;
-    margin:40px auto 0
+    width:min(100%,680px);
+    height:46vh;
+    min-height:330px;
+    margin:22px auto -15px;
+  }
+
+  .hero-device-image{
+    object-position:center;
   }
 }
 
-/* ============ /HERO STAGE ============ */
+@media(max-width:600px){
+  .scene-wrap[data-scene="hero"] .scene{
+    padding-top:82px;
+    padding-bottom:30px;
+    min-height:100svh;
+  }
+
+  .hero-stage{
+    width:calc(100% + 30px);
+    height:42vh;
+    min-height:300px;
+    margin:8px -15px -5px;
+  }
+}
+
+/* ============ /PREMIUM HERO DEVICE VISUAL ============ */
 
 .scene--dark{
   color:#fff;
@@ -1060,14 +1100,15 @@ details p{
       </div>
 
       <div class="hero-stage" id="heroStage" aria-hidden="true">
-
-        <!-- Rendered by /hero-scene.js -->
-        <canvas id="heroCanvas"></canvas>
-
-        <div class="stage-fallback">
-          <span>Loading 3D preview…</span>
-        </div>
-
+        <img
+          class="hero-device-image"
+          src="/assets/webcraft-hero.webp"
+          alt=""
+          width="780"
+          height="1020"
+          loading="eager"
+          decoding="async"
+        >
       </div>
 
     </div>
@@ -2053,54 +2094,7 @@ $('#contactForm').addEventListener(
 );
 </script>
 
-<!-- =========================================================
-     HERO 3D SCENE LOADER
-     =========================================================
 
-     This loads hero-scene.js only after the page finishes loading.
-
-     IMPORTANT:
-     - hero-scene.js must exist at the repository root
-     - GLTFLoader's "three" dependency is resolved by the
-       import map in <head>
-     - Errors are now visible instead of being silently swallowed
-     ========================================================= -->
-
-<script>
-function loadHeroScene(){
-
-  import('/hero-scene.js')
-    .then(()=>{
-      console.log('Web Craft 3D hero scene loaded successfully.');
-    })
-    .catch(err=>{
-
-      console.error(
-        'Web Craft 3D hero scene failed to load:',
-        err
-      );
-
-      const fallback=
-        document.querySelector('.stage-fallback span');
-
-      if(fallback){
-        fallback.textContent=
-          '3D preview could not be loaded.';
-      }
-    });
-
-}
-
-if(document.readyState==='complete'){
-  loadHeroScene();
-}else{
-  addEventListener(
-    'load',
-    loadHeroScene,
-    {once:true}
-  );
-}
-</script>
 
 </body>
 </html>
