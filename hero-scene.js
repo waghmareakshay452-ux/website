@@ -1,1211 +1,1188 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 
-(() => {
-  'use strict';
+const stage = document.getElementById('heroStage');
+const canvas = document.getElementById('heroCanvas');
 
-  const stage = document.getElementById('heroStage');
-  const canvas = document.getElementById('heroCanvas');
+if (!stage || !canvas) {
+  throw new Error('Web Craft 3D hero elements not found.');
+}
 
-  if (!stage || !canvas) return;
+/* -------------------------------------------------------
+   SCENE
+------------------------------------------------------- */
 
-  // ============================================================
-  // SCENE
-  // ============================================================
+const scene = new THREE.Scene();
 
-  const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(
+  32,
+  1,
+  0.1,
+  100
+);
 
-  const camera = new THREE.PerspectiveCamera(
-    30,
-    1,
-    0.1,
-    100
-  );
+camera.position.set(0, 1.25, 10);
+camera.lookAt(0, 0.85, 0);
 
-  camera.position.set(0, 1.3, 10);
-  camera.lookAt(0, 0.8, 0);
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: true,
+  powerPreference: 'high-performance'
+});
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-    powerPreference: 'high-performance'
-  });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio || 1, 2)
-  );
+/* -------------------------------------------------------
+   LIGHTING
+------------------------------------------------------- */
 
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-  // ============================================================
-  // LIGHTING
-  // ============================================================
-
-  scene.add(
-    new THREE.HemisphereLight(
-      0xffffff,
-      0x9da9bd,
-      2.4
-    )
-  );
-
-  const keyLight = new THREE.DirectionalLight(
+scene.add(
+  new THREE.HemisphereLight(
     0xffffff,
-    4.2
+    0xb9c4dc,
+    2.0
+  )
+);
+
+const keyLight = new THREE.DirectionalLight(
+  0xffffff,
+  3.2
+);
+
+keyLight.position.set(-4, 7, 7);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(1024, 1024);
+scene.add(keyLight);
+
+const blueLight = new THREE.PointLight(
+  0x58bfff,
+  12,
+  12
+);
+
+blueLight.position.set(4, 2.5, 3);
+scene.add(blueLight);
+
+const violetLight = new THREE.PointLight(
+  0x9c78ff,
+  9,
+  10
+);
+
+violetLight.position.set(-4, 1.5, 1);
+scene.add(violetLight);
+
+/* -------------------------------------------------------
+   MATERIALS
+------------------------------------------------------- */
+
+const silver = new THREE.MeshStandardMaterial({
+  color: 0xd9dee7,
+  metalness: 0.82,
+  roughness: 0.24
+});
+
+const silverDark = new THREE.MeshStandardMaterial({
+  color: 0xaeb7c5,
+  metalness: 0.85,
+  roughness: 0.27
+});
+
+const black = new THREE.MeshStandardMaterial({
+  color: 0x11141a,
+  metalness: 0.45,
+  roughness: 0.3
+});
+
+const keyboardMat = new THREE.MeshStandardMaterial({
+  color: 0x252a32,
+  metalness: 0.25,
+  roughness: 0.58
+});
+
+const keyMat = new THREE.MeshStandardMaterial({
+  color: 0x3b414b,
+  metalness: 0.12,
+  roughness: 0.5
+});
+
+const glass = new THREE.MeshPhysicalMaterial({
+  color: 0x0c111b,
+  metalness: 0.15,
+  roughness: 0.18,
+  transmission: 0.04,
+  clearcoat: 0.8
+});
+
+const white = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
+  metalness: 0.05,
+  roughness: 0.35
+});
+
+/* -------------------------------------------------------
+   HELPERS
+------------------------------------------------------- */
+
+function roundedBox(
+  width,
+  height,
+  depth,
+  radius = 0.08,
+  material
+) {
+  const shape = new THREE.Shape();
+
+  const x = -width / 2;
+  const y = -height / 2;
+
+  shape.moveTo(x + radius, y);
+
+  shape.lineTo(x + width - radius, y);
+  shape.quadraticCurveTo(
+    x + width,
+    y,
+    x + width,
+    y + radius
   );
 
-  keyLight.position.set(4, 7, 7);
-  keyLight.castShadow = true;
-  keyLight.shadow.mapSize.set(1024, 1024);
-
-  scene.add(keyLight);
-
-  const blueLight = new THREE.PointLight(
-    0x66ccff,
-    16,
-    14
+  shape.lineTo(x + width, y + height - radius);
+  shape.quadraticCurveTo(
+    x + width,
+    y + height,
+    x + width - radius,
+    y + height
   );
 
-  blueLight.position.set(-4, 3, 4);
-  scene.add(blueLight);
-
-  const violetLight = new THREE.PointLight(
-    0x907cff,
-    12,
-    12
+  shape.lineTo(x + radius, y + height);
+  shape.quadraticCurveTo(
+    x,
+    y + height,
+    x,
+    y + height - radius
   );
 
-  violetLight.position.set(4, 2, -2);
-  scene.add(violetLight);
+  shape.lineTo(x, y + radius);
+  shape.quadraticCurveTo(
+    x,
+    y,
+    x + radius,
+    y
+  );
 
-  // ============================================================
-  // MAIN GROUP
-  // ============================================================
-
-  const hero = new THREE.Group();
-
-  hero.position.set(0, -0.25, 0);
-
-  scene.add(hero);
-
-  // ============================================================
-  // MATERIALS
-  // ============================================================
-
-  const silver = new THREE.MeshPhysicalMaterial({
-    color: 0xdce2eb,
-    metalness: 0.72,
-    roughness: 0.22,
-    clearcoat: 0.7,
-    clearcoatRoughness: 0.12
-  });
-
-  const dark = new THREE.MeshPhysicalMaterial({
-    color: 0x11151d,
-    metalness: 0.4,
-    roughness: 0.25,
-    clearcoat: 0.65
-  });
-
-  const keyboard = new THREE.MeshPhysicalMaterial({
-    color: 0xb8c1cf,
-    metalness: 0.45,
-    roughness: 0.34
-  });
-
-  const keyMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x6f7887,
-    metalness: 0.2,
-    roughness: 0.45
-  });
-
-  // ============================================================
-  // ROUNDED BOX
-  // ============================================================
-
-  function roundedBox(
-    width,
-    height,
+  const geometry = new THREE.ExtrudeGeometry(shape, {
     depth,
-    radius,
+    bevelEnabled: true,
+    bevelSegments: 3,
+    bevelSize: radius * 0.45,
+    bevelThickness: radius * 0.45,
+    curveSegments: 6
+  });
+
+  geometry.translate(0, 0, -depth / 2);
+
+  const mesh = new THREE.Mesh(
+    geometry,
     material
-  ) {
-    const shape = new THREE.Shape();
-
-    const x = -width / 2;
-    const y = -height / 2;
-
-    shape.moveTo(x + radius, y);
-
-    shape.lineTo(
-      x + width - radius,
-      y
-    );
-
-    shape.quadraticCurveTo(
-      x + width,
-      y,
-      x + width,
-      y + radius
-    );
-
-    shape.lineTo(
-      x + width,
-      y + height - radius
-    );
-
-    shape.quadraticCurveTo(
-      x + width,
-      y + height,
-      x + width - radius,
-      y + height
-    );
-
-    shape.lineTo(
-      x + radius,
-      y + height
-    );
-
-    shape.quadraticCurveTo(
-      x,
-      y + height,
-      x,
-      y + height - radius
-    );
-
-    shape.lineTo(
-      x,
-      y + radius
-    );
-
-    shape.quadraticCurveTo(
-      x,
-      y,
-      x + radius,
-      y
-    );
-
-    const geometry = new THREE.ExtrudeGeometry(
-      shape,
-      {
-        depth,
-        bevelEnabled: true,
-        bevelSegments: 3,
-        bevelSize: 0.035,
-        bevelThickness: 0.025
-      }
-    );
-
-    geometry.center();
-
-    return new THREE.Mesh(
-      geometry,
-      material
-    );
-  }
-
-  // ============================================================
-  // LAPTOP SCREEN TEXTURE
-  // ============================================================
-
-  function laptopTexture() {
-    const canvas = document.createElement('canvas');
-
-    canvas.width = 1200;
-    canvas.height = 720;
-
-    const ctx = canvas.getContext('2d');
-
-    ctx.fillStyle = '#0a0e16';
-    ctx.fillRect(0, 0, 1200, 720);
-
-    const gradient = ctx.createLinearGradient(
-      0,
-      0,
-      1200,
-      720
-    );
-
-    gradient.addColorStop(0, '#17243a');
-    gradient.addColorStop(0.5, '#0d1423');
-    gradient.addColorStop(1, '#181329');
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 1200, 720);
-
-    // Browser bar
-    ctx.fillStyle = '#171d28';
-    ctx.fillRect(0, 0, 1200, 58);
-
-    // Browser dots
-    ['#ff605c', '#ffbd44', '#00ca4e'].forEach(
-      (color, i) => {
-        ctx.beginPath();
-        ctx.fillStyle = color;
-        ctx.arc(
-          27 + i * 23,
-          29,
-          6,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
-      }
-    );
-
-    // Logo
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 25px Arial';
-
-    ctx.fillText(
-      'WEB CRAFT',
-      105,
-      37
-    );
-
-    // Nav
-    ctx.fillStyle = '#8d98aa';
-    ctx.font = '16px Arial';
-
-    ctx.fillText('Work', 800, 36);
-    ctx.fillText('Services', 865, 36);
-    ctx.fillText('Contact', 950, 36);
-
-    // Main heading
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 58px Arial';
-
-    ctx.fillText(
-      'Digital experiences',
-      65,
-      175
-    );
-
-    ctx.fillStyle = '#71d0ff';
-
-    ctx.fillText(
-      'built to perform.',
-      65,
-      245
-    );
-
-    // Description
-    ctx.fillStyle = '#8995a8';
-    ctx.font = '20px Arial';
-
-    ctx.fillText(
-      'Premium websites + intelligent automation.',
-      67,
-      292
-    );
-
-    // Cards
-    const cards = [
-      ['Design', '98'],
-      ['Performance', '96'],
-      ['Conversion', '94']
-    ];
-
-    cards.forEach((card, index) => {
-      const x = 65 + index * 350;
-
-      ctx.fillStyle = '#171f2d';
-
-      ctx.beginPath();
-      ctx.roundRect(
-        x,
-        360,
-        305,
-        205,
-        22
-      );
-      ctx.fill();
-
-      ctx.fillStyle = '#8b96a9';
-      ctx.font = '17px Arial';
-
-      ctx.fillText(
-        card[0],
-        x + 25,
-        400
-      );
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 52px Arial';
-
-      ctx.fillText(
-        card[1],
-        x + 25,
-        470
-      );
-
-      ctx.fillStyle = '#6ecfff';
-
-      ctx.fillRect(
-        x + 25,
-        515,
-        210,
-        5
-      );
-    });
-
-    const texture =
-      new THREE.CanvasTexture(canvas);
-
-    texture.colorSpace =
-      THREE.SRGBColorSpace;
-
-    texture.anisotropy =
-      renderer.capabilities.getMaxAnisotropy();
-
-    return texture;
-  }
-
-  // ============================================================
-  // PHONE TEXTURE
-  // ============================================================
-
-  function phoneTexture() {
-    const canvas = document.createElement('canvas');
-
-    canvas.width = 500;
-    canvas.height = 1000;
-
-    const ctx = canvas.getContext('2d');
-
-    ctx.fillStyle = '#090d15';
-    ctx.fillRect(0, 0, 500, 1000);
-
-    const gradient = ctx.createLinearGradient(
-      0,
-      0,
-      500,
-      1000
-    );
-
-    gradient.addColorStop(0, '#15253e');
-    gradient.addColorStop(1, '#11101e');
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 500, 1000);
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 29px Arial';
-
-    ctx.fillText(
-      'WEB CRAFT',
-      32,
-      62
-    );
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 48px Arial';
-
-    ctx.fillText(
-      'Build.',
-      32,
-      175
-    );
-
-    ctx.fillStyle = '#70ceff';
-
-    ctx.fillText(
-      'Automate.',
-      32,
-      235
-    );
-
-    ctx.fillStyle = '#8b96aa';
-    ctx.font = '17px Arial';
-
-    ctx.fillText(
-      'Beautiful digital systems',
-      32,
-      285
-    );
-
-    ctx.fillText(
-      'for ambitious businesses.',
-      32,
-      312
-    );
-
-    // CTA
-    ctx.fillStyle = '#ffffff';
-
-    ctx.beginPath();
-    ctx.roundRect(
-      32,
-      360,
-      235,
-      58,
-      17
-    );
-    ctx.fill();
-
-    ctx.fillStyle = '#0d1119';
-    ctx.font = 'bold 17px Arial';
-
-    ctx.fillText(
-      'Free Website Audit',
-      57,
-      397
-    );
-
-    const items = [
-      'Website Design',
-      'Automation',
-      'Performance'
-    ];
-
-    items.forEach((item, index) => {
-      const y = 485 + index * 130;
-
-      ctx.fillStyle = '#181f2c';
-
-      ctx.beginPath();
-      ctx.roundRect(
-        32,
-        y,
-        436,
-        95,
-        19
-      );
-      ctx.fill();
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 19px Arial';
-
-      ctx.fillText(
-        item,
-        57,
-        y + 38
-      );
-
-      ctx.fillStyle = '#758195';
-      ctx.font = '15px Arial';
-
-      ctx.fillText(
-        'Premium digital experience',
-        57,
-        y + 65
-      );
-    });
-
-    const texture =
-      new THREE.CanvasTexture(canvas);
-
-    texture.colorSpace =
-      THREE.SRGBColorSpace;
-
-    texture.anisotropy =
-      renderer.capabilities.getMaxAnisotropy();
-
-    return texture;
-  }
-
-  // ============================================================
-  // LAPTOP
-  // ============================================================
-
-  function createLaptop() {
-    const laptop = new THREE.Group();
-
-    // ----------------------------------------------------------
-    // BASE
-    // ----------------------------------------------------------
-
-    const base = roundedBox(
-      5.7,
-      3.35,
-      0.25,
-      0.16,
-      silver
-    );
-
-    // Base lies horizontally.
-    base.position.y = 0;
-
-    base.castShadow = true;
-    base.receiveShadow = true;
-
-    laptop.add(base);
-
-    // Keyboard plate
-    const keyboardPlate = roundedBox(
-      5.0,
-      2.55,
-      0.055,
-      0.12,
-      keyboard
-    );
-
-    keyboardPlate.position.set(
-      0,
-      0.145,
-      0
-    );
-
-    laptop.add(keyboardPlate);
-
-    // ----------------------------------------------------------
-    // KEYS
-    // ----------------------------------------------------------
-
-    const rows = 6;
-    const columns = 12;
-
-    for (let row = 0; row < rows; row++) {
-      for (
-        let column = 0;
-        column < columns;
-        column++
-      ) {
-        const key = roundedBox(
-          0.30,
-          0.26,
-          0.045,
-          0.035,
-          keyMaterial
-        );
-
-        key.position.set(
-          -1.92 + column * 0.35,
-          0.19,
-          -0.82 + row * 0.34
-        );
-
-        key.castShadow = true;
-
-        laptop.add(key);
-      }
-    }
-
-    // Space bar
-    const space = roundedBox(
-      1.65,
-      0.26,
+  );
+
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+
+  return mesh;
+}
+
+function plane(
+  width,
+  height,
+  material,
+  x = 0,
+  y = 0,
+  z = 0
+) {
+  const geometry = new THREE.PlaneGeometry(
+    width,
+    height
+  );
+
+  const mesh = new THREE.Mesh(
+    geometry,
+    material
+  );
+
+  mesh.position.set(x, y, z);
+
+  return mesh;
+}
+
+/* -------------------------------------------------------
+   TEXTURE HELPERS
+------------------------------------------------------- */
+
+function createLaptopScreenTexture() {
+  const c = document.createElement('canvas');
+
+  c.width = 1200;
+  c.height = 760;
+
+  const ctx = c.getContext('2d');
+
+  const gradient = ctx.createLinearGradient(
+    0,
+    0,
+    1200,
+    760
+  );
+
+  gradient.addColorStop(0, '#101827');
+  gradient.addColorStop(0.45, '#172b4c');
+  gradient.addColorStop(1, '#273b66');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 1200, 760);
+
+  const glow = ctx.createRadialGradient(
+    780,
+    250,
+    30,
+    780,
+    250,
+    500
+  );
+
+  glow.addColorStop(
+    0,
+    'rgba(78,194,255,.55)'
+  );
+
+  glow.addColorStop(
+    1,
+    'rgba(78,194,255,0)'
+  );
+
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, 1200, 760);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 72px Arial';
+  ctx.fillText(
+    'WEB CRAFT',
+    90,
+    155
+  );
+
+  ctx.fillStyle = '#a9bddb';
+  ctx.font = '400 30px Arial';
+  ctx.fillText(
+    'Premium digital experiences',
+    94,
+    205
+  );
+
+  ctx.fillStyle = 'rgba(255,255,255,.09)';
+  ctx.roundRect(
+    90,
+    285,
+    470,
+    230,
+    28
+  );
+  ctx.fill();
+
+  ctx.fillStyle = '#69d0ff';
+  ctx.font = '700 34px Arial';
+  ctx.fillText(
+    'DESIGN',
+    125,
+    350
+  );
+
+  ctx.fillStyle = '#d8e5f7';
+  ctx.font = '400 25px Arial';
+  ctx.fillText(
+    'Fast',
+    125,
+    405
+  );
+
+  ctx.fillText(
+    'Elegant',
+    125,
+    445
+  );
+
+  ctx.fillText(
+    'Built to convert',
+    125,
+    485
+  );
+
+  const texture = new THREE.CanvasTexture(c);
+
+  texture.colorSpace = THREE.SRGBColorSpace;
+
+  return texture;
+}
+
+function createPhoneTexture() {
+  const c = document.createElement('canvas');
+
+  c.width = 600;
+  c.height = 1100;
+
+  const ctx = c.getContext('2d');
+
+  const gradient = ctx.createLinearGradient(
+    0,
+    0,
+    600,
+    1100
+  );
+
+  gradient.addColorStop(0, '#111a2d');
+  gradient.addColorStop(0.5, '#152c52');
+  gradient.addColorStop(1, '#0e1525');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 600, 1100);
+
+  ctx.fillStyle = 'rgba(255,255,255,.08)';
+  ctx.roundRect(
+    45,
+    150,
+    510,
+    300,
+    32
+  );
+  ctx.fill();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 52px Arial';
+  ctx.fillText(
+    'WEB CRAFT',
+    78,
+    235
+  );
+
+  ctx.fillStyle = '#70d5ff';
+  ctx.font = '700 28px Arial';
+  ctx.fillText(
+    'YOUR DIGITAL PRESENCE',
+    78,
+    300
+  );
+
+  ctx.fillStyle = '#b8c9e4';
+  ctx.font = '400 25px Arial';
+  ctx.fillText(
+    'Designed for growth.',
+    78,
+    350
+  );
+
+  ctx.fillStyle = 'rgba(105,208,255,.18)';
+  ctx.roundRect(
+    45,
+    520,
+    510,
+    180,
+    28
+  );
+  ctx.fill();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '600 31px Arial';
+  ctx.fillText(
+    'Premium websites',
+    78,
+    585
+  );
+
+  ctx.fillStyle = '#9fb2ce';
+  ctx.font = '400 24px Arial';
+  ctx.fillText(
+    'Fast • Modern • Strategic',
+    78,
+    630
+  );
+
+  const texture = new THREE.CanvasTexture(c);
+
+  texture.colorSpace = THREE.SRGBColorSpace;
+
+  return texture;
+}
+
+/* -------------------------------------------------------
+   MAIN HERO GROUP
+------------------------------------------------------- */
+
+const hero = new THREE.Group();
+
+hero.position.y = 0.05;
+
+scene.add(hero);
+
+/* =======================================================
+   LAPTOP
+======================================================= */
+
+const laptop = new THREE.Group();
+
+laptop.position.set(
+  -0.55,
+  0.15,
+  0
+);
+
+laptop.rotation.y = -0.18;
+laptop.rotation.x = -0.02;
+
+hero.add(laptop);
+
+/* -------------------------------------------------------
+   LAPTOP BASE
+------------------------------------------------------- */
+
+const base = roundedBox(
+  4.65,
+  2.75,
+  0.24,
+  0.16,
+  silver
+);
+
+base.position.set(
+  0,
+  0,
+  0
+);
+
+base.rotation.x = -0.035;
+
+laptop.add(base);
+
+/* -------------------------------------------------------
+   TOP KEYBOARD DECK
+------------------------------------------------------- */
+
+const deck = roundedBox(
+  4.25,
+  2.30,
+  0.055,
+  0.11,
+  keyboardMat
+);
+
+deck.position.set(
+  0,
+  0.08,
+  0.15
+);
+
+deck.rotation.x = -0.035;
+
+laptop.add(deck);
+
+/* -------------------------------------------------------
+   KEYBOARD
+------------------------------------------------------- */
+
+const keyboard = new THREE.Group();
+
+keyboard.position.set(
+  -0.08,
+  0.16,
+  0.195
+);
+
+keyboard.rotation.x = -0.035;
+
+laptop.add(keyboard);
+
+const rows = [
+  14,
+  14,
+  13,
+  12,
+  10
+];
+
+const keyW = 0.245;
+const keyH = 0.18;
+const gap = 0.045;
+
+rows.forEach((count, row) => {
+
+  const rowWidth =
+    count * keyW +
+    (count - 1) * gap;
+
+  const startX =
+    -rowWidth / 2;
+
+  for (let i = 0; i < count; i++) {
+
+    const key = roundedBox(
+      keyW,
+      keyH,
       0.045,
-      0.035,
-      keyMaterial
+      0.025,
+      keyMat
     );
 
-    space.position.set(
+    key.position.set(
+      startX +
+      i * (keyW + gap) +
+      keyW / 2,
       0,
-      0.20,
-      0.87
+      row * (keyH + gap)
     );
 
-    laptop.add(space);
+    keyboard.add(key);
+  }
+});
 
-    // Trackpad
-    const trackpad = roundedBox(
-      1.55,
-      0.95,
-      0.035,
+/* -------------------------------------------------------
+   SPACE BAR
+------------------------------------------------------- */
+
+const spaceBar = roundedBox(
+  1.42,
+  0.18,
+  0.045,
+  0.025,
+  keyMat
+);
+
+spaceBar.position.set(
+  0,
+  0,
+  1.12
+);
+
+keyboard.add(spaceBar);
+
+/* -------------------------------------------------------
+   TRACKPAD
+------------------------------------------------------- */
+
+const trackpad = roundedBox(
+  1.52,
+  0.93,
+  0.035,
+  0.08,
+  new THREE.MeshStandardMaterial({
+    color: 0x343a44,
+    metalness: 0.15,
+    roughness: 0.48
+  })
+);
+
+trackpad.position.set(
+  0,
+  -0.58,
+  0.205
+);
+
+trackpad.rotation.x = -0.035;
+
+laptop.add(trackpad);
+
+/* -------------------------------------------------------
+   FRONT PALM REST
+------------------------------------------------------- */
+
+const palmRest = roundedBox(
+  4.18,
+  0.72,
+  0.045,
+  0.08,
+  silverDark
+);
+
+palmRest.position.set(
+  0,
+  -0.87,
+  0.17
+);
+
+palmRest.rotation.x = -0.035;
+
+laptop.add(palmRest);
+
+/* -------------------------------------------------------
+   LAPTOP LID
+------------------------------------------------------- */
+
+const lid = new THREE.Group();
+
+lid.position.set(
+  0,
+  1.37,
+  -0.02
+);
+
+laptop.add(lid);
+
+/* Outer lid */
+
+const lidOuter = roundedBox(
+  4.65,
+  2.82,
+  0.20,
+  0.16,
+  silver
+);
+
+lidOuter.position.set(
+  0,
+  1.30,
+  -0.02
+);
+
+lidOuter.rotation.x = 0.10;
+
+lid.add(lidOuter);
+
+/* Inner black bezel */
+
+const bezel = roundedBox(
+  4.25,
+  2.43,
+  0.055,
+  0.10,
+  black
+);
+
+bezel.position.set(
+  0,
+  1.30,
+  0.105
+);
+
+bezel.rotation.x = 0.10;
+
+lid.add(bezel);
+
+/* Screen */
+
+const screenTexture =
+  createLaptopScreenTexture();
+
+const screenMaterial =
+  new THREE.MeshBasicMaterial({
+    map: screenTexture,
+    side: THREE.FrontSide
+  });
+
+const screen = plane(
+  4.02,
+  2.20,
+  screenMaterial
+);
+
+screen.position.set(
+  0,
+  1.30,
+  0.145
+);
+
+screen.rotation.x = 0.10;
+
+lid.add(screen);
+
+/* -------------------------------------------------------
+   WEBCAM
+------------------------------------------------------- */
+
+const webcam = new THREE.Mesh(
+  new THREE.SphereGeometry(
+    0.035,
+    16,
+    16
+  ),
+  black
+);
+
+webcam.position.set(
+  0,
+  2.34,
+  0.18
+);
+
+lid.add(webcam);
+
+/* -------------------------------------------------------
+   LAPTOP LOGO
+------------------------------------------------------- */
+
+const logo = new THREE.Mesh(
+  new THREE.CircleGeometry(
+    0.17,
+    32
+  ),
+  new THREE.MeshStandardMaterial({
+    color: 0xf4f7fb,
+    metalness: 0.8,
+    roughness: 0.2,
+    emissive: 0x111827,
+    emissiveIntensity: 0.3
+  })
+);
+
+logo.position.set(
+  0,
+  0.32,
+  -0.125
+);
+
+logo.rotation.x = -Math.PI / 2;
+
+laptop.add(logo);
+
+/* -------------------------------------------------------
+   HINGES
+------------------------------------------------------- */
+
+for (const x of [-1.45, 1.45]) {
+
+  const hinge = new THREE.Mesh(
+    new THREE.CylinderGeometry(
       0.10,
-      new THREE.MeshPhysicalMaterial({
-        color: 0xc6ced9,
-        metalness: 0.3,
-        roughness: 0.25
-      })
-    );
-
-    trackpad.position.set(
-      0,
-      0.20,
-      1.00
-    );
-
-    laptop.add(trackpad);
-
-    // ----------------------------------------------------------
-    // DISPLAY HINGE
-    // ----------------------------------------------------------
-
-    const display = new THREE.Group();
-
-    // Put hinge at back of base.
-    display.position.set(
-      0,
-      0.13,
-      -1.50
-    );
-
-    // ----------------------------------------------------------
-    // SCREEN FRAME
-    // ----------------------------------------------------------
-
-    const frame = roundedBox(
-      5.55,
-      3.55,
-      0.20,
-      0.18,
-      dark
-    );
-
-    // IMPORTANT:
-    // The display is vertical in XY plane.
-    frame.position.set(
-      0,
-      1.68,
-      0
-    );
-
-    frame.castShadow = true;
-
-    display.add(frame);
-
-    // ----------------------------------------------------------
-    // SCREEN
-    // ----------------------------------------------------------
-
-    const screen = new THREE.Mesh(
-      new THREE.PlaneGeometry(
-        5.02,
-        2.98
-      ),
-      new THREE.MeshBasicMaterial({
-        map: laptopTexture()
-      })
-    );
-
-    screen.position.set(
-      0,
-      1.68,
-      0.115
-    );
-
-    display.add(screen);
-
-    // ----------------------------------------------------------
-    // CAMERA / WEBCAM
-    // ----------------------------------------------------------
-
-    const webcam = new THREE.Mesh(
-      new THREE.CircleGeometry(
-        0.035,
-        24
-      ),
-      new THREE.MeshBasicMaterial({
-        color: 0x384152
-      })
-    );
-
-    webcam.position.set(
-      0,
-      3.12,
-      0.125
-    );
-
-    display.add(webcam);
-
-    // ----------------------------------------------------------
-    // HINGE
-    // ----------------------------------------------------------
-
-    const hinge = new THREE.Mesh(
-      new THREE.CylinderGeometry(
-        0.10,
-        0.10,
-        4.7,
-        24
-      ),
-      dark
-    );
-
-    hinge.rotation.z =
-      Math.PI / 2;
-
-    hinge.position.set(
-      0,
-      0,
-      0
-    );
-
-    display.add(hinge);
-
-    // Open laptop angle.
-    display.rotation.x =
-      THREE.MathUtils.degToRad(-8);
-
-    laptop.add(display);
-
-    // ----------------------------------------------------------
-    // LAPTOP LOGO
-    // ----------------------------------------------------------
-
-    const logo = new THREE.Mesh(
-      new THREE.CircleGeometry(
-        0.24,
-        48
-      ),
-      new THREE.MeshBasicMaterial({
-        color: 0xf5f7fb
-      })
-    );
-
-    logo.position.set(
-      0,
-      0.145,
-      1.12
-    );
-
-    logo.rotation.x =
-      -Math.PI / 2;
-
-    laptop.add(logo);
-
-    laptop.scale.setScalar(0.94);
-
-    laptop.position.set(
-      -0.35,
-      0.05,
-      0
-    );
-
-    laptop.rotation.y =
-      THREE.MathUtils.degToRad(-6);
-
-    return laptop;
-  }
-
-  // ============================================================
-  // PHONE
-  // ============================================================
-
-  function createPhone() {
-    const phone = new THREE.Group();
-
-    // IMPORTANT:
-    // Phone stays in XY plane.
-    // DO NOT rotate it 90 degrees.
-    const body = roundedBox(
-      1.55,
-      3.30,
-      0.25,
-      0.20,
-      dark
-    );
-
-    body.position.set(
-      0,
-      0,
-      0
-    );
-
-    body.castShadow = true;
-
-    phone.add(body);
-
-    // ----------------------------------------------------------
-    // FRONT SCREEN
-    // ----------------------------------------------------------
-
-    const screen = new THREE.Mesh(
-      new THREE.PlaneGeometry(
-        1.34,
-        3.00
-      ),
-      new THREE.MeshBasicMaterial({
-        map: phoneTexture()
-      })
-    );
-
-    screen.position.z =
-      0.145;
-
-    phone.add(screen);
-
-    // ----------------------------------------------------------
-    // TOP CAMERA / DYNAMIC ISLAND
-    // ----------------------------------------------------------
-
-    const island = roundedBox(
-      0.55,
-      0.15,
-      0.035,
-      0.07,
-      new THREE.MeshPhysicalMaterial({
-        color: 0x030406,
-        roughness: 0.15,
-        metalness: 0.2
-      })
-    );
-
-    island.position.set(
-      0,
-      1.36,
-      0.165
-    );
-
-    phone.add(island);
-
-    // ----------------------------------------------------------
-    // BACK CAMERA BUMP
-    // ----------------------------------------------------------
-
-    const backCamera = roundedBox(
-      0.62,
-      0.52,
-      0.08,
-      0.11,
-      dark
-    );
-
-    backCamera.position.set(
-      -0.39,
-      1.22,
-      -0.17
-    );
-
-    phone.add(backCamera);
-
-    const lensMaterial =
-      new THREE.MeshPhysicalMaterial({
-        color: 0x020305,
-        metalness: 0.75,
-        roughness: 0.15
-      });
-
-    [-0.13, 0.13].forEach(offset => {
-      const lens = new THREE.Mesh(
-        new THREE.CylinderGeometry(
-          0.075,
-          0.075,
-          0.035,
-          24
-        ),
-        lensMaterial
-      );
-
-      lens.rotation.x =
-        Math.PI / 2;
-
-      lens.position.set(
-        -0.39 + offset,
-        1.25,
-        -0.23
-      );
-
-      phone.add(lens);
-    });
-
-    // ----------------------------------------------------------
-    // SIDE BUTTONS
-    // ----------------------------------------------------------
-
-    const buttonMaterial =
-      new THREE.MeshPhysicalMaterial({
-        color: 0x7c8593,
-        metalness: 0.7,
-        roughness: 0.22
-      });
-
-    const button1 = new THREE.Mesh(
-      new THREE.BoxGeometry(
-        0.06,
-        0.42,
-        0.10
-      ),
-      buttonMaterial
-    );
-
-    button1.position.set(
-      -0.81,
-      0.55,
-      0
-    );
-
-    phone.add(button1);
-
-    const button2 = button1.clone();
-
-    button2.position.y =
-      0.05;
-
-    phone.add(button2);
-
-    // ----------------------------------------------------------
-    // POSITION PHONE NEXT TO LAPTOP
-    // ----------------------------------------------------------
-
-    phone.position.set(
-      2.75,
-      0.85,
-      0.45
-    );
-
-    phone.rotation.set(
-      THREE.MathUtils.degToRad(3),
-      THREE.MathUtils.degToRad(-10),
-      THREE.MathUtils.degToRad(8)
-    );
-
-    phone.scale.setScalar(
-      0.82
-    );
-
-    return phone;
-  }
-
-  // ============================================================
-  // DEVICES
-  // ============================================================
-
-  const laptop = createLaptop();
-  const phone = createPhone();
-
-  hero.add(laptop);
-  hero.add(phone);
-
-  // ============================================================
-  // GROUND SHADOW
-  // ============================================================
-
-  const shadow = new THREE.Mesh(
-    new THREE.CircleGeometry(
-      3.8,
-      64
+      0.10,
+      0.48,
+      24
     ),
-    new THREE.MeshBasicMaterial({
-      color: 0x1a2434,
-      transparent: true,
-      opacity: 0.12,
-      depthWrite: false
+    silverDark
+  );
+
+  hinge.rotation.z = Math.PI / 2;
+
+  hinge.position.set(
+    x,
+    1.28,
+    0.0
+  );
+
+  laptop.add(hinge);
+}
+
+/* =======================================================
+   PHONE
+======================================================= */
+
+const phone = new THREE.Group();
+
+phone.position.set(
+  2.35,
+  1.05,
+  0.55
+);
+
+phone.rotation.set(
+  0.02,
+  -0.18,
+  0.035
+);
+
+phone.scale.setScalar(0.86);
+
+hero.add(phone);
+
+/* -------------------------------------------------------
+   PHONE BODY
+------------------------------------------------------- */
+
+const phoneBody = roundedBox(
+  1.55,
+  3.28,
+  0.25,
+  0.18,
+  black
+);
+
+phone.add(phoneBody);
+
+/* -------------------------------------------------------
+   PHONE FRONT GLASS
+------------------------------------------------------- */
+
+const phoneTexture =
+  createPhoneTexture();
+
+const phoneScreenMaterial =
+  new THREE.MeshBasicMaterial({
+    map: phoneTexture
+  });
+
+const phoneScreen = roundedBox(
+  1.38,
+  3.08,
+  0.035,
+  0.15,
+  phoneScreenMaterial
+);
+
+phoneScreen.position.z = 0.145;
+
+phone.add(phoneScreen);
+
+/* -------------------------------------------------------
+   DYNAMIC ISLAND
+------------------------------------------------------- */
+
+const island = roundedBox(
+  0.58,
+  0.15,
+  0.045,
+  0.075,
+  new THREE.MeshStandardMaterial({
+    color: 0x050608,
+    metalness: 0.1,
+    roughness: 0.25
+  })
+);
+
+island.position.set(
+  0,
+  1.31,
+  0.17
+);
+
+phone.add(island);
+
+/* -------------------------------------------------------
+   PHONE SIDE BUTTONS
+------------------------------------------------------- */
+
+const sideButtonMat =
+  new THREE.MeshStandardMaterial({
+    color: 0x6f7885,
+    metalness: 0.8,
+    roughness: 0.25
+  });
+
+const volumeUp = roundedBox(
+  0.09,
+  0.38,
+  0.08,
+  0.035,
+  sideButtonMat
+);
+
+volumeUp.position.set(
+  -0.81,
+  0.62,
+  0
+);
+
+phone.add(volumeUp);
+
+const volumeDown = roundedBox(
+  0.09,
+  0.38,
+  0.08,
+  0.035,
+  sideButtonMat
+);
+
+volumeDown.position.set(
+  -0.81,
+  0.13,
+  0
+);
+
+phone.add(volumeDown);
+
+const power = roundedBox(
+  0.09,
+  0.58,
+  0.08,
+  0.035,
+  sideButtonMat
+);
+
+power.position.set(
+  0.81,
+  0.45,
+  0
+);
+
+phone.add(power);
+
+/* -------------------------------------------------------
+   PHONE CAMERA BUMP
+------------------------------------------------------- */
+
+const cameraBump = roundedBox(
+  0.64,
+  0.76,
+  0.14,
+  0.14,
+  new THREE.MeshStandardMaterial({
+    color: 0x1b2029,
+    metalness: 0.55,
+    roughness: 0.28
+  })
+);
+
+cameraBump.position.set(
+  -0.37,
+  1.02,
+  -0.20
+);
+
+phone.add(cameraBump);
+
+for (
+  let i = 0;
+  i < 3;
+  i++
+) {
+
+  const lens = new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      0.105,
+      0.105,
+      0.035,
+      24
+    ),
+    new THREE.MeshStandardMaterial({
+      color: 0x05070a,
+      metalness: 0.9,
+      roughness: 0.12
     })
   );
 
-  shadow.scale.set(
-    1.75,
-    0.40,
-    1
+  lens.rotation.x =
+    Math.PI / 2;
+
+  const positions = [
+    [-0.50, 1.22],
+    [-0.24, 1.22],
+    [-0.50, 0.94]
+  ];
+
+  lens.position.set(
+    positions[i][0],
+    positions[i][1],
+    -0.29
   );
 
-  shadow.rotation.x =
-    -Math.PI / 2;
+  phone.add(lens);
+}
 
-  shadow.position.set(
-    0,
-    -1.35,
-    0
+/* =======================================================
+   GROUND SHADOW
+======================================================= */
+
+const shadowMaterial =
+  new THREE.MeshBasicMaterial({
+    color: 0x59667a,
+    transparent: true,
+    opacity: 0.13,
+    depthWrite: false
+  });
+
+const shadow = new THREE.Mesh(
+  new THREE.PlaneGeometry(
+    8.5,
+    3.8
+  ),
+  shadowMaterial
+);
+
+shadow.rotation.x =
+  -Math.PI / 2;
+
+shadow.position.set(
+  0,
+  -1.25,
+  0
+);
+
+hero.add(shadow);
+
+/* =======================================================
+   FLOATING PARTICLES
+======================================================= */
+
+const particleGeometry =
+  new THREE.BufferGeometry();
+
+const particleCount = 70;
+
+const particlePositions =
+  new Float32Array(
+    particleCount * 3
   );
 
-  scene.add(shadow);
+for (
+  let i = 0;
+  i < particleCount;
+  i++
+) {
 
-  // ============================================================
-  // PARTICLES
-  // ============================================================
+  particlePositions[i * 3] =
+    (Math.random() - 0.5) * 9;
 
-  const particleCount = 70;
+  particlePositions[i * 3 + 1] =
+    (Math.random() - 0.5) * 5;
 
-  const positions =
-    new Float32Array(
-      particleCount * 3
-    );
+  particlePositions[i * 3 + 2] =
+    (Math.random() - 0.5) * 4;
+}
 
-  for (
-    let i = 0;
-    i < particleCount;
-    i++
-  ) {
-    positions[i * 3] =
-      (Math.random() - 0.5) * 9;
+particleGeometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(
+    particlePositions,
+    3
+  )
+);
 
-    positions[i * 3 + 1] =
-      (Math.random() - 0.5) * 5;
+const particleMaterial =
+  new THREE.PointsMaterial({
+    color: 0x9edfff,
+    size: 0.018,
+    transparent: true,
+    opacity: 0.42,
+    depthWrite: false
+  });
 
-    positions[i * 3 + 2] =
-      (Math.random() - 0.5) * 4;
-  }
-
-  const particleGeometry =
-    new THREE.BufferGeometry();
-
-  particleGeometry.setAttribute(
-    'position',
-    new THREE.BufferAttribute(
-      positions,
-      3
-    )
+const particles =
+  new THREE.Points(
+    particleGeometry,
+    particleMaterial
   );
 
-  const particles =
-    new THREE.Points(
-      particleGeometry,
-      new THREE.PointsMaterial({
-        color: 0x8bcfff,
-        size: 0.025,
-        transparent: true,
-        opacity: 0.4,
-        depthWrite: false
-      })
-    );
+scene.add(particles);
 
-  scene.add(particles);
+/* =======================================================
+   POINTER PARALLAX
+======================================================= */
 
-  // ============================================================
-  // MOUSE / POINTER
-  // ============================================================
+let pointerX = 0;
+let pointerY = 0;
 
-  let pointerX = 0;
-  let pointerY = 0;
+window.addEventListener(
+  'pointermove',
+  event => {
 
-  let smoothX = 0;
-  let smoothY = 0;
+    pointerX =
+      (event.clientX /
+        window.innerWidth -
+        0.5) *
+      2;
 
-  window.addEventListener(
-    'pointermove',
-    event => {
-      pointerX =
-        event.clientX /
-          window.innerWidth *
-          2 -
-        1;
+    pointerY =
+      (event.clientY /
+        window.innerHeight -
+        0.5) *
+      2;
+  },
+  { passive: true }
+);
 
-      pointerY =
-        event.clientY /
-          window.innerHeight *
-          2 -
-        1;
+/* =======================================================
+   RESIZE
+======================================================= */
+
+function resize() {
+
+  const width =
+    stage.clientWidth || 600;
+
+  const height =
+    stage.clientHeight || 400;
+
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    width,
+    height,
+    false
+  );
+}
+
+window.addEventListener(
+  'resize',
+  resize
+);
+
+resize();
+
+/* =======================================================
+   ANIMATION
+======================================================= */
+
+const clock =
+  new THREE.Clock();
+
+let visible = true;
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      visible =
+        entries[0]?.isIntersecting !== false;
     },
-    { passive: true }
-  );
-
-  // ============================================================
-  // RESIZE
-  // ============================================================
-
-  function resize() {
-    const width =
-      stage.clientWidth || 600;
-
-    const height =
-      stage.clientHeight || 400;
-
-    camera.aspect =
-      width / height;
-
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(
-      width,
-      height,
-      false
-    );
-  }
-
-  window.addEventListener(
-    'resize',
-    resize
-  );
-
-  resize();
-
-  // ============================================================
-  // ANIMATION
-  // ============================================================
-
-  const clock =
-    new THREE.Clock();
-
-  let animationFrame = null;
-
-  function animate() {
-    animationFrame =
-      requestAnimationFrame(
-        animate
-      );
-
-    const time =
-      clock.getElapsedTime();
-
-    smoothX +=
-      (pointerX - smoothX) *
-      0.035;
-
-    smoothY +=
-      (pointerY - smoothY) *
-      0.035;
-
-    // Floating
-    hero.position.y =
-      -0.25 +
-      Math.sin(time * 0.8) *
-      0.10;
-
-    // Main parallax
-    hero.rotation.y =
-      smoothX * 0.065;
-
-    hero.rotation.x =
-      smoothY * 0.025;
-
-    // Laptop breathing
-    laptop.rotation.y =
-      THREE.MathUtils.degToRad(-6) +
-      smoothX * 0.035;
-
-    laptop.rotation.z =
-      Math.sin(time * 0.6) *
-      0.006;
-
-    // Phone floating separately
-    phone.position.y =
-      0.85 +
-      Math.sin(time * 1.05) *
-      0.13;
-
-    phone.rotation.y =
-      THREE.MathUtils.degToRad(-10) +
-      smoothX * 0.06;
-
-    phone.rotation.z =
-      THREE.MathUtils.degToRad(8) +
-      Math.sin(time * 0.75) *
-      0.012;
-
-    // Particles
-    particles.rotation.y =
-      time * 0.018;
-
-    renderer.render(
-      scene,
-      camera
-    );
-  }
-
-  // ============================================================
-  // START
-  // ============================================================
-
-  stage.classList.add(
-    'scene-active'
-  );
-
-  animate();
-
-  // ============================================================
-  // VISIBILITY
-  // ============================================================
-
-  document.addEventListener(
-    'visibilitychange',
-    () => {
-      if (document.hidden) {
-        if (animationFrame) {
-          cancelAnimationFrame(
-            animationFrame
-          );
-
-          animationFrame = null;
-        }
-      } else if (!animationFrame) {
-        animate();
-      }
+    {
+      threshold: 0.05
     }
   );
 
-})();
+observer.observe(stage);
+
+function animate() {
+
+  requestAnimationFrame(
+    animate
+  );
+
+  if (!visible) return;
+
+  const t =
+    clock.getElapsedTime();
+
+  hero.position.y =
+    0.05 +
+    Math.sin(t * 0.8) *
+    0.055;
+
+  hero.rotation.y =
+    THREE.MathUtils.lerp(
+      hero.rotation.y,
+      pointerX * 0.045,
+      0.035
+    );
+
+  hero.rotation.x =
+    THREE.MathUtils.lerp(
+      hero.rotation.x,
+      pointerY * -0.018,
+      0.035
+    );
+
+  particles.rotation.y =
+    t * 0.018;
+
+  renderer.render(
+    scene,
+    camera
+  );
+}
+
+stage.classList.add(
+  'scene-active'
+);
+
+animate();
