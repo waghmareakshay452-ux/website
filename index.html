@@ -3,190 +3,2104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Web Craft — Premium Websites for Ambitious Businesses</title>
 <meta name="description" content="Web Craft designs and builds premium, fast and trustworthy websites — plus the automation behind them — for businesses that want a stronger digital presence.">
 <link rel="canonical" href="https://webcraft-audit.netlify.app/">
+
 <meta property="og:title" content="Web Craft — Premium Websites for Ambitious Businesses">
 <meta property="og:description" content="Premium website design, development and business automation, built around clarity, trust and better customer experiences.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://webcraft-audit.netlify.app/">
+
 <meta name="theme-color" content="#f4f6fb">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- IMPORTANT:
+     Three.js uses the bare module name "three" internally.
+     This import map allows GLTFLoader.js to resolve it correctly
+     when loaded directly in the browser. -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
 <style>
 :root{--bg:#f4f6fb;--ink:#10131a;--muted:#667085;--line:rgba(16,19,26,.12);--white:#fff;--blue:#4f6fff;--cyan:#51c8ff;--violet:#8b6cff;--green:#65d9b0;--max:1280px;--ease:cubic-bezier(.2,.8,.2,1)}
-*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:auto}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 15% 15%,rgba(81,200,255,.16),transparent 28%),radial-gradient(circle at 85% 28%,rgba(139,108,255,.14),transparent 30%),linear-gradient(180deg,#f8faff 0%,#f1f4fa 100%)}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:auto}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 15% 15%,rgba(81,200,255,.16),transparent 28%),radial-gradient(circle at 85% 28%,rgba(139,108,255,.14),transparent 30%),linear-gradient(180deg,#f8faff 0%,#f1f4fa 100%)}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
 
-.nav{position:fixed;z-index:100;top:16px;left:0;right:0}.nav-inner{width:min(calc(100% - 40px),var(--max));height:58px;margin:auto;padding:0 10px 0 20px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.72);background:rgba(255,255,255,.66);backdrop-filter:blur(22px);box-shadow:0 14px 50px rgba(35,45,70,.08);border-radius:999px}.logo{font-family:Manrope;font-weight:800;font-size:20px;letter-spacing:-.06em}.navlinks{display:flex;gap:25px;font-size:13px;color:#535b6c}.navlinks a{transition:color .25s}.navlinks a:hover{color:var(--ink)}
+.nav{position:fixed;z-index:100;top:16px;left:0;right:0}
+.nav-inner{width:min(calc(100% - 40px),var(--max));height:58px;margin:auto;padding:0 10px 0 20px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.72);background:rgba(255,255,255,.66);backdrop-filter:blur(22px);box-shadow:0 14px 50px rgba(35,45,70,.08);border-radius:999px}
+.logo{font-family:Manrope;font-weight:800;font-size:20px;letter-spacing:-.06em}
+.navlinks{display:flex;gap:25px;font-size:13px;color:#535b6c}
+.navlinks a{transition:color .25s}
+.navlinks a:hover{color:var(--ink)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:13px 19px;font-size:13px;font-weight:700;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s}.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,19,26,.15)}.btn.secondary{background:rgba(255,255,255,.55);color:var(--ink);border-color:var(--line)}.btn.light{background:#fff;color:var(--ink);border-color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:13px 19px;font-size:13px;font-weight:700;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,19,26,.15)}
+.btn.secondary{background:rgba(255,255,255,.55);color:var(--ink);border-color:var(--line)}
+.btn.light{background:#fff;color:var(--ink);border-color:#fff}
 
-.journey{position:relative}.scene-wrap{height:150svh;position:relative}.scene{height:100svh;width:100%;position:sticky;top:0;display:flex;align-items:center;overflow:hidden;isolation:isolate}.scene-inner{width:min(calc(100% - 40px),var(--max));margin:auto;will-change:transform,opacity;transform:translate3d(0,0,0);opacity:1}.scene-content{position:relative;z-index:2}
-.kicker{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#4a5468}.kicker:before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex:none}
-.scene h1,.scene h2{font-family:Manrope;margin:0;letter-spacing:-.085em;line-height:.9}.hero h1{font-size:clamp(58px,9vw,130px);max-width:1030px;margin:24px 0 28px}.hero h1 span{color:#8993a8}.hero-copy{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}.hero-copy p{max-width:530px;margin:0;color:#566174;font-size:18px;line-height:1.5}.actions{display:flex;gap:10px;flex-wrap:wrap}
+.journey{position:relative}
+.scene-wrap{height:150svh;position:relative}
+.scene{height:100svh;width:100%;position:sticky;top:0;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.scene-inner{width:min(calc(100% - 40px),var(--max));margin:auto;will-change:transform,opacity;transform:translate3d(0,0,0);opacity:1}
+.scene-content{position:relative;z-index:2}
+
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#4a5468}
+.kicker:before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex:none}
+
+.scene h1,.scene h2{font-family:Manrope;margin:0;letter-spacing:-.085em;line-height:.9}
+.hero h1{font-size:clamp(58px,9vw,130px);max-width:1030px;margin:24px 0 28px}
+.hero h1 span{color:#8993a8}
+.hero-copy{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hero-copy p{max-width:530px;margin:0;color:#566174;font-size:18px;line-height:1.5}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
 
 /* ============ HERO 3D DEVICE STAGE ============ */
-/* Real Three.js/WebGL scene, loaded by hero-scene.js (separate file, lazy-loaded, fully
-   independent of the rest of the site's JS). Until that module successfully renders a first
-   frame, this shows a plain, honest placeholder panel — never a fake CSS/flat-image device. */
-.hero-stage{position:absolute;right:-2%;bottom:5%;width:min(46vw,620px);height:44vh;min-height:320px;pointer-events:none}
-.hero-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hero-stage.scene-active .stage-fallback{opacity:0}
-.stage-fallback{position:absolute;inset:0;border-radius:32px;background:linear-gradient(150deg,rgba(81,200,255,.14),rgba(139,108,255,.14)),linear-gradient(200deg,#eef2fb,#e3e8f4);border:1px solid rgba(255,255,255,.6);box-shadow:0 40px 100px rgba(35,45,70,.1);transition:opacity .6s var(--ease);display:flex;align-items:center;justify-content:center;text-align:center;padding:30px}
-.stage-fallback span{font:600 13px/1.5 'DM Sans';color:#69758a;max-width:240px}
 
-@media(max-width:1000px){.hero-stage{position:relative;right:auto;bottom:auto;width:100%;max-width:460px;height:260px;margin:40px auto 0}}
+.hero-stage{
+  position:absolute;
+  right:-2%;
+  bottom:5%;
+  width:min(46vw,620px);
+  height:44vh;
+  min-height:320px;
+  pointer-events:none
+}
+
+.hero-stage canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block
+}
+
+.hero-stage.scene-active .stage-fallback{
+  opacity:0
+}
+
+.stage-fallback{
+  position:absolute;
+  inset:0;
+  border-radius:32px;
+  background:
+    linear-gradient(150deg,rgba(81,200,255,.14),rgba(139,108,255,.14)),
+    linear-gradient(200deg,#eef2fb,#e3e8f4);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 40px 100px rgba(35,45,70,.1);
+  transition:opacity .6s var(--ease);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px
+}
+
+.stage-fallback span{
+  font:600 13px/1.5 'DM Sans';
+  color:#69758a;
+  max-width:240px
+}
+
+@media(max-width:1000px){
+  .hero-stage{
+    position:relative;
+    right:auto;
+    bottom:auto;
+    width:100%;
+    max-width:460px;
+    height:260px;
+    margin:40px auto 0
+  }
+}
+
 /* ============ /HERO STAGE ============ */
 
-.scene--dark{color:#fff;background:#0e1119}.scene--dark:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 70% 30%,rgba(81,200,255,.22),transparent 25%),radial-gradient(circle at 20% 70%,rgba(139,108,255,.18),transparent 28%);z-index:-1}.scene--dark .kicker{color:#aab4c5}.scene--dark .hero-copy p,.scene--dark .muted{color:#9da8bb}.scene--dark .btn.secondary{color:#fff;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+.scene--dark{
+  color:#fff;
+  background:#0e1119
+}
 
-.arch{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}.arch-line{position:absolute;width:80vw;height:80vw;right:-42vw;top:6vh;border:1px solid rgba(120,139,180,.17);border-radius:50%;transform:rotate(-20deg)}.arch-line.two{width:55vw;height:55vw;right:-18vw;top:20vh;border-color:rgba(81,200,255,.13)}.arch-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 30px rgba(81,200,255,.8);right:22%;top:31%}
+.scene--dark:before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 70% 30%,rgba(81,200,255,.22),transparent 25%),
+    radial-gradient(circle at 20% 70%,rgba(139,108,255,.18),transparent 28%);
+  z-index:-1
+}
 
-.manifesto{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}.manifesto h2{font-size:clamp(48px,7vw,92px);max-width:850px}.manifesto p{max-width:410px;color:#a9b3c5;margin:0;font-size:17px}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.metric{padding:22px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}.metric span{font-size:13px;color:#c4cbda;font-weight:600}
+.scene--dark .kicker{color:#aab4c5}
+.scene--dark .hero-copy p,.scene--dark .muted{color:#9da8bb}
+.scene--dark .btn.secondary{
+  color:#fff;
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.2)
+}
 
-.work-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:60px;align-items:center}.work-copy h2{font-size:clamp(52px,7vw,96px)}.work-copy p{color:#617087;max-width:390px;font-size:17px}.work-links{margin-top:28px;display:grid;gap:6px}.work-links a{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--line);font-weight:700}.work-links small{color:#8490a3;font-weight:500}.portfolio-window{height:58vh;min-height:390px;border-radius:32px;background:#101722;padding:8px;box-shadow:0 40px 100px rgba(32,48,84,.22);transform:rotate(3deg)}.portfolio-screen{height:100%;border-radius:26px;overflow:hidden;background:#eef3fb;position:relative}.portfolio-screen .top{height:50px;border-bottom:1px solid #dbe1ea;display:flex;align-items:center;justify-content:space-between;padding:0 20px}.portfolio-screen .top b{font:800 13px Manrope}.portfolio-grid{display:grid;grid-template-columns:1fr 1fr;height:calc(100% - 50px)}.portfolio-block{padding:35px;background:#f9fbff}.portfolio-block h3{font:800 clamp(35px,4vw,64px)/.9 Manrope;letter-spacing:-.08em;margin:0}.portfolio-block p{font-size:11px;color:#738097;max-width:210px}.portfolio-art{background:linear-gradient(135deg,#c6efff,#9b91ff);position:relative}.portfolio-art:before{content:"";position:absolute;width:55%;height:55%;left:20%;top:20%;border-radius:30px;background:rgba(255,255,255,.75);transform:rotate(-10deg);box-shadow:0 30px 70px rgba(42,48,111,.22)}
+.arch{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden
+}
 
-.services-layout{display:grid;grid-template-columns:.55fr 1.45fr;gap:70px;align-items:start}.services-layout h2{font-size:clamp(50px,7vw,94px)}.services-layout>div>p{color:#657287;max-width:340px}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--line);background:var(--line);border-radius:28px;overflow:hidden}.service{background:rgba(255,255,255,.7);padding:26px}.service:nth-child(2){background:#eaf8ff}.service:nth-child(3){background:#f0ecff}.service:nth-child(4){background:#eafaf4}.service:nth-child(5){background:#fff6ea}.service:nth-child(6){background:#f2f5ff}.service h3{font:700 21px Manrope;letter-spacing:-.05em;margin:0 0 8px}.service p{margin:0;color:#69758a;font-size:12.5px}
+.arch-line{
+  position:absolute;
+  width:80vw;
+  height:80vw;
+  right:-42vw;
+  top:6vh;
+  border:1px solid rgba(120,139,180,.17);
+  border-radius:50%;
+  transform:rotate(-20deg)
+}
 
-.automation{background:rgba(255,255,255,.7);border:1px solid var(--line);border-radius:26px;padding:26px;margin-top:1px;grid-column:1/-1}.automation b{font:700 15px Manrope;letter-spacing:-.02em}.automation p{margin:6px 0 0;color:#69758a;font-size:13px;max-width:640px}
+.arch-line.two{
+  width:55vw;
+  height:55vw;
+  right:-18vw;
+  top:20vh;
+  border-color:rgba(81,200,255,.13)
+}
 
-.process-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}.process-layout h2{font-size:clamp(54px,7vw,98px)}.process-list{border-top:1px solid var(--line)}.process-step{display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}.process-step b{font:700 13px Manrope;color:#7c8799}.process-step h3{font:700 29px Manrope;letter-spacing:-.05em;margin:0}.process-step span{color:#7c8799;font-size:12px}.process-orbit{height:420px;position:relative;display:flex;align-items:center;justify-content:center}.orbit-ring{position:absolute;width:330px;height:330px;border:1px solid rgba(79,111,255,.25);border-radius:50%}.orbit-ring:nth-child(2){width:250px;height:250px;border-color:rgba(81,200,255,.25);transform:rotate(30deg)}.orbit-core{width:130px;height:130px;border-radius:36px;background:linear-gradient(135deg,#fff,#dff5ff);box-shadow:0 30px 80px rgba(65,104,190,.2);display:flex;align-items:center;justify-content:center;font:800 20px Manrope;letter-spacing:-.05em;z-index:2}.orbit-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--blue);box-shadow:0 0 25px rgba(79,111,255,.55)}.orbit-dot.one{top:38px;right:23%}.orbit-dot.two{bottom:70px;left:18%}.orbit-dot.three{top:48%;right:8%}
+.arch-dot{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 30px rgba(81,200,255,.8);
+  right:22%;
+  top:31%
+}
 
-.pricing-layout{display:grid;grid-template-columns:.65fr 1.35fr;gap:50px;align-items:start}.pricing-layout h2{font-size:clamp(52px,7vw,94px)}.pricing-layout>div>p{color:#647187;max-width:330px}.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.price{min-height:520px;border:1px solid var(--line);background:rgba(255,255,255,.74);border-radius:28px;padding:28px;display:flex;flex-direction:column}.price.pop{background:#111722;color:#fff;border-color:#111722;box-shadow:0 30px 90px rgba(20,29,46,.2)}.price .tag{font-size:12px;font-weight:600;color:#7b8799;margin-bottom:28px}.price.pop .tag{color:#aab4c5}.price h3{font:800 24px Manrope;letter-spacing:-.05em;margin:0 0 13px}.amount{font:800 34px/1.05 Manrope;letter-spacing:-.06em;margin-bottom:28px}.amount small{font:500 11px 'DM Sans';color:#8792a4;letter-spacing:0}.price ul{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}.price.pop ul{border-color:#343b49}.price li{padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}.price.pop li{border-color:#343b49}.price .btn{margin-top:auto}
+.manifesto{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  align-items:end
+}
 
-.audit-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}.audit-layout h2{font-size:clamp(50px,7vw,90px)}.audit-layout p{color:#667287;max-width:400px}.audit-card{background:#111722;color:#fff;border-radius:34px;padding:34px;box-shadow:0 35px 100px rgba(25,35,55,.22)}.audit-card label{font-size:11px;color:#9da8ba}.audit-form{display:flex;gap:9px;margin-top:12px}.audit-form input{min-width:0;flex:1;border:1px solid #353d4b;background:#191f2a;color:#fff;border-radius:999px;padding:15px 18px;outline:none}.audit-form input:focus{border-color:#6d9aff}.audit-status{min-height:22px;color:#aab4c4;font-size:11px;margin-top:13px}.audit-result{display:none;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:15px}.score{padding:15px;border-radius:16px;background:#191f2a;border:1px solid #303846}.score small{display:block;color:#8e99aa;font-size:9px;text-transform:uppercase}.score strong{font:800 29px Manrope;letter-spacing:-.06em}
+.manifesto h2{
+  font-size:clamp(48px,7vw,92px);
+  max-width:850px
+}
 
-.why-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px}.why-layout h2{font-size:clamp(54px,7vw,96px)}.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.why-card{padding:26px;border-radius:25px;border:1px solid var(--line);background:rgba(255,255,255,.62);min-height:170px}.why-card:nth-child(2){background:#eaf8ff}.why-card:nth-child(3){background:#f0ecff}.why-card:nth-child(4){background:#eafaf4}.why-card b{font:700 12px Manrope;color:#4a5468}.why-card h3{font:700 24px Manrope;letter-spacing:-.05em;margin:14px 0 8px}.why-card p{font-size:13px;color:#68748a;margin:0}
+.manifesto p{
+  max-width:410px;
+  color:#a9b3c5;
+  margin:0;
+  font-size:17px
+}
 
-.faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px}.faq-layout h2{font-size:clamp(54px,7vw,94px)}.faq{border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line);padding:21px 0}summary{cursor:pointer;font:700 20px Manrope;letter-spacing:-.04em;list-style:none}summary::-webkit-details-marker{display:none}details p{max-width:700px;color:#68748a;margin:15px 0 0;font-size:14px}
+.metric-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:28px
+}
 
-.final{background:#0e1119;color:#fff}.final .scene-inner{position:relative}.final h2{font-size:clamp(58px,9vw,125px);max-width:1050px}.final p{max-width:500px;color:#a6b0c0;font-size:18px;margin:28px 0}.final-glow{position:absolute;width:650px;height:650px;border-radius:50%;right:-170px;top:-220px;background:radial-gradient(circle,rgba(81,200,255,.28),rgba(139,108,255,.12) 35%,transparent 68%);filter:blur(10px);pointer-events:none}.footer{position:relative;background:#0e1119;color:#8792a4;padding:28px 0 45px;border-top:1px solid rgba(255,255,255,.08)}.footer-inner{width:min(calc(100% - 40px),var(--max));margin:auto;display:flex;justify-content:space-between;gap:20px;font-size:12px}.footer-links{display:flex;gap:18px}.footer a:hover{color:#fff}
+.metric{
+  padding:22px;
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08)
+}
 
-/* Signature architectural scroll: each scene follows one short rounded lateral arc during the transition, then settles. */
-.scene-wrap .scene-inner{transform:translate3d(0,14vh,0) scale(.96);opacity:.35}.scene-wrap.is-active .scene-inner{transform:translate3d(0,0,0) scale(1);opacity:1}.scene-wrap.is-past .scene-inner{transform:translate3d(0,10vh,0) scale(.98);opacity:.25}
-.architecture-viewport{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.architecture-viewport .path{position:absolute;left:50%;top:50%;width:120vw;height:80vh;transform:translate(-50%,-50%);border-top:1px solid rgba(79,111,255,.07);border-radius:50%}
+.metric span{
+  font-size:13px;
+  color:#c4cbda;
+  font-weight:600
+}
 
-.cursor-dot,.cursor-ring,.cursor-label{display:none;position:fixed;pointer-events:none;z-index:300}.cursor-dot{width:7px;height:7px;border-radius:50%;background:#10131a;transform:translate(-50%,-50%)}.cursor-ring{width:31px;height:31px;border:1px solid rgba(16,19,26,.38);border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s}.cursor-label{font-size:9px;font-weight:800;transform:translate(13px,13px)}
-@media(min-width:900px){body.cursor-enabled{cursor:none}body.cursor-enabled a,body.cursor-enabled button{cursor:none}.cursor-dot,.cursor-ring,.cursor-label{display:block}}
+.work-layout{
+  display:grid;
+  grid-template-columns:.75fr 1.25fr;
+  gap:60px;
+  align-items:center
+}
 
-@media(max-width:1000px){.navlinks{display:none}.hero-copy{display:block}.hero-copy p{margin-bottom:24px}.hero{align-items:flex-start}.work-layout,.services-layout,.process-layout,.pricing-layout,.audit-layout,.why-layout,.faq-layout{grid-template-columns:1fr;gap:38px}.portfolio-window{height:48vh}.pricing{grid-template-columns:1fr}.price{min-height:auto}.price .btn{margin-top:25px}.manifesto{grid-template-columns:1fr}.metric-row{grid-template-columns:1fr 1fr}.service-grid{grid-template-columns:1fr 1fr}
-/* Sticky, overlapping scenes are a desktop-only effect — on mobile, dynamic browser chrome and momentum scroll make sections visually blend into each other. Sections stack normally here instead. */
-.scene-wrap{height:auto!important;overflow:visible}.scene{height:auto!important;min-height:0;position:relative!important;top:auto;overflow:visible;padding:64px 0;align-items:stretch}.scene-inner{width:calc(100% - 32px);transform:none!important;opacity:1!important}.arch,.architecture-viewport{display:none}}
+.work-copy h2{font-size:clamp(52px,7vw,96px)}
+.work-copy p{color:#617087;max-width:390px;font-size:17px}
 
-@media(max-width:600px){.wrap,.nav-inner,.scene-inner,.footer-inner{width:calc(100% - 24px)}.nav{top:9px}.nav-inner{height:50px;padding-left:16px}.nav-cta{padding:10px 14px}.scene{align-items:center}.scene-wrap{height:138svh}.hero h1{font-size:clamp(54px,15vw,76px);margin-top:20px}.hero-copy p{font-size:16px}.portfolio-window{height:330px;border-radius:23px}.portfolio-screen{border-radius:18px}.portfolio-block{padding:23px}.portfolio-block h3{font-size:35px}.service-grid,.why-grid{grid-template-columns:1fr}.process-step{grid-template-columns:45px 1fr}.process-step span{display:none}.process-step h3{font-size:23px}.process-orbit{height:310px}.orbit-ring{width:240px;height:240px}.orbit-ring:nth-child(2){width:180px;height:180px}.audit-form{display:grid;grid-template-columns:1fr}.audit-form .btn{width:100%}.audit-result{grid-template-columns:1fr 1fr}.final h2{font-size:clamp(56px,15vw,78px)}.footer-inner{display:block}.footer-links{margin-top:16px;flex-wrap:wrap}.arch-line{width:150vw;height:150vw;right:-95vw}.arch-line.two{width:110vw;height:110vw;right:-65vw}}
+.work-links{
+  margin-top:28px;
+  display:grid;
+  gap:6px
+}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.scene-wrap .scene-inner,.scene-wrap.is-active .scene-inner,.scene-wrap.is-past .scene-inner{transform:none!important;opacity:1!important;transition:none!important}.btn{transition:none}}
+.work-links a{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+  font-weight:700
+}
+
+.work-links small{
+  color:#8490a3;
+  font-weight:500
+}
+
+.portfolio-window{
+  height:58vh;
+  min-height:390px;
+  border-radius:32px;
+  background:#101722;
+  padding:8px;
+  box-shadow:0 40px 100px rgba(32,48,84,.22);
+  transform:rotate(3deg)
+}
+
+.portfolio-screen{
+  height:100%;
+  border-radius:26px;
+  overflow:hidden;
+  background:#eef3fb;
+  position:relative
+}
+
+.portfolio-screen .top{
+  height:50px;
+  border-bottom:1px solid #dbe1ea;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px
+}
+
+.portfolio-screen .top b{
+  font:800 13px Manrope
+}
+
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  height:calc(100% - 50px)
+}
+
+.portfolio-block{
+  padding:35px;
+  background:#f9fbff
+}
+
+.portfolio-block h3{
+  font:800 clamp(35px,4vw,64px)/.9 Manrope;
+  letter-spacing:-.08em;
+  margin:0
+}
+
+.portfolio-block p{
+  font-size:11px;
+  color:#738097;
+  max-width:210px
+}
+
+.portfolio-art{
+  background:linear-gradient(135deg,#c6efff,#9b91ff);
+  position:relative
+}
+
+.portfolio-art:before{
+  content:"";
+  position:absolute;
+  width:55%;
+  height:55%;
+  left:20%;
+  top:20%;
+  border-radius:30px;
+  background:rgba(255,255,255,.75);
+  transform:rotate(-10deg);
+  box-shadow:0 30px 70px rgba(42,48,111,.22)
+}
+
+.services-layout{
+  display:grid;
+  grid-template-columns:.55fr 1.45fr;
+  gap:70px;
+  align-items:start
+}
+
+.services-layout h2{font-size:clamp(50px,7vw,94px)}
+
+.services-layout>div>p{
+  color:#657287;
+  max-width:340px
+}
+
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  border:1px solid var(--line);
+  background:var(--line);
+  border-radius:28px;
+  overflow:hidden
+}
+
+.service{
+  background:rgba(255,255,255,.7);
+  padding:26px
+}
+
+.service:nth-child(2){background:#eaf8ff}
+.service:nth-child(3){background:#f0ecff}
+.service:nth-child(4){background:#eafaf4}
+.service:nth-child(5){background:#fff6ea}
+.service:nth-child(6){background:#f2f5ff}
+
+.service h3{
+  font:700 21px Manrope;
+  letter-spacing:-.05em;
+  margin:0 0 8px
+}
+
+.service p{
+  margin:0;
+  color:#69758a;
+  font-size:12.5px
+}
+
+.automation{
+  background:rgba(255,255,255,.7);
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:26px;
+  margin-top:1px;
+  grid-column:1/-1
+}
+
+.automation b{
+  font:700 15px Manrope;
+  letter-spacing:-.02em
+}
+
+.automation p{
+  margin:6px 0 0;
+  color:#69758a;
+  font-size:13px;
+  max-width:640px
+}
+
+.process-layout{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:80px;
+  align-items:center
+}
+
+.process-layout h2{font-size:clamp(54px,7vw,98px)}
+
+.process-list{
+  border-top:1px solid var(--line)
+}
+
+.process-step{
+  display:grid;
+  grid-template-columns:70px 1fr auto;
+  align-items:center;
+  gap:20px;
+  padding:24px 0;
+  border-bottom:1px solid var(--line)
+}
+
+.process-step b{
+  font:700 13px Manrope;
+  color:#7c8799
+}
+
+.process-step h3{
+  font:700 29px Manrope;
+  letter-spacing:-.05em;
+  margin:0
+}
+
+.process-step span{
+  color:#7c8799;
+  font-size:12px
+}
+
+.process-orbit{
+  height:420px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.orbit-ring{
+  position:absolute;
+  width:330px;
+  height:330px;
+  border:1px solid rgba(79,111,255,.25);
+  border-radius:50%
+}
+
+.orbit-ring:nth-child(2){
+  width:250px;
+  height:250px;
+  border-color:rgba(81,200,255,.25);
+  transform:rotate(30deg)
+}
+
+.orbit-core{
+  width:130px;
+  height:130px;
+  border-radius:36px;
+  background:linear-gradient(135deg,#fff,#dff5ff);
+  box-shadow:0 30px 80px rgba(65,104,190,.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font:800 20px Manrope;
+  letter-spacing:-.05em;
+  z-index:2
+}
+
+.orbit-dot{
+  position:absolute;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:var(--blue);
+  box-shadow:0 0 25px rgba(79,111,255,.55)
+}
+
+.orbit-dot.one{top:38px;right:23%}
+.orbit-dot.two{bottom:70px;left:18%}
+.orbit-dot.three{top:48%;right:8%}
+
+.pricing-layout{
+  display:grid;
+  grid-template-columns:.65fr 1.35fr;
+  gap:50px;
+  align-items:start
+}
+
+.pricing-layout h2{font-size:clamp(52px,7vw,94px)}
+
+.pricing-layout>div>p{
+  color:#647187;
+  max-width:330px
+}
+
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px
+}
+
+.price{
+  min-height:520px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.74);
+  border-radius:28px;
+  padding:28px;
+  display:flex;
+  flex-direction:column
+}
+
+.price.pop{
+  background:#111722;
+  color:#fff;
+  border-color:#111722;
+  box-shadow:0 30px 90px rgba(20,29,46,.2)
+}
+
+.price .tag{
+  font-size:12px;
+  font-weight:600;
+  color:#7b8799;
+  margin-bottom:28px
+}
+
+.price.pop .tag{color:#aab4c5}
+
+.price h3{
+  font:800 24px Manrope;
+  letter-spacing:-.05em;
+  margin:0 0 13px
+}
+
+.amount{
+  font:800 34px/1.05 Manrope;
+  letter-spacing:-.06em;
+  margin-bottom:28px
+}
+
+.amount small{
+  font:500 11px 'DM Sans';
+  color:#8792a4;
+  letter-spacing:0
+}
+
+.price ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+  border-top:1px solid var(--line)
+}
+
+.price.pop ul{border-color:#343b49}
+
+.price li{
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+  font-size:12px
+}
+
+.price.pop li{border-color:#343b49}
+
+.price .btn{margin-top:auto}
+
+.audit-layout{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:70px;
+  align-items:center
+}
+
+.audit-layout h2{font-size:clamp(50px,7vw,90px)}
+
+.audit-layout p{
+  color:#667287;
+  max-width:400px
+}
+
+.audit-card{
+  background:#111722;
+  color:#fff;
+  border-radius:34px;
+  padding:34px;
+  box-shadow:0 35px 100px rgba(25,35,55,.22)
+}
+
+.audit-card label{
+  font-size:11px;
+  color:#9da8ba
+}
+
+.audit-form{
+  display:flex;
+  gap:9px;
+  margin-top:12px
+}
+
+.audit-form input{
+  min-width:0;
+  flex:1;
+  border:1px solid #353d4b;
+  background:#191f2a;
+  color:#fff;
+  border-radius:999px;
+  padding:15px 18px;
+  outline:none
+}
+
+.audit-form input:focus{border-color:#6d9aff}
+
+.audit-status{
+  min-height:22px;
+  color:#aab4c4;
+  font-size:11px;
+  margin-top:13px
+}
+
+.audit-result{
+  display:none;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:15px
+}
+
+.score{
+  padding:15px;
+  border-radius:16px;
+  background:#191f2a;
+  border:1px solid #303846
+}
+
+.score small{
+  display:block;
+  color:#8e99aa;
+  font-size:9px;
+  text-transform:uppercase
+}
+
+.score strong{
+  font:800 29px Manrope;
+  letter-spacing:-.06em
+}
+
+.why-layout{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:70px
+}
+
+.why-layout h2{font-size:clamp(54px,7vw,96px)}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.why-card{
+  padding:26px;
+  border-radius:25px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.62);
+  min-height:170px
+}
+
+.why-card:nth-child(2){background:#eaf8ff}
+.why-card:nth-child(3){background:#f0ecff}
+.why-card:nth-child(4){background:#eafaf4}
+
+.why-card b{
+  font:700 12px Manrope;
+  color:#4a5468
+}
+
+.why-card h3{
+  font:700 24px Manrope;
+  letter-spacing:-.05em;
+  margin:14px 0 8px
+}
+
+.why-card p{
+  font-size:13px;
+  color:#68748a;
+  margin:0
+}
+
+.faq-layout{
+  display:grid;
+  grid-template-columns:.75fr 1.25fr;
+  gap:70px
+}
+
+.faq-layout h2{font-size:clamp(54px,7vw,94px)}
+
+.faq{border-top:1px solid var(--line)}
+
+details{
+  border-bottom:1px solid var(--line);
+  padding:21px 0
+}
+
+summary{
+  cursor:pointer;
+  font:700 20px Manrope;
+  letter-spacing:-.04em;
+  list-style:none
+}
+
+summary::-webkit-details-marker{display:none}
+
+details p{
+  max-width:700px;
+  color:#68748a;
+  margin:15px 0 0;
+  font-size:14px
+}
+
+.final{
+  background:#0e1119;
+  color:#fff
+}
+
+.final .scene-inner{position:relative}
+
+.final h2{
+  font-size:clamp(58px,9vw,125px);
+  max-width:1050px
+}
+
+.final p{
+  max-width:500px;
+  color:#a6b0c0;
+  font-size:18px;
+  margin:28px 0
+}
+
+.final-glow{
+  position:absolute;
+  width:650px;
+  height:650px;
+  border-radius:50%;
+  right:-170px;
+  top:-220px;
+  background:radial-gradient(circle,rgba(81,200,255,.28),rgba(139,108,255,.12) 35%,transparent 68%);
+  filter:blur(10px);
+  pointer-events:none
+}
+
+.footer{
+  position:relative;
+  background:#0e1119;
+  color:#8792a4;
+  padding:28px 0 45px;
+  border-top:1px solid rgba(255,255,255,.08)
+}
+
+.footer-inner{
+  width:min(calc(100% - 40px),var(--max));
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  font-size:12px
+}
+
+.footer-links{
+  display:flex;
+  gap:18px
+}
+
+.footer a:hover{color:#fff}
+
+.scene-wrap .scene-inner{
+  transform:translate3d(0,14vh,0) scale(.96);
+  opacity:.35
+}
+
+.scene-wrap.is-active .scene-inner{
+  transform:translate3d(0,0,0) scale(1);
+  opacity:1
+}
+
+.scene-wrap.is-past .scene-inner{
+  transform:translate3d(0,10vh,0) scale(.98);
+  opacity:.25
+}
+
+.architecture-viewport{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden
+}
+
+.architecture-viewport .path{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:120vw;
+  height:80vh;
+  transform:translate(-50%,-50%);
+  border-top:1px solid rgba(79,111,255,.07);
+  border-radius:50%
+}
+
+.cursor-dot,.cursor-ring,.cursor-label{
+  display:none;
+  position:fixed;
+  pointer-events:none;
+  z-index:300
+}
+
+.cursor-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#10131a;
+  transform:translate(-50%,-50%)
+}
+
+.cursor-ring{
+  width:31px;
+  height:31px;
+  border:1px solid rgba(16,19,26,.38);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s
+}
+
+.cursor-label{
+  font-size:9px;
+  font-weight:800;
+  transform:translate(13px,13px)
+}
+
+@media(min-width:900px){
+  body.cursor-enabled{cursor:none}
+  body.cursor-enabled a,
+  body.cursor-enabled button{cursor:none}
+  .cursor-dot,.cursor-ring,.cursor-label{display:block}
+}
+
+@media(max-width:1000px){
+  .navlinks{display:none}
+  .hero-copy{display:block}
+  .hero-copy p{margin-bottom:24px}
+  .hero{align-items:flex-start}
+  .work-layout,
+  .services-layout,
+  .process-layout,
+  .pricing-layout,
+  .audit-layout,
+  .why-layout,
+  .faq-layout{
+    grid-template-columns:1fr;
+    gap:38px
+  }
+
+  .portfolio-window{height:48vh}
+  .pricing{grid-template-columns:1fr}
+  .price{min-height:auto}
+  .price .btn{margin-top:25px}
+  .manifesto{grid-template-columns:1fr}
+  .metric-row{grid-template-columns:1fr 1fr}
+  .service-grid{grid-template-columns:1fr 1fr}
+
+  .scene-wrap{
+    height:auto!important;
+    overflow:visible
+  }
+
+  .scene{
+    height:auto!important;
+    min-height:0;
+    position:relative!important;
+    top:auto;
+    overflow:visible;
+    padding:64px 0;
+    align-items:stretch
+  }
+
+  .scene-inner{
+    width:calc(100% - 32px);
+    transform:none!important;
+    opacity:1!important
+  }
+
+  .arch,.architecture-viewport{display:none}
+}
+
+@media(max-width:600px){
+  .wrap,.nav-inner,.scene-inner,.footer-inner{
+    width:calc(100% - 24px)
+  }
+
+  .nav{top:9px}
+
+  .nav-inner{
+    height:50px;
+    padding-left:16px
+  }
+
+  .nav-cta{padding:10px 14px}
+
+  .scene{align-items:center}
+
+  .scene-wrap{height:138svh}
+
+  .hero h1{
+    font-size:clamp(54px,15vw,76px);
+    margin-top:20px
+  }
+
+  .hero-copy p{font-size:16px}
+
+  .portfolio-window{
+    height:330px;
+    border-radius:23px
+  }
+
+  .portfolio-screen{border-radius:18px}
+
+  .portfolio-block{padding:23px}
+
+  .portfolio-block h3{font-size:35px}
+
+  .service-grid,.why-grid{grid-template-columns:1fr}
+
+  .process-step{grid-template-columns:45px 1fr}
+
+  .process-step span{display:none}
+
+  .process-step h3{font-size:23px}
+
+  .process-orbit{height:310px}
+
+  .orbit-ring{
+    width:240px;
+    height:240px
+  }
+
+  .orbit-ring:nth-child(2){
+    width:180px;
+    height:180px
+  }
+
+  .audit-form{
+    display:grid;
+    grid-template-columns:1fr
+  }
+
+  .audit-form .btn{width:100%}
+
+  .audit-result{grid-template-columns:1fr 1fr}
+
+  .final h2{
+    font-size:clamp(56px,15vw,78px)
+  }
+
+  .footer-inner{display:block}
+
+  .footer-links{
+    margin-top:16px;
+    flex-wrap:wrap
+  }
+
+  .arch-line{
+    width:150vw;
+    height:150vw;
+    right:-95vw
+  }
+
+  .arch-line.two{
+    width:110vw;
+    height:110vw;
+    right:-65vw
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  .scene-wrap .scene-inner,
+  .scene-wrap.is-active .scene-inner,
+  .scene-wrap.is-past .scene-inner{
+    transform:none!important;
+    opacity:1!important;
+    transition:none!important
+  }
+
+  .btn{transition:none}
+}
 </style>
 </head>
-<body>
-<div class="architecture-viewport" aria-hidden="true"><div class="path"></div></div>
-<div class="cursor-dot"></div><div class="cursor-ring"></div><div class="cursor-label"></div>
 
-<header class="nav"><div class="nav-inner"><a class="logo" href="#top">Web Craft.</a><nav class="navlinks"><a href="#services">Services</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#audit">Audit</a></nav><a class="btn nav-cta magnetic" data-cursor="BOOK A CALL" href="#contact">Book a Call ↗</a></div></header>
+<body>
+
+<div class="architecture-viewport" aria-hidden="true">
+  <div class="path"></div>
+</div>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="cursor-label"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top">Web Craft.</a>
+
+    <nav class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#audit">Audit</a>
+    </nav>
+
+    <a class="btn nav-cta magnetic" data-cursor="BOOK A CALL" href="#contact">
+      Book a Call ↗
+    </a>
+  </div>
+</header>
 
 <main id="top" class="journey">
 
-<section class="scene-wrap" data-scene="hero"><div class="scene"><div class="scene-inner hero"><div class="scene-content"><div class="kicker">Premium digital experiences</div><h1>Your business deserves a <span>better digital presence.</span></h1><div class="hero-copy"><p>We design and build fast, modern websites — and the automation behind them — so businesses look professional, build trust, and convert more of the visitors they already get.</p><div class="actions"><a class="btn magnetic" data-cursor="AUDIT" href="#audit">Free Website Audit ↗</a></div></div></div>
-<div class="hero-stage" id="heroStage" aria-hidden="true"><!-- Hero 3D scene: rendered by hero-scene.js (separate file, lazy-loaded). See that file's header comment for where to place a real laptop+phone glTF/GLB model when one is available. -->
-<canvas id="heroCanvas"></canvas>
-<div class="stage-fallback"><span>Loading 3D preview…</span></div>
-</div></div></div>
+<section class="scene-wrap" data-scene="hero">
+  <div class="scene">
+    <div class="scene-inner hero">
+
+      <div class="scene-content">
+        <div class="kicker">Premium digital experiences</div>
+
+        <h1>
+          Your business deserves a
+          <span>better digital presence.</span>
+        </h1>
+
+        <div class="hero-copy">
+          <p>
+            We design and build fast, modern websites — and the automation
+            behind them — so businesses look professional, build trust,
+            and convert more of the visitors they already get.
+          </p>
+
+          <div class="actions">
+            <a class="btn magnetic" data-cursor="AUDIT" href="#audit">
+              Free Website Audit ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stage" id="heroStage" aria-hidden="true">
+
+        <!-- Rendered by /hero-scene.js -->
+        <canvas id="heroCanvas"></canvas>
+
+        <div class="stage-fallback">
+          <span>Loading 3D preview…</span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="scene-wrap scene--dark" data-scene="manifesto"><div class="scene"><div class="arch"><div class="arch-line"></div><div class="arch-line two"></div><div class="arch-dot"></div></div><div class="scene-inner"><div class="manifesto"><div><div class="kicker">Why this matters</div><h2>Good businesses can look invisible online.</h2></div><p>Outdated, slow, confusing or difficult-to-update websites create friction before a conversation even starts. Web Craft turns that friction into a clear digital experience — then automates the busywork around it.</p></div><div class="metric-row"><div class="metric"><span>Clearer positioning</span></div><div class="metric"><span>Faster customer journeys</span></div><div class="metric"><span>Built for real devices</span></div></div></div></div></section>
+<section class="scene-wrap scene--dark" data-scene="manifesto">
+  <div class="scene">
 
-<section id="services" class="scene-wrap scene--dark" data-scene="services"><div class="scene"><div class="scene-inner"><div class="services-layout"><div><div class="kicker">What we build</div><h2>The website, and the system behind it.</h2><p>Design, code and automation — only the capabilities needed to create a complete, dependable digital presence.</p></div><div class="service-grid">
-<div class="service"><h3>Website Design</h3><p>High-clarity layouts, visual direction and responsive UX.</p></div>
-<div class="service"><h3>Website Development</h3><p>Fast, maintainable frontends and functional business experiences.</p></div>
-<div class="service"><h3>Website Redesign</h3><p>Transform outdated websites into modern digital experiences.</p></div>
-<div class="service"><h3>SEO & Performance</h3><p>Technical foundations for discoverability, speed and better experiences.</p></div>
-<div class="service"><h3>Maintenance</h3><p>Ongoing updates, monitoring and support after launch.</p></div>
-<div class="service"><h3>Google Business Profile</h3><p>Improve local visibility for the searches that matter.</p></div>
-<div class="automation"><b>Business Automation</b><p>Lead capture, qualification, follow-ups and internal workflows — connected directly to the website so enquiries move without manual chasing.</p></div>
-</div></div></div></div></section>
+    <div class="arch">
+      <div class="arch-line"></div>
+      <div class="arch-line two"></div>
+      <div class="arch-dot"></div>
+    </div>
 
-<section id="process" class="scene-wrap" data-scene="process"><div class="scene"><div class="scene-inner"><div class="process-layout"><div><div class="kicker">How it works</div><h2>Five moves. One finished experience.</h2><div class="process-orbit" aria-hidden="true"><div class="orbit-ring"></div><div class="orbit-ring"></div><div class="orbit-core">WC.</div><i class="orbit-dot one"></i><i class="orbit-dot two"></i><i class="orbit-dot three"></i></div></div><div class="process-list"><div class="process-step"><b>01</b><h3>Discover</h3><span>Understand the business, audience and goals</span></div><div class="process-step"><b>02</b><h3>Design</h3><span>Shape the visual direction and experience</span></div><div class="process-step"><b>03</b><h3>Build</h3><span>Develop the website and required functionality</span></div><div class="process-step"><b>04</b><h3>Launch</h3><span>Test, optimize and launch</span></div><div class="process-step"><b>05</b><h3>Improve</h3><span>Ongoing performance, SEO and workflow refinement</span></div></div></div></div></div></section>
+    <div class="scene-inner">
 
-<section id="pricing" class="scene-wrap scene--dark" data-scene="pricing"><div class="scene"><div class="scene-inner"><div class="pricing-layout"><div><div class="kicker">Pricing</div><h2>Simple. Transparent.</h2><p>Informational pricing only. There is no online checkout or automated payment — projects are agreed in conversation.</p></div><div class="pricing"><article class="price"><div class="tag">Standard</div><h3>STARTER</h3><div class="amount">$999 <small>setup</small><br>+ $79 <small>/ month</small></div><ul><li>Up to 6 pages</li><li>Custom design system</li><li>SEO & performance setup</li><li>Hosting & monitoring included</li><li>2 weeks turnaround</li></ul><a class="btn light" href="#contact">Book a Call</a></article><article class="price pop"><div class="tag">Most popular</div><h3>GROWTH</h3><div class="amount">$1,999 <small>setup</small><br>+ $149 <small>/ month</small></div><ul><li>Unlimited pages</li><li>CMS-driven content</li><li>Booking, forms & integrations</li><li>Priority support & updates</li><li>4–6 weeks turnaround</li></ul><a class="btn light" href="#contact">Book a Call</a></article><article class="price"><div class="tag">Advanced</div><h3>PREMIUM</h3><div class="amount">$3,999 <small>setup</small><br>+ $299 <small>/ month</small></div><ul><li>Everything in Growth</li><li>Business automation & workflows</li><li>Admin dashboard</li><li>Database/API integrations</li><li>Dedicated support line</li></ul><a class="btn light" href="#contact">Book a Call</a></article></div></div></div></div></section>
+      <div class="manifesto">
 
-<section id="audit" class="scene-wrap" data-scene="audit"><div class="scene"><div class="scene-inner"><div class="audit-layout"><div><div class="kicker">Free Website Audit</div><h2>See what your website is telling visitors.</h2><p>This review checks publicly accessible homepage HTML and selected structural signals. It does not pretend to replace Lighthouse, PageSpeed or real-device testing.</p></div><div class="audit-card"><label for="auditUrl">PUBLIC WEBSITE URL</label><form class="audit-form" id="auditForm"><input id="auditUrl" type="url" placeholder="https://yourwebsite.com" required><button class="btn light" type="submit">Analyze ↗</button></form><div class="audit-status" id="auditStatus">Results are generated from the actual website response. No fabricated scores.</div><div class="audit-result" id="auditResult"></div></div></div></div></div></section>
+        <div>
+          <div class="kicker">Why this matters</div>
 
-<section class="scene-wrap" data-scene="why"><div class="scene"><div class="scene-inner"><div class="why-layout"><div><div class="kicker">Why Web Craft</div><h2>Quietly premium. Deliberately built.</h2></div><div class="why-grid"><div class="why-card"><b>Strategy before decoration</b><h3>Understand it quickly.</h3><p>Strong hierarchy helps visitors understand what you do and what to do next.</p></div><div class="why-card"><b>Craft in the details</b><h3>Details are part of the product.</h3><p>Typography, spacing, states, responsiveness and transitions work as one system.</p></div><div class="why-card"><b>No invented proof</b><h3>Honesty over hype.</h3><p>Real work and clear limitations matter more than made-up results.</p></div><div class="why-card"><b>Built for growth</b><h3>Made for the long term.</h3><p>Maintainable code, sensible integrations and support after launch.</p></div></div></div></div></div></section>
+          <h2>
+            Good businesses can look invisible online.
+          </h2>
+        </div>
 
-<section class="scene-wrap" data-scene="faq"><div class="scene"><div class="scene-inner"><div class="faq-layout"><div><div class="kicker">FAQ</div><h2>Questions, answered.</h2></div><div class="faq"><details><summary>What does Web Craft do?</summary><p>We design and build websites, and connect them to the automation a business needs — lead capture, follow-ups and internal workflows — as one system.</p></details><details><summary>How does a project start?</summary><p>Book a call or send an enquiry. We discuss your business, goals, scope and the right approach before any project decision.</p></details><details><summary>Do you redesign existing websites?</summary><p>Yes. Existing websites are reviewed first so we can identify what should be kept, improved, replaced or removed.</p></details><details><summary>Do you provide SEO and maintenance?</summary><p>Yes, both are part of the service model — SEO and performance setup are included from Starter, with ongoing maintenance available on every plan.</p></details><details><summary>What is business automation?</summary><p>Automating the repetitive parts of running a business online — enquiry routing, follow-ups and internal notifications — so leads don't sit unanswered.</p></details><details><summary>Do you work internationally?</summary><p>Yes. Web Craft works with businesses in the US, UK, Australia and Canada.</p></details><details><summary>How does the Free Website Audit work?</summary><p>Enter a public website URL and we review the homepage's structure, SEO and performance signals — then walk through the results together.</p></details><details><summary>How do payments work?</summary><p>There is no online checkout. Pricing is agreed in conversation and handled directly between us.</p></details></div></div></div></div></section>
+        <p>
+          Outdated, slow, confusing or difficult-to-update websites create
+          friction before a conversation even starts. Web Craft turns that
+          friction into a clear digital experience — then automates the
+          busywork around it.
+        </p>
 
-<section id="contact" class="scene-wrap final" data-scene="final"><div class="scene"><div class="final-glow"></div><div class="scene-inner"><div class="kicker">Start a conversation</div><h2>Your next website shouldn't just exist. It should work.</h2><p>Tell us what you are building, improving or launching. We will start with a conversation — not a checkout.</p><form class="contact-form" id="contactForm" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:850px"><input name="name" placeholder="Your name" required style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"><input name="business" placeholder="Business name" required style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"><input name="email" type="email" placeholder="Email" required style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"><input name="phone" placeholder="Phone / WhatsApp" style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"><input name="website" placeholder="Current website (optional)" style="grid-column:1/-1;border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"><textarea name="need" placeholder="What do you need?" required style="grid-column:1/-1;min-height:110px;resize:vertical;border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"></textarea><div id="contactStatus" style="grid-column:1/-1;color:#aab4c4;font-size:12px;min-height:20px"></div><button class="btn light magnetic" type="submit">Send Enquiry ↗</button></form></div></div></section>
+      </div>
+
+      <div class="metric-row">
+        <div class="metric">
+          <span>Clearer positioning</span>
+        </div>
+
+        <div class="metric">
+          <span>Faster customer journeys</span>
+        </div>
+
+        <div class="metric">
+          <span>Built for real devices</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="services" class="scene-wrap scene--dark" data-scene="services">
+  <div class="scene">
+    <div class="scene-inner">
+
+      <div class="services-layout">
+
+        <div>
+          <div class="kicker">What we build</div>
+
+          <h2>
+            The website, and the system behind it.
+          </h2>
+
+          <p>
+            Design, code and automation — only the capabilities needed
+            to create a complete, dependable digital presence.
+          </p>
+        </div>
+
+        <div class="service-grid">
+
+          <div class="service">
+            <h3>Website Design</h3>
+            <p>
+              High-clarity layouts, visual direction and responsive UX.
+            </p>
+          </div>
+
+          <div class="service">
+            <h3>Website Development</h3>
+            <p>
+              Fast, maintainable frontends and functional business experiences.
+            </p>
+          </div>
+
+          <div class="service">
+            <h3>Website Redesign</h3>
+            <p>
+              Transform outdated websites into modern digital experiences.
+            </p>
+          </div>
+
+          <div class="service">
+            <h3>SEO & Performance</h3>
+            <p>
+              Technical foundations for discoverability, speed and better experiences.
+            </p>
+          </div>
+
+          <div class="service">
+            <h3>Maintenance</h3>
+            <p>
+              Ongoing updates, monitoring and support after launch.
+            </p>
+          </div>
+
+          <div class="service">
+            <h3>Google Business Profile</h3>
+            <p>
+              Improve local visibility for the searches that matter.
+            </p>
+          </div>
+
+          <div class="automation">
+            <b>Business Automation</b>
+            <p>
+              Lead capture, qualification, follow-ups and internal workflows
+              — connected directly to the website so enquiries move without
+              manual chasing.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="process" class="scene-wrap" data-scene="process">
+  <div class="scene">
+    <div class="scene-inner">
+
+      <div class="process-layout">
+
+        <div>
+
+          <div class="kicker">How it works</div>
+
+          <h2>
+            Five moves. One finished experience.
+          </h2>
+
+          <div class="process-orbit" aria-hidden="true">
+
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring"></div>
+
+            <div class="orbit-core">
+              WC.
+            </div>
+
+            <i class="orbit-dot one"></i>
+            <i class="orbit-dot two"></i>
+            <i class="orbit-dot three"></i>
+
+          </div>
+
+        </div>
+
+        <div class="process-list">
+
+          <div class="process-step">
+            <b>01</b>
+            <h3>Discover</h3>
+            <span>Understand the business, audience and goals</span>
+          </div>
+
+          <div class="process-step">
+            <b>02</b>
+            <h3>Design</h3>
+            <span>Shape the visual direction and experience</span>
+          </div>
+
+          <div class="process-step">
+            <b>03</b>
+            <h3>Build</h3>
+            <span>Develop the website and required functionality</span>
+          </div>
+
+          <div class="process-step">
+            <b>04</b>
+            <h3>Launch</h3>
+            <span>Test, optimize and launch</span>
+          </div>
+
+          <div class="process-step">
+            <b>05</b>
+            <h3>Improve</h3>
+            <span>Ongoing performance, SEO and workflow refinement</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="scene-wrap scene--dark" data-scene="pricing">
+  <div class="scene">
+    <div class="scene-inner">
+
+      <div class="pricing-layout">
+
+        <div>
+          <div class="kicker">Pricing</div>
+
+          <h2>
+            Simple. Transparent.
+          </h2>
+
+          <p>
+            Informational pricing only. There is no online checkout or
+            automated payment — projects are agreed in conversation.
+          </p>
+        </div>
+
+        <div class="pricing">
+
+          <article class="price">
+
+            <div class="tag">Standard</div>
+
+            <h3>STARTER</h3>
+
+            <div class="amount">
+              $999 <small>setup</small><br>
+              + $79 <small>/ month</small>
+            </div>
+
+            <ul>
+              <li>Up to 6 pages</li>
+              <li>Custom design system</li>
+              <li>SEO & performance setup</li>
+              <li>Hosting & monitoring included</li>
+              <li>2 weeks turnaround</li>
+            </ul>
+
+            <a class="btn light" href="#contact">
+              Book a Call
+            </a>
+
+          </article>
+
+          <article class="price pop">
+
+            <div class="tag">Most popular</div>
+
+            <h3>GROWTH</h3>
+
+            <div class="amount">
+              $1,999 <small>setup</small><br>
+              + $149 <small>/ month</small>
+            </div>
+
+            <ul>
+              <li>Unlimited pages</li>
+              <li>CMS-driven content</li>
+              <li>Booking, forms & integrations</li>
+              <li>Priority support & updates</li>
+              <li>4–6 weeks turnaround</li>
+            </ul>
+
+            <a class="btn light" href="#contact">
+              Book a Call
+            </a>
+
+          </article>
+
+          <article class="price">
+
+            <div class="tag">Advanced</div>
+
+            <h3>PREMIUM</h3>
+
+            <div class="amount">
+              $3,999 <small>setup</small><br>
+              + $299 <small>/ month</small>
+            </div>
+
+            <ul>
+              <li>Everything in Growth</li>
+              <li>Business automation & workflows</li>
+              <li>Admin dashboard</li>
+              <li>Database/API integrations</li>
+              <li>Dedicated support line</li>
+            </ul>
+
+            <a class="btn light" href="#contact">
+              Book a Call
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="audit" class="scene-wrap" data-scene="audit">
+  <div class="scene">
+    <div class="scene-inner">
+
+      <div class="audit-layout">
+
+        <div>
+
+          <div class="kicker">Free Website Audit</div>
+
+          <h2>
+            See what your website is telling visitors.
+          </h2>
+
+          <p>
+            This review checks publicly accessible homepage HTML and selected
+            structural signals. It does not pretend to replace Lighthouse,
+            PageSpeed or real-device testing.
+          </p>
+
+        </div>
+
+        <div class="audit-card">
+
+          <label for="auditUrl">
+            PUBLIC WEBSITE URL
+          </label>
+
+          <form class="audit-form" id="auditForm">
+
+            <input
+              id="auditUrl"
+              type="url"
+              placeholder="https://yourwebsite.com"
+              required
+            >
+
+            <button class="btn light" type="submit">
+              Analyze ↗
+            </button>
+
+          </form>
+
+          <div class="audit-status" id="auditStatus">
+            Results are generated from the actual website response.
+            No fabricated scores.
+          </div>
+
+          <div class="audit-result" id="auditResult"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="scene-wrap" data-scene="why">
+  <div class="scene">
+    <div class="scene-inner">
+
+      <div class="why-layout">
+
+        <div>
+
+          <div class="kicker">Why Web Craft</div>
+
+          <h2>
+            Quietly premium. Deliberately built.
+          </h2>
+
+        </div>
+
+        <div class="why-grid">
+
+          <div class="why-card">
+            <b>Strategy before decoration</b>
+            <h3>Understand it quickly.</h3>
+            <p>
+              Strong hierarchy helps visitors understand what you do
+              and what to do next.
+            </p>
+          </div>
+
+          <div class="why-card">
+            <b>Craft in the details</b>
+            <h3>Details are part of the product.</h3>
+            <p>
+              Typography, spacing, states, responsiveness and transitions
+              work as one system.
+            </p>
+          </div>
+
+          <div class="why-card">
+            <b>No invented proof</b>
+            <h3>Honesty over hype.</h3>
+            <p>
+              Real work and clear limitations matter more than made-up results.
+            </p>
+          </div>
+
+          <div class="why-card">
+            <b>Built for growth</b>
+            <h3>Made for the long term.</h3>
+            <p>
+              Maintainable code, sensible integrations and support after launch.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="scene-wrap" data-scene="faq">
+  <div class="scene">
+    <div class="scene-inner">
+
+      <div class="faq-layout">
+
+        <div>
+
+          <div class="kicker">FAQ</div>
+
+          <h2>
+            Questions, answered.
+          </h2>
+
+        </div>
+
+        <div class="faq">
+
+          <details>
+            <summary>What does Web Craft do?</summary>
+            <p>
+              We design and build websites, and connect them to the automation
+              a business needs — lead capture, follow-ups and internal workflows
+              — as one system.
+            </p>
+          </details>
+
+          <details>
+            <summary>How does a project start?</summary>
+            <p>
+              Book a call or send an enquiry. We discuss your business,
+              goals, scope and the right approach before any project decision.
+            </p>
+          </details>
+
+          <details>
+            <summary>Do you redesign existing websites?</summary>
+            <p>
+              Yes. Existing websites are reviewed first so we can identify
+              what should be kept, improved, replaced or removed.
+            </p>
+          </details>
+
+          <details>
+            <summary>Do you provide SEO and maintenance?</summary>
+            <p>
+              Yes, both are part of the service model — SEO and performance
+              setup are included from Starter, with ongoing maintenance
+              available on every plan.
+            </p>
+          </details>
+
+          <details>
+            <summary>What is business automation?</summary>
+            <p>
+              Automating the repetitive parts of running a business online
+              — enquiry routing, follow-ups and internal notifications —
+              so leads don't sit unanswered.
+            </p>
+          </details>
+
+          <details>
+            <summary>Do you work internationally?</summary>
+            <p>
+              Yes. Web Craft works with businesses in the US, UK,
+              Australia and Canada.
+            </p>
+          </details>
+
+          <details>
+            <summary>How does the Free Website Audit work?</summary>
+            <p>
+              Enter a public website URL and we review the homepage's
+              structure, SEO and performance signals — then walk through
+              the results together.
+            </p>
+          </details>
+
+          <details>
+            <summary>How do payments work?</summary>
+            <p>
+              There is no online checkout. Pricing is agreed in conversation
+              and handled directly between us.
+            </p>
+          </details>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="scene-wrap final" data-scene="final">
+  <div class="scene">
+
+    <div class="final-glow"></div>
+
+    <div class="scene-inner">
+
+      <div class="kicker">
+        Start a conversation
+      </div>
+
+      <h2>
+        Your next website shouldn't just exist.
+        It should work.
+      </h2>
+
+      <p>
+        Tell us what you are building, improving or launching.
+        We will start with a conversation — not a checkout.
+      </p>
+
+      <form
+        class="contact-form"
+        id="contactForm"
+        style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:850px"
+      >
+
+        <input
+          name="name"
+          placeholder="Your name"
+          required
+          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+        >
+
+        <input
+          name="business"
+          placeholder="Business name"
+          required
+          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+        >
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+        >
+
+        <input
+          name="phone"
+          placeholder="Phone / WhatsApp"
+          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+        >
+
+        <input
+          name="website"
+          placeholder="Current website (optional)"
+          style="grid-column:1/-1;border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+        >
+
+        <textarea
+          name="need"
+          placeholder="What do you need?"
+          required
+          style="grid-column:1/-1;min-height:110px;resize:vertical;border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+        ></textarea>
+
+        <div
+          id="contactStatus"
+          style="grid-column:1/-1;color:#aab4c4;font-size:12px;min-height:20px"
+        ></div>
+
+        <button class="btn light magnetic" type="submit">
+          Send Enquiry ↗
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+</section>
 
 </main>
 
-<footer class="footer"><div class="footer-inner"><div>© 2026 Web Craft. Designed and built with care.</div><div class="footer-links"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#audit">Free Website Audit</a><a href="#contact">Book a Call</a></div></div></footer>
+<footer class="footer">
+  <div class="footer-inner">
+
+    <div>
+      © 2026 Web Craft. Designed and built with care.
+    </div>
+
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#audit">Free Website Audit</a>
+      <a href="#contact">Book a Call</a>
+    </div>
+
+  </div>
+</footer>
 
 <script>
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const $=s=>document.querySelector(s),
+$$=s=>[...document.querySelectorAll(s)];
+
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const fine=matchMedia('(pointer:fine)').matches;
 
-/* Signature architecture: mostly vertical travel, with one short rounded lateral arc at each scene hand-off. */
+/* Signature architecture:
+   mostly vertical travel, with one short rounded lateral arc at each scene hand-off. */
+
 const scenes=$$('.scene-wrap');
+
 if(!reduce){
-let raf=0;
-const update=()=>{
-raf=0;
-const vh=innerHeight;
-scenes.forEach((wrap)=>{
-const r=wrap.getBoundingClientRect();
-const progress=Math.min(1,Math.max(0,(vh-r.top)/(Math.max(1,r.height-vh))));
-const inner=wrap.querySelector('.scene-inner');
-const scene=r.top < vh*.72 && r.bottom > vh*.28;
-wrap.classList.toggle('is-active',scene);
-wrap.classList.toggle('is-past',r.bottom<=vh*.28);
-if(!inner)return;
-let x=0,y=0,scale=1,opacity=1,rot=0;
-if(progress<.34){
-const t=progress/.34; const e=t*t*(3-2*t);
-y=(1-e)*14; x=(1-e)*-3; scale=.96+.04*e; opacity=.35+.65*e; rot=-1.2*(1-e);
-}else if(progress<.72){
-const t=(progress-.34)/.38; const e=t*t*(3-2*t);
-const arc=Math.sin(t*Math.PI);
-x=-3*(1-e)+1.8*arc; y=0; scale=1; opacity=1; rot=-1.2*(1-e)+.6*arc;
-}else{
-const t=(progress-.72)/.28; const e=t*t*(3-2*t);
-y=14*e; x=1.8*(1-e); scale=1-.02*e; opacity=1-.7*e; rot=.6*(1-e);
-}
-if(r.bottom<vh*.55){const t=Math.min(1,Math.max(0,(vh*.55-r.bottom)/(vh*.55))); y+=t*14; opacity*=1-t*.55;}
-inner.style.transform=`translate3d(${x}vw,${y}vh,0) scale(${scale}) rotateZ(${rot}deg)`;
-inner.style.opacity=opacity;
-});
-};
-addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(update)},{passive:true});
-addEventListener('resize',()=>{if(!raf)raf=requestAnimationFrame(update)});
-update();
+
+  let raf=0;
+
+  const update=()=>{
+
+    raf=0;
+
+    const vh=innerHeight;
+
+    scenes.forEach((wrap)=>{
+
+      const r=wrap.getBoundingClientRect();
+
+      const progress=Math.min(
+        1,
+        Math.max(
+          0,
+          (vh-r.top)/(Math.max(1,r.height-vh))
+        )
+      );
+
+      const inner=wrap.querySelector('.scene-inner');
+
+      const scene=
+        r.top < vh*.72 &&
+        r.bottom > vh*.28;
+
+      wrap.classList.toggle('is-active',scene);
+      wrap.classList.toggle('is-past',r.bottom<=vh*.28);
+
+      if(!inner)return;
+
+      let x=0,
+          y=0,
+          scale=1,
+          opacity=1,
+          rot=0;
+
+      if(progress<.34){
+
+        const t=progress/.34;
+        const e=t*t*(3-2*t);
+
+        y=(1-e)*14;
+        x=(1-e)*-3;
+        scale=.96+.04*e;
+        opacity=.35+.65*e;
+        rot=-1.2*(1-e);
+
+      }else if(progress<.72){
+
+        const t=(progress-.34)/.38;
+        const e=t*t*(3-2*t);
+        const arc=Math.sin(t*Math.PI);
+
+        x=-3*(1-e)+1.8*arc;
+        y=0;
+        scale=1;
+        opacity=1;
+        rot=-1.2*(1-e)+.6*arc;
+
+      }else{
+
+        const t=(progress-.72)/.28;
+        const e=t*t*(3-2*t);
+
+        y=14*e;
+        x=1.8*(1-e);
+        scale=1-.02*e;
+        opacity=1-.7*e;
+        rot=.6*(1-e);
+      }
+
+      if(r.bottom<vh*.55){
+
+        const t=Math.min(
+          1,
+          Math.max(
+            0,
+            (vh*.55-r.bottom)/(vh*.55)
+          )
+        );
+
+        y+=t*14;
+        opacity*=1-t*.55;
+      }
+
+      inner.style.transform=
+        `translate3d(${x}vw,${y}vh,0) scale(${scale}) rotateZ(${rot}deg)`;
+
+      inner.style.opacity=opacity;
+
+    });
+
+  };
+
+  addEventListener(
+    'scroll',
+    ()=>{
+      if(!raf)raf=requestAnimationFrame(update)
+    },
+    {passive:true}
+  );
+
+  addEventListener(
+    'resize',
+    ()=>{
+      if(!raf)raf=requestAnimationFrame(update)
+    }
+  );
+
+  update();
 }
 
 /* Desktop cursor, never active on touch. */
+
 if(fine&&!reduce){
-document.body.classList.add('cursor-enabled');
-const d=$('.cursor-dot'),r=$('.cursor-ring'),l=$('.cursor-label');let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y;
-addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY;d.style.left=x+'px';d.style.top=y+'px';l.style.left=x+'px';l.style.top=y+'px'});
-function cursorLoop(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(cursorLoop)}cursorLoop();
-$$('[data-cursor]').forEach(el=>{el.addEventListener('mouseenter',()=>{l.textContent=el.dataset.cursor;r.style.width='48px';r.style.height='48px'});el.addEventListener('mouseleave',()=>{l.textContent='';r.style.width='31px';r.style.height='31px'})});
+
+  document.body.classList.add('cursor-enabled');
+
+  const d=$('.cursor-dot'),
+        r=$('.cursor-ring'),
+        l=$('.cursor-label');
+
+  let x=innerWidth/2,
+      y=innerHeight/2,
+      rx=x,
+      ry=y;
+
+  addEventListener(
+    'pointermove',
+    e=>{
+      x=e.clientX;
+      y=e.clientY;
+
+      d.style.left=x+'px';
+      d.style.top=y+'px';
+
+      l.style.left=x+'px';
+      l.style.top=y+'px';
+    }
+  );
+
+  function cursorLoop(){
+
+    rx+=(x-rx)*.18;
+    ry+=(y-ry)*.18;
+
+    r.style.left=rx+'px';
+    r.style.top=ry+'px';
+
+    requestAnimationFrame(cursorLoop);
+  }
+
+  cursorLoop();
+
+  $$('[data-cursor]').forEach(el=>{
+
+    el.addEventListener(
+      'mouseenter',
+      ()=>{
+        l.textContent=el.dataset.cursor;
+        r.style.width='48px';
+        r.style.height='48px';
+      }
+    );
+
+    el.addEventListener(
+      'mouseleave',
+      ()=>{
+        l.textContent='';
+        r.style.width='31px';
+        r.style.height='31px';
+      }
+    );
+
+  });
 }
-if(fine&&!reduce){$$('.magnetic').forEach(el=>{el.addEventListener('pointermove',e=>{const b=el.getBoundingClientRect();el.style.transform=`translate(${(e.clientX-(b.left+b.width/2))*.08}px,${(e.clientY-(b.top+b.height/2))*.08}px)`});el.addEventListener('pointerleave',()=>el.style.transform='')})}
 
-function normalizeUrl(v){v=v.trim();return /^https?:\/\//i.test(v)?v:'https://'+v}
-$('#auditForm').addEventListener('submit',async e=>{e.preventDefault();const input=$('#auditUrl'),status=$('#auditStatus'),out=$('#auditResult'),btn=e.submitter;const url=normalizeUrl(input.value);btn.disabled=true;btn.textContent='Analyzing…';out.style.display='none';status.textContent='Fetching the public website and checking available signals…';try{const res=await fetch('/.netlify/functions/audit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await res.json();if(!res.ok||!data.success)throw new Error(data.error||'The website could not be analyzed.');const scores=data.scores||{};out.innerHTML=Object.entries(scores).map(([k,v])=>`<div class="score"><small>${k.replace(/([A-Z])/g,' $1')}</small><strong>${typeof v==='number'?Math.round(v):'—'}</strong><small>/ 100</small></div>`).join('');out.style.display='grid';status.textContent=data.insufficientData?'Review completed with limited public data.':'Review completed from the website response.'}catch(err){status.textContent=err.message||'We could not complete the review. Please check the URL and try again.'}finally{btn.disabled=false;btn.textContent='Analyze ↗'}})
+if(fine&&!reduce){
 
-$('#contactForm').addEventListener('submit',async e=>{e.preventDefault();const form=e.currentTarget,status=$('#contactStatus'),btn=form.querySelector('button');btn.disabled=true;status.textContent='Sending…';const payload=Object.fromEntries(new FormData(form));try{const res=await fetch('/.netlify/functions/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await res.json();if(!res.ok||!data.success)throw new Error(data.message||data.error||'We could not send the enquiry.');status.textContent='Thanks — your enquiry was sent. We’ll be in touch.';form.reset()}catch(err){status.textContent=err.message||'Something went wrong. Please try again.'}finally{btn.disabled=false}})
+  $$('.magnetic').forEach(el=>{
+
+    el.addEventListener(
+      'pointermove',
+      e=>{
+        const b=el.getBoundingClientRect();
+
+        el.style.transform=
+          `translate(${(e.clientX-(b.left+b.width/2))*.08}px,${(e.clientY-(b.top+b.height/2))*.08}px)`;
+      }
+    );
+
+    el.addEventListener(
+      'pointerleave',
+      ()=>el.style.transform=''
+    );
+
+  });
+}
+
+function normalizeUrl(v){
+
+  v=v.trim();
+
+  return /^https?:\/\//i.test(v)
+    ?v
+    :'https://'+v;
+}
+
+$('#auditForm').addEventListener(
+  'submit',
+  async e=>{
+
+    e.preventDefault();
+
+    const input=$('#auditUrl');
+    const status=$('#auditStatus');
+    const out=$('#auditResult');
+    const btn=e.submitter;
+
+    const url=normalizeUrl(input.value);
+
+    btn.disabled=true;
+    btn.textContent='Analyzing…';
+
+    out.style.display='none';
+
+    status.textContent=
+      'Fetching the public website and checking available signals…';
+
+    try{
+
+      const res=await fetch(
+        '/.netlify/functions/audit',
+        {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({url})
+        }
+      );
+
+      const data=await res.json();
+
+      if(!res.ok||!data.success)
+        throw new Error(
+          data.error||
+          'The website could not be analyzed.'
+        );
+
+      const scores=data.scores||{};
+
+      out.innerHTML=
+        Object.entries(scores)
+          .map(
+            ([k,v])=>
+              `<div class="score">
+                <small>${k.replace(/([A-Z])/g,' $1')}</small>
+                <strong>${typeof v==='number'?Math.round(v):'—'}</strong>
+                <small>/ 100</small>
+              </div>`
+          )
+          .join('');
+
+      out.style.display='grid';
+
+      status.textContent=
+        data.insufficientData
+          ?'Review completed with limited public data.'
+          :'Review completed from the website response.';
+
+    }catch(err){
+
+      status.textContent=
+        err.message||
+        'We could not complete the review. Please check the URL and try again.';
+
+    }finally{
+
+      btn.disabled=false;
+      btn.textContent='Analyze ↗';
+    }
+
+  }
+);
+
+$('#contactForm').addEventListener(
+  'submit',
+  async e=>{
+
+    e.preventDefault();
+
+    const form=e.currentTarget;
+    const status=$('#contactStatus');
+    const btn=form.querySelector('button');
+
+    btn.disabled=true;
+    status.textContent='Sending…';
+
+    const payload=
+      Object.fromEntries(
+        new FormData(form)
+      );
+
+    try{
+
+      const res=await fetch(
+        '/.netlify/functions/contact',
+        {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(payload)
+        }
+      );
+
+      const data=await res.json();
+
+      if(!res.ok||!data.success)
+        throw new Error(
+          data.message||
+          data.error||
+          'We could not send the enquiry.'
+        );
+
+      status.textContent=
+        'Thanks — your enquiry was sent. We’ll be in touch.';
+
+      form.reset();
+
+    }catch(err){
+
+      status.textContent=
+        err.message||
+        'Something went wrong. Please try again.';
+
+    }finally{
+
+      btn.disabled=false;
+
+    }
+
+  }
+);
 </script>
 
-<!-- Hero 3D scene: lazy-loaded so it never blocks first paint / text render.
-     Fully separate module — see hero-scene.js. Safe to delete this block and
-     hero-scene.js together to fully revert to the plain fallback panel. -->
+<!-- =========================================================
+     HERO 3D SCENE LOADER
+     =========================================================
+
+     This loads hero-scene.js only after the page finishes loading.
+
+     IMPORTANT:
+     - hero-scene.js must exist at the repository root
+     - GLTFLoader's "three" dependency is resolved by the
+       import map in <head>
+     - Errors are now visible instead of being silently swallowed
+     ========================================================= -->
+
 <script>
-function loadHeroScene(){ import('/hero-scene.js').catch(()=>{}); }
-if(document.readyState==='complete') loadHeroScene();
-else addEventListener('load', loadHeroScene, { once:true });
+function loadHeroScene(){
+
+  import('/hero-scene.js')
+    .then(()=>{
+      console.log('Web Craft 3D hero scene loaded successfully.');
+    })
+    .catch(err=>{
+
+      console.error(
+        'Web Craft 3D hero scene failed to load:',
+        err
+      );
+
+      const fallback=
+        document.querySelector('.stage-fallback span');
+
+      if(fallback){
+        fallback.textContent=
+          '3D preview could not be loaded.';
+      }
+    });
+
+}
+
+if(document.readyState==='complete'){
+  loadHeroScene();
+}else{
+  addEventListener(
+    'load',
+    loadHeroScene,
+    {once:true}
+  );
+}
 </script>
+
 </body>
 </html>
