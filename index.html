@@ -13,59 +13,263 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://webcraft-audit.netlify.app/">
 
-<meta name="theme-color" content="#f4f6fb">
+<meta name="theme-color" content="#0e1119">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-  }
-}
-</script>
-
 <style>
-:root{--bg:#f4f6fb;--ink:#10131a;--muted:#667085;--line:rgba(16,19,26,.12);--white:#fff;--blue:#4f6fff;--cyan:#51c8ff;--violet:#8b6cff;--green:#65d9b0;--max:1280px;--ease:cubic-bezier(.2,.8,.2,1)}
-*{box-sizing:border-box}
-html{background:var(--bg);scroll-behavior:auto}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 15% 15%,rgba(81,200,255,.16),transparent 28%),radial-gradient(circle at 85% 28%,rgba(139,108,255,.14),transparent 30%),linear-gradient(180deg,#f8faff 0%,#f1f4fa 100%)}
-a{color:inherit;text-decoration:none}
-button,input,textarea{font:inherit}
-.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+:root{
+  --bg:#f4f6fb;
+  --ink:#10131a;
+  --muted:#667085;
+  --line:rgba(16,19,26,.12);
+  --white:#fff;
+  --blue:#4f6fff;
+  --cyan:#51c8ff;
+  --violet:#8b6cff;
+  --green:#65d9b0;
+  --max:1280px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
 
-.nav{position:fixed;z-index:100;top:16px;left:0;right:0}
-.nav-inner{width:min(calc(100% - 40px),var(--max));height:58px;margin:auto;padding:0 10px 0 20px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.72);background:rgba(255,255,255,.66);backdrop-filter:blur(22px);box-shadow:0 14px 50px rgba(35,45,70,.08);border-radius:999px}
-.logo{font-family:Manrope;font-weight:800;font-size:20px;letter-spacing:-.06em}
-.navlinks{display:flex;gap:25px;font-size:13px;color:#535b6c}
-.navlinks a{transition:color .25s}
-.navlinks a:hover{color:var(--ink)}
+*{
+  box-sizing:border-box;
+}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:13px 19px;font-size:13px;font-weight:700;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s}
-.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(16,19,26,.15)}
-.btn.secondary{background:rgba(255,255,255,.55);color:var(--ink);border-color:var(--line)}
-.btn.light{background:#fff;color:var(--ink);border-color:#fff}
+html{
+  background:var(--bg);
+  scroll-behavior:auto;
+}
 
-.journey{position:relative}
-.scene-wrap{height:150svh;position:relative}
-.scene{height:100svh;width:100%;position:sticky;top:0;display:flex;align-items:center;overflow:hidden;isolation:isolate}
-.scene-inner{width:min(calc(100% - 40px),var(--max));margin:auto;will-change:transform,opacity;transform:translate3d(0,0,0);opacity:1}
-.scene-content{position:relative;z-index:2}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
 
-.kicker{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#4a5468}
-.kicker:before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));flex:none}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(81,200,255,.16),transparent 28%),
+    radial-gradient(circle at 85% 28%,rgba(139,108,255,.14),transparent 30%),
+    linear-gradient(180deg,#f8faff 0%,#f1f4fa 100%);
+}
 
-.scene h1,.scene h2{font-family:Manrope;margin:0;letter-spacing:-.085em;line-height:.9}
-.hero h1{font-size:clamp(58px,9vw,130px);max-width:1030px;margin:24px 0 28px}
-.hero h1 span{color:#8993a8}
-.hero-copy{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
-.hero-copy p{max-width:530px;margin:0;color:#566174;font-size:18px;line-height:1.5}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-/* ============ PREMIUM HERO DEVICE VISUAL ============ */
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+.wrap{
+  width:min(calc(100% - 40px),var(--max));
+  margin:auto;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav{
+  position:fixed;
+  z-index:100;
+  top:16px;
+  left:0;
+  right:0;
+}
+
+.nav-inner{
+  width:min(calc(100% - 40px),var(--max));
+  height:58px;
+  margin:auto;
+  padding:0 10px 0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid rgba(255,255,255,.72);
+  background:rgba(255,255,255,.66);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:0 14px 50px rgba(35,45,70,.08);
+  border-radius:999px;
+}
+
+.logo{
+  font-family:Manrope;
+  font-weight:800;
+  font-size:20px;
+  letter-spacing:-.06em;
+}
+
+.navlinks{
+  display:flex;
+  gap:25px;
+  font-size:13px;
+  color:#535b6c;
+}
+
+.navlinks a{
+  transition:color .25s;
+}
+
+.navlinks a:hover{
+  color:var(--ink);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:#fff;
+  border-radius:999px;
+  padding:13px 19px;
+  font-size:13px;
+  font-weight:700;
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease),
+    background .35s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(16,19,26,.15);
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.55);
+  color:var(--ink);
+  border-color:var(--line);
+}
+
+.btn.light{
+  background:#fff;
+  color:var(--ink);
+  border-color:#fff;
+}
+
+/* =========================
+   SCENE SYSTEM
+========================= */
+
+.journey{
+  position:relative;
+}
+
+.scene-wrap{
+  height:150svh;
+  position:relative;
+}
+
+.scene{
+  height:100svh;
+  width:100%;
+  position:sticky;
+  top:0;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+.scene-inner{
+  width:min(calc(100% - 40px),var(--max));
+  margin:auto;
+  will-change:transform,opacity;
+  transform:translate3d(0,0,0);
+  opacity:1;
+}
+
+.scene-content{
+  position:relative;
+  z-index:2;
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-size:14px;
+  font-weight:600;
+  color:#4a5468;
+}
+
+.kicker:before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  flex:none;
+}
+
+.scene h1,
+.scene h2{
+  font-family:Manrope;
+  margin:0;
+  letter-spacing:-.085em;
+  line-height:.9;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero h1{
+  font-size:clamp(58px,9vw,130px);
+  max-width:1030px;
+  margin:24px 0 28px;
+}
+
+.hero h1 span{
+  color:#8993a8;
+}
+
+.hero-copy{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:40px;
+}
+
+.hero-copy p{
+  max-width:530px;
+  margin:0;
+  color:#566174;
+  font-size:18px;
+  line-height:1.5;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   HERO DARK VISUAL
+========================= */
 
 .scene-wrap[data-scene="hero"] .scene{
   background:
@@ -127,9 +331,11 @@ button,input,textarea{font:inherit}
     drop-shadow(0 35px 55px rgba(0,0,0,.35))
     drop-shadow(0 0 35px rgba(76,137,255,.08));
   user-select:none;
+  -webkit-user-drag:none;
 }
 
 @media(max-width:1000px){
+
   .scene-wrap[data-scene="hero"] .scene{
     min-height:100svh;
   }
@@ -150,6 +356,7 @@ button,input,textarea{font:inherit}
 }
 
 @media(max-width:600px){
+
   .scene-wrap[data-scene="hero"] .scene{
     padding-top:82px;
     padding-bottom:30px;
@@ -164,11 +371,13 @@ button,input,textarea{font:inherit}
   }
 }
 
-/* ============ /PREMIUM HERO DEVICE VISUAL ============ */
+/* =========================
+   DARK SECTIONS
+========================= */
 
 .scene--dark{
   color:#fff;
-  background:#0e1119
+  background:#0e1119;
 }
 
 .scene--dark:before{
@@ -178,23 +387,34 @@ button,input,textarea{font:inherit}
   background:
     radial-gradient(circle at 70% 30%,rgba(81,200,255,.22),transparent 25%),
     radial-gradient(circle at 20% 70%,rgba(139,108,255,.18),transparent 28%);
-  z-index:-1
+  z-index:-1;
 }
 
-.scene--dark .kicker{color:#aab4c5}
-.scene--dark .hero-copy p,.scene--dark .muted{color:#9da8bb}
+.scene--dark .kicker{
+  color:#aab4c5;
+}
+
+.scene--dark .hero-copy p,
+.scene--dark .muted{
+  color:#9da8bb;
+}
+
 .scene--dark .btn.secondary{
   color:#fff;
   background:rgba(255,255,255,.06);
-  border-color:rgba(255,255,255,.2)
+  border-color:rgba(255,255,255,.2);
 }
+
+/* =========================
+   ARCHITECTURE
+========================= */
 
 .arch{
   position:absolute;
   inset:0;
   z-index:0;
   pointer-events:none;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .arch-line{
@@ -205,7 +425,7 @@ button,input,textarea{font:inherit}
   top:6vh;
   border:1px solid rgba(120,139,180,.17);
   border-radius:50%;
-  transform:rotate(-20deg)
+  transform:rotate(-20deg);
 }
 
 .arch-line.two{
@@ -213,7 +433,7 @@ button,input,textarea{font:inherit}
   height:55vw;
   right:-18vw;
   top:20vh;
-  border-color:rgba(81,200,255,.13)
+  border-color:rgba(81,200,255,.13);
 }
 
 .arch-dot{
@@ -224,62 +444,77 @@ button,input,textarea{font:inherit}
   background:#fff;
   box-shadow:0 0 30px rgba(81,200,255,.8);
   right:22%;
-  top:31%
+  top:31%;
 }
+
+/* =========================
+   MANIFESTO
+========================= */
 
 .manifesto{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:18px;
-  align-items:end
+  align-items:end;
 }
 
 .manifesto h2{
   font-size:clamp(48px,7vw,92px);
-  max-width:850px
+  max-width:850px;
 }
 
 .manifesto p{
   max-width:410px;
   color:#a9b3c5;
   margin:0;
-  font-size:17px
+  font-size:17px;
 }
 
 .metric-row{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
-  margin-top:28px
+  margin-top:28px;
 }
 
 .metric{
   padding:22px;
   border-radius:20px;
   background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08)
+  border:1px solid rgba(255,255,255,.08);
 }
 
 .metric span{
   font-size:13px;
   color:#c4cbda;
-  font-weight:600
+  font-weight:600;
 }
+
+/* =========================
+   WORK
+========================= */
 
 .work-layout{
   display:grid;
   grid-template-columns:.75fr 1.25fr;
   gap:60px;
-  align-items:center
+  align-items:center;
 }
 
-.work-copy h2{font-size:clamp(52px,7vw,96px)}
-.work-copy p{color:#617087;max-width:390px;font-size:17px}
+.work-copy h2{
+  font-size:clamp(52px,7vw,96px);
+}
+
+.work-copy p{
+  color:#617087;
+  max-width:390px;
+  font-size:17px;
+}
 
 .work-links{
   margin-top:28px;
   display:grid;
-  gap:6px
+  gap:6px;
 }
 
 .work-links a{
@@ -288,12 +523,12 @@ button,input,textarea{font:inherit}
   align-items:center;
   padding:15px 0;
   border-bottom:1px solid var(--line);
-  font-weight:700
+  font-weight:700;
 }
 
 .work-links small{
   color:#8490a3;
-  font-weight:500
+  font-weight:500;
 }
 
 .portfolio-window{
@@ -303,7 +538,7 @@ button,input,textarea{font:inherit}
   background:#101722;
   padding:8px;
   box-shadow:0 40px 100px rgba(32,48,84,.22);
-  transform:rotate(3deg)
+  transform:rotate(3deg);
 }
 
 .portfolio-screen{
@@ -311,7 +546,7 @@ button,input,textarea{font:inherit}
   border-radius:26px;
   overflow:hidden;
   background:#eef3fb;
-  position:relative
+  position:relative;
 }
 
 .portfolio-screen .top{
@@ -320,39 +555,39 @@ button,input,textarea{font:inherit}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 20px
+  padding:0 20px;
 }
 
 .portfolio-screen .top b{
-  font:800 13px Manrope
+  font:800 13px Manrope;
 }
 
 .portfolio-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  height:calc(100% - 50px)
+  height:calc(100% - 50px);
 }
 
 .portfolio-block{
   padding:35px;
-  background:#f9fbff
+  background:#f9fbff;
 }
 
 .portfolio-block h3{
   font:800 clamp(35px,4vw,64px)/.9 Manrope;
   letter-spacing:-.08em;
-  margin:0
+  margin:0;
 }
 
 .portfolio-block p{
   font-size:11px;
   color:#738097;
-  max-width:210px
+  max-width:210px;
 }
 
 .portfolio-art{
   background:linear-gradient(135deg,#c6efff,#9b91ff);
-  position:relative
+  position:relative;
 }
 
 .portfolio-art:before{
@@ -365,21 +600,27 @@ button,input,textarea{font:inherit}
   border-radius:30px;
   background:rgba(255,255,255,.75);
   transform:rotate(-10deg);
-  box-shadow:0 30px 70px rgba(42,48,111,.22)
+  box-shadow:0 30px 70px rgba(42,48,111,.22);
 }
+
+/* =========================
+   SERVICES
+========================= */
 
 .services-layout{
   display:grid;
   grid-template-columns:.55fr 1.45fr;
   gap:70px;
-  align-items:start
+  align-items:start;
 }
 
-.services-layout h2{font-size:clamp(50px,7vw,94px)}
+.services-layout h2{
+  font-size:clamp(50px,7vw,94px);
+}
 
 .services-layout>div>p{
   color:#657287;
-  max-width:340px
+  max-width:340px;
 }
 
 .service-grid{
@@ -389,30 +630,44 @@ button,input,textarea{font:inherit}
   border:1px solid var(--line);
   background:var(--line);
   border-radius:28px;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .service{
   background:rgba(255,255,255,.7);
-  padding:26px
+  padding:26px;
 }
 
-.service:nth-child(2){background:#eaf8ff}
-.service:nth-child(3){background:#f0ecff}
-.service:nth-child(4){background:#eafaf4}
-.service:nth-child(5){background:#fff6ea}
-.service:nth-child(6){background:#f2f5ff}
+.service:nth-child(2){
+  background:#eaf8ff;
+}
+
+.service:nth-child(3){
+  background:#f0ecff;
+}
+
+.service:nth-child(4){
+  background:#eafaf4;
+}
+
+.service:nth-child(5){
+  background:#fff6ea;
+}
+
+.service:nth-child(6){
+  background:#f2f5ff;
+}
 
 .service h3{
   font:700 21px Manrope;
   letter-spacing:-.05em;
-  margin:0 0 8px
+  margin:0 0 8px;
 }
 
 .service p{
   margin:0;
   color:#69758a;
-  font-size:12.5px
+  font-size:12.5px;
 }
 
 .automation{
@@ -421,32 +676,38 @@ button,input,textarea{font:inherit}
   border-radius:26px;
   padding:26px;
   margin-top:1px;
-  grid-column:1/-1
+  grid-column:1/-1;
 }
 
 .automation b{
   font:700 15px Manrope;
-  letter-spacing:-.02em
+  letter-spacing:-.02em;
 }
 
 .automation p{
   margin:6px 0 0;
   color:#69758a;
   font-size:13px;
-  max-width:640px
+  max-width:640px;
 }
+
+/* =========================
+   PROCESS
+========================= */
 
 .process-layout{
   display:grid;
   grid-template-columns:.8fr 1.2fr;
   gap:80px;
-  align-items:center
+  align-items:center;
 }
 
-.process-layout h2{font-size:clamp(54px,7vw,98px)}
+.process-layout h2{
+  font-size:clamp(54px,7vw,98px);
+}
 
 .process-list{
-  border-top:1px solid var(--line)
+  border-top:1px solid var(--line);
 }
 
 .process-step{
@@ -455,23 +716,23 @@ button,input,textarea{font:inherit}
   align-items:center;
   gap:20px;
   padding:24px 0;
-  border-bottom:1px solid var(--line)
+  border-bottom:1px solid var(--line);
 }
 
 .process-step b{
   font:700 13px Manrope;
-  color:#7c8799
+  color:#7c8799;
 }
 
 .process-step h3{
   font:700 29px Manrope;
   letter-spacing:-.05em;
-  margin:0
+  margin:0;
 }
 
 .process-step span{
   color:#7c8799;
-  font-size:12px
+  font-size:12px;
 }
 
 .process-orbit{
@@ -479,7 +740,7 @@ button,input,textarea{font:inherit}
   position:relative;
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
 }
 
 .orbit-ring{
@@ -487,14 +748,14 @@ button,input,textarea{font:inherit}
   width:330px;
   height:330px;
   border:1px solid rgba(79,111,255,.25);
-  border-radius:50%
+  border-radius:50%;
 }
 
 .orbit-ring:nth-child(2){
   width:250px;
   height:250px;
   border-color:rgba(81,200,255,.25);
-  transform:rotate(30deg)
+  transform:rotate(30deg);
 }
 
 .orbit-core{
@@ -508,7 +769,7 @@ button,input,textarea{font:inherit}
   justify-content:center;
   font:800 20px Manrope;
   letter-spacing:-.05em;
-  z-index:2
+  z-index:2;
 }
 
 .orbit-dot{
@@ -517,31 +778,48 @@ button,input,textarea{font:inherit}
   height:13px;
   border-radius:50%;
   background:var(--blue);
-  box-shadow:0 0 25px rgba(79,111,255,.55)
+  box-shadow:0 0 25px rgba(79,111,255,.55);
 }
 
-.orbit-dot.one{top:38px;right:23%}
-.orbit-dot.two{bottom:70px;left:18%}
-.orbit-dot.three{top:48%;right:8%}
+.orbit-dot.one{
+  top:38px;
+  right:23%;
+}
+
+.orbit-dot.two{
+  bottom:70px;
+  left:18%;
+}
+
+.orbit-dot.three{
+  top:48%;
+  right:8%;
+}
+
+/* =========================
+   PRICING
+========================= */
 
 .pricing-layout{
   display:grid;
   grid-template-columns:.65fr 1.35fr;
   gap:50px;
-  align-items:start
+  align-items:start;
 }
 
-.pricing-layout h2{font-size:clamp(52px,7vw,94px)}
+.pricing-layout h2{
+  font-size:clamp(52px,7vw,94px);
+}
 
 .pricing-layout>div>p{
   color:#647187;
-  max-width:330px
+  max-width:330px;
 }
 
 .pricing{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px
+  gap:10px;
 }
 
 .price{
@@ -551,74 +829,88 @@ button,input,textarea{font:inherit}
   border-radius:28px;
   padding:28px;
   display:flex;
-  flex-direction:column
+  flex-direction:column;
 }
 
 .price.pop{
   background:#111722;
   color:#fff;
   border-color:#111722;
-  box-shadow:0 30px 90px rgba(20,29,46,.2)
+  box-shadow:0 30px 90px rgba(20,29,46,.2);
 }
 
 .price .tag{
   font-size:12px;
   font-weight:600;
   color:#7b8799;
-  margin-bottom:28px
+  margin-bottom:28px;
 }
 
-.price.pop .tag{color:#aab4c5}
+.price.pop .tag{
+  color:#aab4c5;
+}
 
 .price h3{
   font:800 24px Manrope;
   letter-spacing:-.05em;
-  margin:0 0 13px
+  margin:0 0 13px;
 }
 
 .amount{
   font:800 34px/1.05 Manrope;
   letter-spacing:-.06em;
-  margin-bottom:28px
+  margin-bottom:28px;
 }
 
 .amount small{
   font:500 11px 'DM Sans';
   color:#8792a4;
-  letter-spacing:0
+  letter-spacing:0;
 }
 
 .price ul{
   list-style:none;
   padding:0;
   margin:0;
-  border-top:1px solid var(--line)
+  border-top:1px solid var(--line);
 }
 
-.price.pop ul{border-color:#343b49}
+.price.pop ul{
+  border-color:#343b49;
+}
 
 .price li{
   padding:11px 0;
   border-bottom:1px solid var(--line);
-  font-size:12px
+  font-size:12px;
 }
 
-.price.pop li{border-color:#343b49}
+.price.pop li{
+  border-color:#343b49;
+}
 
-.price .btn{margin-top:auto}
+.price .btn{
+  margin-top:auto;
+}
+
+/* =========================
+   AUDIT
+========================= */
 
 .audit-layout{
   display:grid;
   grid-template-columns:.8fr 1.2fr;
   gap:70px;
-  align-items:center
+  align-items:center;
 }
 
-.audit-layout h2{font-size:clamp(50px,7vw,90px)}
+.audit-layout h2{
+  font-size:clamp(50px,7vw,90px);
+}
 
 .audit-layout p{
   color:#667287;
-  max-width:400px
+  max-width:400px;
 }
 
 .audit-card{
@@ -626,18 +918,18 @@ button,input,textarea{font:inherit}
   color:#fff;
   border-radius:34px;
   padding:34px;
-  box-shadow:0 35px 100px rgba(25,35,55,.22)
+  box-shadow:0 35px 100px rgba(25,35,55,.22);
 }
 
 .audit-card label{
   font-size:11px;
-  color:#9da8ba
+  color:#9da8ba;
 }
 
 .audit-form{
   display:flex;
   gap:9px;
-  margin-top:12px
+  margin-top:12px;
 }
 
 .audit-form input{
@@ -648,56 +940,64 @@ button,input,textarea{font:inherit}
   color:#fff;
   border-radius:999px;
   padding:15px 18px;
-  outline:none
+  outline:none;
 }
 
-.audit-form input:focus{border-color:#6d9aff}
+.audit-form input:focus{
+  border-color:#6d9aff;
+}
 
 .audit-status{
   min-height:22px;
   color:#aab4c4;
   font-size:11px;
-  margin-top:13px
+  margin-top:13px;
 }
 
 .audit-result{
   display:none;
   grid-template-columns:repeat(4,1fr);
   gap:8px;
-  margin-top:15px
+  margin-top:15px;
 }
 
 .score{
   padding:15px;
   border-radius:16px;
   background:#191f2a;
-  border:1px solid #303846
+  border:1px solid #303846;
 }
 
 .score small{
   display:block;
   color:#8e99aa;
   font-size:9px;
-  text-transform:uppercase
+  text-transform:uppercase;
 }
 
 .score strong{
   font:800 29px Manrope;
-  letter-spacing:-.06em
+  letter-spacing:-.06em;
 }
+
+/* =========================
+   WHY
+========================= */
 
 .why-layout{
   display:grid;
   grid-template-columns:.8fr 1.2fr;
-  gap:70px
+  gap:70px;
 }
 
-.why-layout h2{font-size:clamp(54px,7vw,96px)}
+.why-layout h2{
+  font-size:clamp(54px,7vw,96px);
+}
 
 .why-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px
+  gap:10px;
 }
 
 .why-card{
@@ -705,78 +1005,102 @@ button,input,textarea{font:inherit}
   border-radius:25px;
   border:1px solid var(--line);
   background:rgba(255,255,255,.62);
-  min-height:170px
+  min-height:170px;
 }
 
-.why-card:nth-child(2){background:#eaf8ff}
-.why-card:nth-child(3){background:#f0ecff}
-.why-card:nth-child(4){background:#eafaf4}
+.why-card:nth-child(2){
+  background:#eaf8ff;
+}
+
+.why-card:nth-child(3){
+  background:#f0ecff;
+}
+
+.why-card:nth-child(4){
+  background:#eafaf4;
+}
 
 .why-card b{
   font:700 12px Manrope;
-  color:#4a5468
+  color:#4a5468;
 }
 
 .why-card h3{
   font:700 24px Manrope;
   letter-spacing:-.05em;
-  margin:14px 0 8px
+  margin:14px 0 8px;
 }
 
 .why-card p{
   font-size:13px;
   color:#68748a;
-  margin:0
+  margin:0;
 }
+
+/* =========================
+   FAQ
+========================= */
 
 .faq-layout{
   display:grid;
   grid-template-columns:.75fr 1.25fr;
-  gap:70px
+  gap:70px;
 }
 
-.faq-layout h2{font-size:clamp(54px,7vw,94px)}
+.faq-layout h2{
+  font-size:clamp(54px,7vw,94px);
+}
 
-.faq{border-top:1px solid var(--line)}
+.faq{
+  border-top:1px solid var(--line);
+}
 
 details{
   border-bottom:1px solid var(--line);
-  padding:21px 0
+  padding:21px 0;
 }
 
 summary{
   cursor:pointer;
   font:700 20px Manrope;
   letter-spacing:-.04em;
-  list-style:none
+  list-style:none;
 }
 
-summary::-webkit-details-marker{display:none}
+summary::-webkit-details-marker{
+  display:none;
+}
 
 details p{
   max-width:700px;
   color:#68748a;
   margin:15px 0 0;
-  font-size:14px
+  font-size:14px;
 }
+
+/* =========================
+   FINAL CTA
+========================= */
 
 .final{
   background:#0e1119;
-  color:#fff
+  color:#fff;
 }
 
-.final .scene-inner{position:relative}
+.final .scene-inner{
+  position:relative;
+}
 
 .final h2{
   font-size:clamp(58px,9vw,125px);
-  max-width:1050px
+  max-width:1050px;
 }
 
 .final p{
   max-width:500px;
   color:#a6b0c0;
   font-size:18px;
-  margin:28px 0
+  margin:28px 0;
 }
 
 .final-glow{
@@ -786,17 +1110,27 @@ details p{
   border-radius:50%;
   right:-170px;
   top:-220px;
-  background:radial-gradient(circle,rgba(81,200,255,.28),rgba(139,108,255,.12) 35%,transparent 68%);
+  background:
+    radial-gradient(
+      circle,
+      rgba(81,200,255,.28),
+      rgba(139,108,255,.12) 35%,
+      transparent 68%
+    );
   filter:blur(10px);
-  pointer-events:none
+  pointer-events:none;
 }
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
   position:relative;
   background:#0e1119;
   color:#8792a4;
   padding:28px 0 45px;
-  border-top:1px solid rgba(255,255,255,.08)
+  border-top:1px solid rgba(255,255,255,.08);
 }
 
 .footer-inner{
@@ -805,37 +1139,47 @@ details p{
   display:flex;
   justify-content:space-between;
   gap:20px;
-  font-size:12px
+  font-size:12px;
 }
 
 .footer-links{
   display:flex;
-  gap:18px
+  gap:18px;
 }
 
-.footer a:hover{color:#fff}
+.footer a:hover{
+  color:#fff;
+}
+
+/* =========================
+   SCROLL ANIMATION
+========================= */
 
 .scene-wrap .scene-inner{
   transform:translate3d(0,14vh,0) scale(.96);
-  opacity:.35
+  opacity:.35;
 }
 
 .scene-wrap.is-active .scene-inner{
   transform:translate3d(0,0,0) scale(1);
-  opacity:1
+  opacity:1;
 }
 
 .scene-wrap.is-past .scene-inner{
   transform:translate3d(0,10vh,0) scale(.98);
-  opacity:.25
+  opacity:.25;
 }
+
+/* =========================
+   ARCHITECTURE BACKGROUND
+========================= */
 
 .architecture-viewport{
   position:fixed;
   inset:0;
   z-index:-1;
   pointer-events:none;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .architecture-viewport .path{
@@ -846,14 +1190,20 @@ details p{
   height:80vh;
   transform:translate(-50%,-50%);
   border-top:1px solid rgba(79,111,255,.07);
-  border-radius:50%
+  border-radius:50%;
 }
 
-.cursor-dot,.cursor-ring,.cursor-label{
+/* =========================
+   CUSTOM CURSOR
+========================= */
+
+.cursor-dot,
+.cursor-ring,
+.cursor-label{
   display:none;
   position:fixed;
   pointer-events:none;
-  z-index:300
+  z-index:300;
 }
 
 .cursor-dot{
@@ -861,7 +1211,7 @@ details p{
   height:7px;
   border-radius:50%;
   background:#10131a;
-  transform:translate(-50%,-50%)
+  transform:translate(-50%,-50%);
 }
 
 .cursor-ring{
@@ -870,27 +1220,55 @@ details p{
   border:1px solid rgba(16,19,26,.38);
   border-radius:50%;
   transform:translate(-50%,-50%);
-  transition:width .2s,height .2s
+  transition:width .2s,height .2s;
 }
 
 .cursor-label{
   font-size:9px;
   font-weight:800;
-  transform:translate(13px,13px)
+  transform:translate(13px,13px);
 }
 
 @media(min-width:900px){
-  body.cursor-enabled{cursor:none}
+
+  body.cursor-enabled{
+    cursor:none;
+  }
+
   body.cursor-enabled a,
-  body.cursor-enabled button{cursor:none}
-  .cursor-dot,.cursor-ring,.cursor-label{display:block}
+  body.cursor-enabled button{
+    cursor:none;
+  }
+
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-label{
+    display:block;
+  }
 }
 
+/* =========================
+   TABLET
+========================= */
+
 @media(max-width:1000px){
-  .navlinks{display:none}
-  .hero-copy{display:block}
-  .hero-copy p{margin-bottom:24px}
-  .hero{align-items:flex-start}
+
+  .navlinks{
+    display:none;
+  }
+
+  .hero-copy{
+    display:block;
+  }
+
+  .hero-copy p{
+    margin-bottom:24px;
+  }
+
+  .hero{
+    align-items:flex-start;
+  }
+
   .work-layout,
   .services-layout,
   .process-layout,
@@ -899,20 +1277,40 @@ details p{
   .why-layout,
   .faq-layout{
     grid-template-columns:1fr;
-    gap:38px
+    gap:38px;
   }
 
-  .portfolio-window{height:48vh}
-  .pricing{grid-template-columns:1fr}
-  .price{min-height:auto}
-  .price .btn{margin-top:25px}
-  .manifesto{grid-template-columns:1fr}
-  .metric-row{grid-template-columns:1fr 1fr}
-  .service-grid{grid-template-columns:1fr 1fr}
+  .portfolio-window{
+    height:48vh;
+  }
+
+  .pricing{
+    grid-template-columns:1fr;
+  }
+
+  .price{
+    min-height:auto;
+  }
+
+  .price .btn{
+    margin-top:25px;
+  }
+
+  .manifesto{
+    grid-template-columns:1fr;
+  }
+
+  .metric-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .service-grid{
+    grid-template-columns:1fr 1fr;
+  }
 
   .scene-wrap{
     height:auto!important;
-    overflow:visible
+    overflow:visible;
   }
 
   .scene{
@@ -922,119 +1320,177 @@ details p{
     top:auto;
     overflow:visible;
     padding:64px 0;
-    align-items:stretch
+    align-items:stretch;
   }
 
   .scene-inner{
     width:calc(100% - 32px);
     transform:none!important;
-    opacity:1!important
+    opacity:1!important;
   }
 
-  .arch,.architecture-viewport{display:none}
+  .arch,
+  .architecture-viewport{
+    display:none;
+  }
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:600px){
-  .wrap,.nav-inner,.scene-inner,.footer-inner{
-    width:calc(100% - 24px)
+
+  .wrap,
+  .nav-inner,
+  .scene-inner,
+  .footer-inner{
+    width:calc(100% - 24px);
   }
 
-  .nav{top:9px}
+  .nav{
+    top:9px;
+  }
 
   .nav-inner{
     height:50px;
-    padding-left:16px
+    padding-left:16px;
   }
 
-  .nav-cta{padding:10px 14px}
+  .nav-cta{
+    padding:10px 14px;
+  }
 
-  .scene{align-items:center}
-
-  .scene-wrap{height:138svh}
+  .scene{
+    align-items:center;
+  }
 
   .hero h1{
     font-size:clamp(54px,15vw,76px);
-    margin-top:20px
+    margin-top:20px;
   }
 
-  .hero-copy p{font-size:16px}
+  .hero-copy p{
+    font-size:16px;
+  }
 
   .portfolio-window{
     height:330px;
-    border-radius:23px
+    border-radius:23px;
   }
 
-  .portfolio-screen{border-radius:18px}
+  .portfolio-screen{
+    border-radius:18px;
+  }
 
-  .portfolio-block{padding:23px}
+  .portfolio-block{
+    padding:23px;
+  }
 
-  .portfolio-block h3{font-size:35px}
+  .portfolio-block h3{
+    font-size:35px;
+  }
 
-  .service-grid,.why-grid{grid-template-columns:1fr}
+  .service-grid,
+  .why-grid{
+    grid-template-columns:1fr;
+  }
 
-  .process-step{grid-template-columns:45px 1fr}
+  .process-step{
+    grid-template-columns:45px 1fr;
+  }
 
-  .process-step span{display:none}
+  .process-step span{
+    display:none;
+  }
 
-  .process-step h3{font-size:23px}
+  .process-step h3{
+    font-size:23px;
+  }
 
-  .process-orbit{height:310px}
+  .process-orbit{
+    height:310px;
+  }
 
   .orbit-ring{
     width:240px;
-    height:240px
+    height:240px;
   }
 
   .orbit-ring:nth-child(2){
     width:180px;
-    height:180px
+    height:180px;
   }
 
   .audit-form{
     display:grid;
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
-  .audit-form .btn{width:100%}
+  .audit-form .btn{
+    width:100%;
+  }
 
-  .audit-result{grid-template-columns:1fr 1fr}
+  .audit-result{
+    grid-template-columns:1fr 1fr;
+  }
 
   .final h2{
-    font-size:clamp(56px,15vw,78px)
+    font-size:clamp(56px,15vw,78px);
   }
 
-  .footer-inner{display:block}
+  .footer-inner{
+    display:block;
+  }
 
   .footer-links{
     margin-top:16px;
-    flex-wrap:wrap
+    flex-wrap:wrap;
   }
 
   .arch-line{
     width:150vw;
     height:150vw;
-    right:-95vw
+    right:-95vw;
   }
 
   .arch-line.two{
     width:110vw;
     height:110vw;
-    right:-65vw
+    right:-65vw;
+  }
+
+  .contact-form{
+    grid-template-columns:1fr!important;
+  }
+
+  .contact-form input,
+  .contact-form textarea{
+    grid-column:1/-1!important;
   }
 }
 
+/* =========================
+   REDUCED MOTION
+========================= */
+
 @media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
+
+  html{
+    scroll-behavior:auto;
+  }
 
   .scene-wrap .scene-inner,
   .scene-wrap.is-active .scene-inner,
   .scene-wrap.is-past .scene-inner{
     transform:none!important;
     opacity:1!important;
-    transition:none!important
+    transition:none!important;
   }
 
-  .btn{transition:none}
+  .btn{
+    transition:none;
+  }
 }
 </style>
 </head>
@@ -1051,7 +1507,10 @@ details p{
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="logo" href="#top">Web Craft.</a>
+
+    <a class="logo" href="#top">
+      Web Craft.
+    </a>
 
     <nav class="navlinks">
       <a href="#services">Services</a>
@@ -1060,20 +1519,34 @@ details p{
       <a href="#audit">Audit</a>
     </nav>
 
-    <a class="btn nav-cta magnetic" data-cursor="BOOK A CALL" href="#contact">
+    <a
+      class="btn nav-cta magnetic"
+      data-cursor="BOOK A CALL"
+      href="#contact"
+    >
       Book a Call ↗
     </a>
+
   </div>
 </header>
 
 <main id="top" class="journey">
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="scene-wrap" data-scene="hero">
+
   <div class="scene">
+
     <div class="scene-inner hero">
 
       <div class="scene-content">
-        <div class="kicker">Premium digital experiences</div>
+
+        <div class="kicker">
+          Premium digital experiences
+        </div>
 
         <h1>
           Your business deserves a
@@ -1081,6 +1554,7 @@ details p{
         </h1>
 
         <div class="hero-copy">
+
           <p>
             We design and build fast, modern websites — and the automation
             behind them — so businesses look professional, build trust,
@@ -1088,14 +1562,27 @@ details p{
           </p>
 
           <div class="actions">
-            <a class="btn magnetic" data-cursor="AUDIT" href="#audit">
+
+            <a
+              class="btn magnetic"
+              data-cursor="AUDIT"
+              href="#audit"
+            >
               Free Website Audit ↗
             </a>
+
           </div>
+
         </div>
+
       </div>
 
-      <div class="hero-stage" id="heroStage" aria-hidden="true">
+      <div
+        class="hero-stage"
+        id="heroStage"
+        aria-hidden="true"
+      >
+
         <img
           class="hero-device-image"
           src="/assets/webcraft-hero.png"
@@ -1105,13 +1592,24 @@ details p{
           loading="eager"
           decoding="async"
         >
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section class="scene-wrap scene--dark" data-scene="manifesto">
+<!-- =========================
+     MANIFESTO
+========================= -->
+
+<section
+  class="scene-wrap scene--dark"
+  data-scene="manifesto"
+>
+
   <div class="scene">
 
     <div class="arch">
@@ -1125,11 +1623,15 @@ details p{
       <div class="manifesto">
 
         <div>
-          <div class="kicker">Why this matters</div>
+
+          <div class="kicker">
+            Why this matters
+          </div>
 
           <h2>
             Good businesses can look invisible online.
           </h2>
+
         </div>
 
         <p>
@@ -1142,6 +1644,7 @@ details p{
       </div>
 
       <div class="metric-row">
+
         <div class="metric">
           <span>Clearer positioning</span>
         </div>
@@ -1153,20 +1656,36 @@ details p{
         <div class="metric">
           <span>Built for real devices</span>
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section id="services" class="scene-wrap scene--dark" data-scene="services">
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section
+  id="services"
+  class="scene-wrap scene--dark"
+  data-scene="services"
+>
+
   <div class="scene">
+
     <div class="scene-inner">
 
       <div class="services-layout">
 
         <div>
-          <div class="kicker">What we build</div>
+
+          <div class="kicker">
+            What we build
+          </div>
 
           <h2>
             The website, and the system behind it.
@@ -1176,6 +1695,7 @@ details p{
             Design, code and automation — only the capabilities needed
             to create a complete, dependable digital presence.
           </p>
+
         </div>
 
         <div class="service-grid">
@@ -1223,36 +1743,59 @@ details p{
           </div>
 
           <div class="automation">
-            <b>Business Automation</b>
+
+            <b>
+              Business Automation
+            </b>
+
             <p>
               Lead capture, qualification, follow-ups and internal workflows
               — connected directly to the website so enquiries move without
               manual chasing.
             </p>
+
           </div>
 
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section id="process" class="scene-wrap" data-scene="process">
+<!-- =========================
+     PROCESS
+========================= -->
+
+<section
+  id="process"
+  class="scene-wrap"
+  data-scene="process"
+>
+
   <div class="scene">
+
     <div class="scene-inner">
 
       <div class="process-layout">
 
         <div>
 
-          <div class="kicker">How it works</div>
+          <div class="kicker">
+            How it works
+          </div>
 
           <h2>
             Five moves. One finished experience.
           </h2>
 
-          <div class="process-orbit" aria-hidden="true">
+          <div
+            class="process-orbit"
+            aria-hidden="true"
+          >
 
             <div class="orbit-ring"></div>
             <div class="orbit-ring"></div>
@@ -1306,17 +1849,32 @@ details p{
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section id="pricing" class="scene-wrap scene--dark" data-scene="pricing">
+<!-- =========================
+     PRICING
+========================= -->
+
+<section
+  id="pricing"
+  class="scene-wrap scene--dark"
+  data-scene="pricing"
+>
+
   <div class="scene">
+
     <div class="scene-inner">
 
       <div class="pricing-layout">
 
         <div>
-          <div class="kicker">Pricing</div>
+
+          <div class="kicker">
+            Pricing
+          </div>
 
           <h2>
             Simple. Transparent.
@@ -1326,15 +1884,20 @@ details p{
             Informational pricing only. There is no online checkout or
             automated payment — projects are agreed in conversation.
           </p>
+
         </div>
 
         <div class="pricing">
 
           <article class="price">
 
-            <div class="tag">Standard</div>
+            <div class="tag">
+              Standard
+            </div>
 
-            <h3>STARTER</h3>
+            <h3>
+              STARTER
+            </h3>
 
             <div class="amount">
               $999 <small>setup</small><br>
@@ -1349,7 +1912,10 @@ details p{
               <li>2 weeks turnaround</li>
             </ul>
 
-            <a class="btn light" href="#contact">
+            <a
+              class="btn light"
+              href="#contact"
+            >
               Book a Call
             </a>
 
@@ -1357,9 +1923,13 @@ details p{
 
           <article class="price pop">
 
-            <div class="tag">Most popular</div>
+            <div class="tag">
+              Most popular
+            </div>
 
-            <h3>GROWTH</h3>
+            <h3>
+              GROWTH
+            </h3>
 
             <div class="amount">
               $1,999 <small>setup</small><br>
@@ -1374,7 +1944,10 @@ details p{
               <li>4–6 weeks turnaround</li>
             </ul>
 
-            <a class="btn light" href="#contact">
+            <a
+              class="btn light"
+              href="#contact"
+            >
               Book a Call
             </a>
 
@@ -1382,9 +1955,13 @@ details p{
 
           <article class="price">
 
-            <div class="tag">Advanced</div>
+            <div class="tag">
+              Advanced
+            </div>
 
-            <h3>PREMIUM</h3>
+            <h3>
+              PREMIUM
+            </h3>
 
             <div class="amount">
               $3,999 <small>setup</small><br>
@@ -1399,7 +1976,10 @@ details p{
               <li>Dedicated support line</li>
             </ul>
 
-            <a class="btn light" href="#contact">
+            <a
+              class="btn light"
+              href="#contact"
+            >
               Book a Call
             </a>
 
@@ -1410,18 +1990,32 @@ details p{
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section id="audit" class="scene-wrap" data-scene="audit">
+<!-- =========================
+     AUDIT
+========================= -->
+
+<section
+  id="audit"
+  class="scene-wrap"
+  data-scene="audit"
+>
+
   <div class="scene">
+
     <div class="scene-inner">
 
       <div class="audit-layout">
 
         <div>
 
-          <div class="kicker">Free Website Audit</div>
+          <div class="kicker">
+            Free Website Audit
+          </div>
 
           <h2>
             See what your website is telling visitors.
@@ -1441,7 +2035,10 @@ details p{
             PUBLIC WEBSITE URL
           </label>
 
-          <form class="audit-form" id="auditForm">
+          <form
+            class="audit-form"
+            id="auditForm"
+          >
 
             <input
               id="auditUrl"
@@ -1450,36 +2047,58 @@ details p{
               required
             >
 
-            <button class="btn light" type="submit">
+            <button
+              class="btn light"
+              type="submit"
+            >
               Analyze ↗
             </button>
 
           </form>
 
-          <div class="audit-status" id="auditStatus">
+          <div
+            class="audit-status"
+            id="auditStatus"
+          >
             Results are generated from the actual website response.
             No fabricated scores.
           </div>
 
-          <div class="audit-result" id="auditResult"></div>
+          <div
+            class="audit-result"
+            id="auditResult"
+          ></div>
 
         </div>
 
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section class="scene-wrap" data-scene="why">
+<!-- =========================
+     WHY WEB CRAFT
+========================= -->
+
+<section
+  class="scene-wrap"
+  data-scene="why"
+>
+
   <div class="scene">
+
     <div class="scene-inner">
 
       <div class="why-layout">
 
         <div>
 
-          <div class="kicker">Why Web Craft</div>
+          <div class="kicker">
+            Why Web Craft
+          </div>
 
           <h2>
             Quietly premium. Deliberately built.
@@ -1490,37 +2109,69 @@ details p{
         <div class="why-grid">
 
           <div class="why-card">
-            <b>Strategy before decoration</b>
-            <h3>Understand it quickly.</h3>
+
+            <b>
+              Strategy before decoration
+            </b>
+
+            <h3>
+              Understand it quickly.
+            </h3>
+
             <p>
               Strong hierarchy helps visitors understand what you do
               and what to do next.
             </p>
+
           </div>
 
           <div class="why-card">
-            <b>Craft in the details</b>
-            <h3>Details are part of the product.</h3>
+
+            <b>
+              Craft in the details
+            </b>
+
+            <h3>
+              Details are part of the product.
+            </h3>
+
             <p>
               Typography, spacing, states, responsiveness and transitions
               work as one system.
             </p>
+
           </div>
 
           <div class="why-card">
-            <b>No invented proof</b>
-            <h3>Honesty over hype.</h3>
+
+            <b>
+              No invented proof
+            </b>
+
+            <h3>
+              Honesty over hype.
+            </h3>
+
             <p>
               Real work and clear limitations matter more than made-up results.
             </p>
+
           </div>
 
           <div class="why-card">
-            <b>Built for growth</b>
-            <h3>Made for the long term.</h3>
+
+            <b>
+              Built for growth
+            </b>
+
+            <h3>
+              Made for the long term.
+            </h3>
+
             <p>
               Maintainable code, sensible integrations and support after launch.
             </p>
+
           </div>
 
         </div>
@@ -1528,18 +2179,31 @@ details p{
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section class="scene-wrap" data-scene="faq">
+<!-- =========================
+     FAQ
+========================= -->
+
+<section
+  class="scene-wrap"
+  data-scene="faq"
+>
+
   <div class="scene">
+
     <div class="scene-inner">
 
       <div class="faq-layout">
 
         <div>
 
-          <div class="kicker">FAQ</div>
+          <div class="kicker">
+            FAQ
+          </div>
 
           <h2>
             Questions, answered.
@@ -1550,7 +2214,10 @@ details p{
         <div class="faq">
 
           <details>
-            <summary>What does Web Craft do?</summary>
+            <summary>
+              What does Web Craft do?
+            </summary>
+
             <p>
               We design and build websites, and connect them to the automation
               a business needs — lead capture, follow-ups and internal workflows
@@ -1559,7 +2226,10 @@ details p{
           </details>
 
           <details>
-            <summary>How does a project start?</summary>
+            <summary>
+              How does a project start?
+            </summary>
+
             <p>
               Book a call or send an enquiry. We discuss your business,
               goals, scope and the right approach before any project decision.
@@ -1567,7 +2237,10 @@ details p{
           </details>
 
           <details>
-            <summary>Do you redesign existing websites?</summary>
+            <summary>
+              Do you redesign existing websites?
+            </summary>
+
             <p>
               Yes. Existing websites are reviewed first so we can identify
               what should be kept, improved, replaced or removed.
@@ -1575,7 +2248,10 @@ details p{
           </details>
 
           <details>
-            <summary>Do you provide SEO and maintenance?</summary>
+            <summary>
+              Do you provide SEO and maintenance?
+            </summary>
+
             <p>
               Yes, both are part of the service model — SEO and performance
               setup are included from Starter, with ongoing maintenance
@@ -1584,7 +2260,10 @@ details p{
           </details>
 
           <details>
-            <summary>What is business automation?</summary>
+            <summary>
+              What is business automation?
+            </summary>
+
             <p>
               Automating the repetitive parts of running a business online
               — enquiry routing, follow-ups and internal notifications —
@@ -1593,7 +2272,10 @@ details p{
           </details>
 
           <details>
-            <summary>Do you work internationally?</summary>
+            <summary>
+              Do you work internationally?
+            </summary>
+
             <p>
               Yes. Web Craft works with businesses in the US, UK,
               Australia and Canada.
@@ -1601,7 +2283,10 @@ details p{
           </details>
 
           <details>
-            <summary>How does the Free Website Audit work?</summary>
+            <summary>
+              How does the Free Website Audit work?
+            </summary>
+
             <p>
               Enter a public website URL and we review the homepage's
               structure, SEO and performance signals — then walk through
@@ -1610,7 +2295,10 @@ details p{
           </details>
 
           <details>
-            <summary>How do payments work?</summary>
+            <summary>
+              How do payments work?
+            </summary>
+
             <p>
               There is no online checkout. Pricing is agreed in conversation
               and handled directly between us.
@@ -1622,10 +2310,21 @@ details p{
       </div>
 
     </div>
+
   </div>
+
 </section>
 
-<section id="contact" class="scene-wrap final" data-scene="final">
+<!-- =========================
+     CONTACT / FINAL CTA
+========================= -->
+
+<section
+  id="contact"
+  class="scene-wrap final"
+  data-scene="final"
+>
+
   <div class="scene">
 
     <div class="final-glow"></div>
@@ -1649,21 +2348,40 @@ details p{
       <form
         class="contact-form"
         id="contactForm"
-        style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:850px"
+        style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:10px;
+          max-width:850px;
+        "
       >
 
         <input
           name="name"
           placeholder="Your name"
           required
-          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+          style="
+            border:1px solid #343b49;
+            background:#171d27;
+            color:#fff;
+            border-radius:12px;
+            padding:15px;
+            outline:none;
+          "
         >
 
         <input
           name="business"
           placeholder="Business name"
           required
-          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+          style="
+            border:1px solid #343b49;
+            background:#171d27;
+            color:#fff;
+            border-radius:12px;
+            padding:15px;
+            outline:none;
+          "
         >
 
         <input
@@ -1671,34 +2389,74 @@ details p{
           type="email"
           placeholder="Email"
           required
-          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+          style="
+            border:1px solid #343b49;
+            background:#171d27;
+            color:#fff;
+            border-radius:12px;
+            padding:15px;
+            outline:none;
+          "
         >
 
         <input
           name="phone"
           placeholder="Phone / WhatsApp"
-          style="border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+          style="
+            border:1px solid #343b49;
+            background:#171d27;
+            color:#fff;
+            border-radius:12px;
+            padding:15px;
+            outline:none;
+          "
         >
 
         <input
           name="website"
           placeholder="Current website (optional)"
-          style="grid-column:1/-1;border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+          style="
+            grid-column:1/-1;
+            border:1px solid #343b49;
+            background:#171d27;
+            color:#fff;
+            border-radius:12px;
+            padding:15px;
+            outline:none;
+          "
         >
 
         <textarea
           name="need"
           placeholder="What do you need?"
           required
-          style="grid-column:1/-1;min-height:110px;resize:vertical;border:1px solid #343b49;background:#171d27;color:#fff;border-radius:12px;padding:15px;outline:none"
+          style="
+            grid-column:1/-1;
+            min-height:110px;
+            resize:vertical;
+            border:1px solid #343b49;
+            background:#171d27;
+            color:#fff;
+            border-radius:12px;
+            padding:15px;
+            outline:none;
+          "
         ></textarea>
 
         <div
           id="contactStatus"
-          style="grid-column:1/-1;color:#aab4c4;font-size:12px;min-height:20px"
+          style="
+            grid-column:1/-1;
+            color:#aab4c4;
+            font-size:12px;
+            min-height:20px;
+          "
         ></div>
 
-        <button class="btn light magnetic" type="submit">
+        <button
+          class="btn light magnetic"
+          type="submit"
+        >
           Send Enquiry ↗
         </button>
 
@@ -1707,11 +2465,17 @@ details p{
     </div>
 
   </div>
+
 </section>
 
 </main>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer class="footer">
+
   <div class="footer-inner">
 
     <div>
@@ -1719,371 +2483,569 @@ details p{
     </div>
 
     <div class="footer-links">
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#audit">Free Website Audit</a>
-      <a href="#contact">Book a Call</a>
+
+      <a href="#services">
+        Services
+      </a>
+
+      <a href="#pricing">
+        Pricing
+      </a>
+
+      <a href="#audit">
+        Free Website Audit
+      </a>
+
+      <a href="#contact">
+        Book a Call
+      </a>
+
     </div>
 
   </div>
+
 </footer>
 
 <script>
-const $=s=>document.querySelector(s),
-$$=s=>[...document.querySelectorAll(s)];
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 
-const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-const fine=matchMedia('(pointer:fine)').matches;
+const reduce = matchMedia(
+  '(prefers-reduced-motion:reduce)'
+).matches;
 
-const scenes=$$('.scene-wrap');
+const fine = matchMedia(
+  '(pointer:fine)'
+).matches;
+
+const scenes = $$('.scene-wrap');
+
+/* =========================
+   CINEMATIC SCROLL ENGINE
+========================= */
 
 if(!reduce){
 
-  let raf=0;
+  let raf = 0;
 
-  const update=()=>{
+  const update = () => {
 
-    raf=0;
+    raf = 0;
 
-    const vh=innerHeight;
+    const vh = innerHeight;
 
-    scenes.forEach((wrap)=>{
+    scenes.forEach((wrap) => {
 
-      const r=wrap.getBoundingClientRect();
+      const r = wrap.getBoundingClientRect();
 
-      const progress=Math.min(
+      const progress = Math.min(
         1,
         Math.max(
           0,
-          (vh-r.top)/(Math.max(1,r.height-vh))
+          (vh - r.top) /
+          Math.max(1,r.height-vh)
         )
       );
 
-      const inner=wrap.querySelector('.scene-inner');
+      const inner = wrap.querySelector(
+        '.scene-inner'
+      );
 
-      const scene=
-        r.top < vh*.72 &&
-        r.bottom > vh*.28;
+      const active =
+        r.top < vh * .72 &&
+        r.bottom > vh * .28;
 
-      wrap.classList.toggle('is-active',scene);
-      wrap.classList.toggle('is-past',r.bottom<=vh*.28);
+      wrap.classList.toggle(
+        'is-active',
+        active
+      );
 
-      if(!inner)return;
+      wrap.classList.toggle(
+        'is-past',
+        r.bottom <= vh * .28
+      );
 
-      let x=0,
-          y=0,
-          scale=1,
-          opacity=1,
-          rot=0;
+      if(!inner) return;
 
-      if(progress<.34){
+      let x = 0;
+      let y = 0;
+      let scale = 1;
+      let opacity = 1;
+      let rot = 0;
 
-        const t=progress/.34;
-        const e=t*t*(3-2*t);
+      if(progress < .34){
 
-        y=(1-e)*14;
-        x=(1-e)*-3;
-        scale=.96+.04*e;
-        opacity=.35+.65*e;
-        rot=-1.2*(1-e);
+        const t = progress / .34;
 
-      }else if(progress<.72){
+        const e =
+          t * t * (3 - 2 * t);
 
-        const t=(progress-.34)/.38;
-        const e=t*t*(3-2*t);
-        const arc=Math.sin(t*Math.PI);
+        y = (1 - e) * 14;
+        x = (1 - e) * -3;
+        scale = .96 + .04 * e;
+        opacity = .35 + .65 * e;
+        rot = -1.2 * (1 - e);
 
-        x=-3*(1-e)+1.8*arc;
-        y=0;
-        scale=1;
-        opacity=1;
-        rot=-1.2*(1-e)+.6*arc;
+      }else if(progress < .72){
+
+        const t =
+          (progress - .34) / .38;
+
+        const e =
+          t * t * (3 - 2 * t);
+
+        const arc =
+          Math.sin(t * Math.PI);
+
+        x =
+          -3 * (1 - e) +
+          1.8 * arc;
+
+        y = 0;
+        scale = 1;
+        opacity = 1;
+
+        rot =
+          -1.2 * (1 - e) +
+          .6 * arc;
 
       }else{
 
-        const t=(progress-.72)/.28;
-        const e=t*t*(3-2*t);
+        const t =
+          (progress - .72) / .28;
 
-        y=14*e;
-        x=1.8*(1-e);
-        scale=1-.02*e;
-        opacity=1-.7*e;
-        rot=.6*(1-e);
+        const e =
+          t * t * (3 - 2 * t);
+
+        y = 14 * e;
+        x = 1.8 * (1 - e);
+        scale = 1 - .02 * e;
+        opacity = 1 - .7 * e;
+        rot = .6 * (1 - e);
       }
 
-      if(r.bottom<vh*.55){
+      if(r.bottom < vh * .55){
 
-        const t=Math.min(
+        const t = Math.min(
           1,
           Math.max(
             0,
-            (vh*.55-r.bottom)/(vh*.55)
+            (vh * .55 - r.bottom) /
+            (vh * .55)
           )
         );
 
-        y+=t*14;
-        opacity*=1-t*.55;
+        y += t * 14;
+        opacity *= 1 - t * .55;
       }
 
-      inner.style.transform=
+      inner.style.transform =
         `translate3d(${x}vw,${y}vh,0) scale(${scale}) rotateZ(${rot}deg)`;
 
-      inner.style.opacity=opacity;
+      inner.style.opacity = opacity;
 
     });
-
   };
 
   addEventListener(
     'scroll',
-    ()=>{
-      if(!raf)raf=requestAnimationFrame(update)
+    () => {
+
+      if(!raf){
+        raf = requestAnimationFrame(update);
+      }
+
     },
     {passive:true}
   );
 
   addEventListener(
     'resize',
-    ()=>{
-      if(!raf)raf=requestAnimationFrame(update)
+    () => {
+
+      if(!raf){
+        raf = requestAnimationFrame(update);
+      }
+
     }
   );
 
   update();
 }
 
-if(fine&&!reduce){
+/* =========================
+   CUSTOM CURSOR
+========================= */
 
-  document.body.classList.add('cursor-enabled');
+if(fine && !reduce){
 
-  const d=$('.cursor-dot'),
-        r=$('.cursor-ring'),
-        l=$('.cursor-label');
+  document.body.classList.add(
+    'cursor-enabled'
+  );
 
-  let x=innerWidth/2,
-      y=innerHeight/2,
-      rx=x,
-      ry=y;
+  const dot = $('.cursor-dot');
+  const ring = $('.cursor-ring');
+  const label = $('.cursor-label');
+
+  let x = innerWidth / 2;
+  let y = innerHeight / 2;
+
+  let rx = x;
+  let ry = y;
 
   addEventListener(
     'pointermove',
-    e=>{
-      x=e.clientX;
-      y=e.clientY;
+    e => {
 
-      d.style.left=x+'px';
-      d.style.top=y+'px';
+      x = e.clientX;
+      y = e.clientY;
 
-      l.style.left=x+'px';
-      l.style.top=y+'px';
+      dot.style.left =
+        x + 'px';
+
+      dot.style.top =
+        y + 'px';
+
+      label.style.left =
+        x + 'px';
+
+      label.style.top =
+        y + 'px';
+
     }
   );
 
   function cursorLoop(){
 
-    rx+=(x-rx)*.18;
-    ry+=(y-ry)*.18;
+    rx += (x - rx) * .18;
+    ry += (y - ry) * .18;
 
-    r.style.left=rx+'px';
-    r.style.top=ry+'px';
+    ring.style.left =
+      rx + 'px';
 
-    requestAnimationFrame(cursorLoop);
+    ring.style.top =
+      ry + 'px';
+
+    requestAnimationFrame(
+      cursorLoop
+    );
   }
 
   cursorLoop();
 
-  $$('[data-cursor]').forEach(el=>{
+  $$('[data-cursor]').forEach(el => {
 
     el.addEventListener(
       'mouseenter',
-      ()=>{
-        l.textContent=el.dataset.cursor;
-        r.style.width='48px';
-        r.style.height='48px';
+      () => {
+
+        label.textContent =
+          el.dataset.cursor;
+
+        ring.style.width =
+          '48px';
+
+        ring.style.height =
+          '48px';
+
       }
     );
 
     el.addEventListener(
       'mouseleave',
-      ()=>{
-        l.textContent='';
-        r.style.width='31px';
-        r.style.height='31px';
+      () => {
+
+        label.textContent = '';
+
+        ring.style.width =
+          '31px';
+
+        ring.style.height =
+          '31px';
+
       }
     );
 
   });
 }
 
-if(fine&&!reduce){
+/* =========================
+   MAGNETIC BUTTONS
+========================= */
 
-  $$('.magnetic').forEach(el=>{
+if(fine && !reduce){
+
+  $$('.magnetic').forEach(el => {
 
     el.addEventListener(
       'pointermove',
-      e=>{
-        const b=el.getBoundingClientRect();
+      e => {
 
-        el.style.transform=
-          `translate(${(e.clientX-(b.left+b.width/2))*.08}px,${(e.clientY-(b.top+b.height/2))*.08}px)`;
+        const b =
+          el.getBoundingClientRect();
+
+        el.style.transform =
+          `translate(${
+            (e.clientX -
+            (b.left + b.width / 2)) * .08
+          }px,${
+            (e.clientY -
+            (b.top + b.height / 2)) * .08
+          }px)`;
+
       }
     );
 
     el.addEventListener(
       'pointerleave',
-      ()=>el.style.transform=''
+      () => {
+
+        el.style.transform = '';
+
+      }
     );
 
   });
 }
 
-function normalizeUrl(v){
+/* =========================
+   URL NORMALIZATION
+========================= */
 
-  v=v.trim();
+function normalizeUrl(value){
 
-  return /^https?:\/\//i.test(v)
-    ?v
-    :'https://'+v;
+  value = value.trim();
+
+  return /^https?:\/\//i.test(value)
+    ? value
+    : 'https://' + value;
 }
 
-$('#auditForm').addEventListener(
-  'submit',
-  async e=>{
+/* =========================
+   WEBSITE AUDIT
+========================= */
 
-    e.preventDefault();
+const auditForm = $('#auditForm');
 
-    const input=$('#auditUrl');
-    const status=$('#auditStatus');
-    const out=$('#auditResult');
-    const btn=e.submitter;
+if(auditForm){
 
-    const url=normalizeUrl(input.value);
+  auditForm.addEventListener(
+    'submit',
+    async e => {
 
-    btn.disabled=true;
-    btn.textContent='Analyzing…';
+      e.preventDefault();
 
-    out.style.display='none';
+      const input =
+        $('#auditUrl');
 
-    status.textContent=
-      'Fetching the public website and checking available signals…';
+      const status =
+        $('#auditStatus');
 
-    try{
+      const out =
+        $('#auditResult');
 
-      const res=await fetch(
-        '/.netlify/functions/audit',
-        {
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify({url})
+      const btn =
+        e.submitter;
+
+      const url =
+        normalizeUrl(input.value);
+
+      btn.disabled = true;
+      btn.textContent =
+        'Analyzing…';
+
+      out.style.display =
+        'none';
+
+      status.textContent =
+        'Fetching the public website and checking available signals…';
+
+      try{
+
+        const res =
+          await fetch(
+            '/.netlify/functions/audit',
+            {
+              method:'POST',
+
+              headers:{
+                'Content-Type':
+                  'application/json'
+              },
+
+              body:
+                JSON.stringify({
+                  url
+                })
+            }
+          );
+
+        const data =
+          await res.json();
+
+        if(
+          !res.ok ||
+          !data.success
+        ){
+
+          throw new Error(
+            data.error ||
+            'The website could not be analyzed.'
+          );
+
         }
-      );
 
-      const data=await res.json();
+        const scores =
+          data.scores || {};
 
-      if(!res.ok||!data.success)
-        throw new Error(
-          data.error||
-          'The website could not be analyzed.'
-        );
+        out.innerHTML =
+          Object.entries(scores)
+            .map(
+              ([key,value]) => {
 
-      const scores=data.scores||{};
+                const label =
+                  key.replace(
+                    /([A-Z])/g,
+                    ' $1'
+                  );
 
-      out.innerHTML=
-        Object.entries(scores)
-          .map(
-            ([k,v])=>
-              `<div class="score">
-                <small>${k.replace(/([A-Z])/g,' $1')}</small>
-                <strong>${typeof v==='number'?Math.round(v):'—'}</strong>
-                <small>/ 100</small>
-              </div>`
-          )
-          .join('');
+                const score =
+                  typeof value === 'number'
+                    ? Math.round(value)
+                    : '—';
 
-      out.style.display='grid';
+                return `
+                  <div class="score">
+                    <small>${label}</small>
+                    <strong>${score}</strong>
+                    <small>/ 100</small>
+                  </div>
+                `;
 
-      status.textContent=
-        data.insufficientData
-          ?'Review completed with limited public data.'
-          :'Review completed from the website response.';
+              }
+            )
+            .join('');
 
-    }catch(err){
+        out.style.display =
+          'grid';
 
-      status.textContent=
-        err.message||
-        'We could not complete the review. Please check the URL and try again.';
+        status.textContent =
+          data.insufficientData
+            ? 'Review completed with limited public data.'
+            : 'Review completed from the website response.';
 
-    }finally{
+      }catch(err){
 
-      btn.disabled=false;
-      btn.textContent='Analyze ↗';
-    }
+        status.textContent =
+          err.message ||
+          'We could not complete the review. Please check the URL and try again.';
 
-  }
-);
+      }finally{
 
-$('#contactForm').addEventListener(
-  'submit',
-  async e=>{
+        btn.disabled = false;
 
-    e.preventDefault();
+        btn.textContent =
+          'Analyze ↗';
 
-    const form=e.currentTarget;
-    const status=$('#contactStatus');
-    const btn=form.querySelector('button');
-
-    btn.disabled=true;
-    status.textContent='Sending…';
-
-    const payload=
-      Object.fromEntries(
-        new FormData(form)
-      );
-
-    try{
-
-      const res=await fetch(
-        '/.netlify/functions/contact',
-        {
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify(payload)
-        }
-      );
-
-      const data=await res.json();
-
-      if(!res.ok||!data.success)
-        throw new Error(
-          data.message||
-          data.error||
-          'We could not send the enquiry.'
-        );
-
-      status.textContent=
-        'Thanks — your enquiry was sent. We’ll be in touch.';
-
-      form.reset();
-
-    }catch(err){
-
-      status.textContent=
-        err.message||
-        'Something went wrong. Please try again.';
-
-    }finally{
-
-      btn.disabled=false;
+      }
 
     }
+  );
+}
 
-  }
-);
+/* =========================
+   CONTACT FORM
+========================= */
+
+const contactForm =
+  $('#contactForm');
+
+if(contactForm){
+
+  contactForm.addEventListener(
+    'submit',
+    async e => {
+
+      e.preventDefault();
+
+      const form =
+        e.currentTarget;
+
+      const status =
+        $('#contactStatus');
+
+      const btn =
+        form.querySelector(
+          'button'
+        );
+
+      btn.disabled = true;
+
+      status.textContent =
+        'Sending…';
+
+      const payload =
+        Object.fromEntries(
+          new FormData(form)
+        );
+
+      try{
+
+        const res =
+          await fetch(
+            '/.netlify/functions/contact',
+            {
+              method:'POST',
+
+              headers:{
+                'Content-Type':
+                  'application/json'
+              },
+
+              body:
+                JSON.stringify(
+                  payload
+                )
+            }
+          );
+
+        const data =
+          await res.json();
+
+        if(
+          !res.ok ||
+          !data.success
+        ){
+
+          throw new Error(
+            data.message ||
+            data.error ||
+            'We could not send the enquiry.'
+          );
+
+        }
+
+        status.textContent =
+          'Thanks — your enquiry was sent. We’ll be in touch.';
+
+        form.reset();
+
+      }catch(err){
+
+        status.textContent =
+          err.message ||
+          'Something went wrong. Please try again.';
+
+      }finally{
+
+        btn.disabled = false;
+
+      }
+
+    }
+  );
+}
 </script>
 
 </body>
-     </html>
+  </html>
