@@ -19,10 +19,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- IMPORTANT:
-     Three.js uses the bare module name "three" internally.
-     This import map allows GLTFLoader.js to resolve it correctly
-     when loaded directly in the browser. -->
 <script type="importmap">
 {
   "imports": {
@@ -1102,7 +1098,7 @@ details p{
       <div class="hero-stage" id="heroStage" aria-hidden="true">
         <img
           class="hero-device-image"
-          src="/assets/webcraft-hero.webp"
+          src="/assets/webcraft-hero.png"
           alt=""
           width="780"
           height="1020"
@@ -1739,9 +1735,6 @@ $$=s=>[...document.querySelectorAll(s)];
 const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const fine=matchMedia('(pointer:fine)').matches;
 
-/* Signature architecture:
-   mostly vertical travel, with one short rounded lateral arc at each scene hand-off. */
-
 const scenes=$$('.scene-wrap');
 
 if(!reduce){
@@ -1858,8 +1851,6 @@ if(!reduce){
 
   update();
 }
-
-/* Desktop cursor, never active on touch. */
 
 if(fine&&!reduce){
 
@@ -2094,7 +2085,5 @@ $('#contactForm').addEventListener(
 );
 </script>
 
-
-
 </body>
-</html>
+     </html>
