@@ -253,9 +253,9 @@ img{
   margin:auto;
 
   /*
-    IMPORTANT:
-    No scale / rotation / 3D transform here.
-    This keeps text and UI sharp.
+    CRISP MODE:
+    Never scale or rotate the container.
+    This prevents text from becoming soft.
   */
   transform:translateY(42px);
   opacity:.45;
@@ -470,10 +470,6 @@ img{
   object-fit:contain;
   object-position:center;
 
-  /*
-    Controlled shadow.
-    Avoid excessive blur around the actual device.
-  */
   filter:
     drop-shadow(
       0 30px 48px rgba(0,0,0,.30)
@@ -486,6 +482,11 @@ img{
 
   user-select:none;
   -webkit-user-drag:none;
+
+  /*
+    Prevent unnecessary compositor tricks.
+  */
+  backface-visibility:visible;
 }
 
 /* =========================================================
@@ -650,7 +651,7 @@ img{
 }
 
 /* =========================================================
-   SERVICES
+   SERVICES — PREMIUM HIGH CLARITY SYSTEM
 ========================================================= */
 
 .services-layout{
@@ -668,93 +669,206 @@ img{
 .services-layout>div>p{
   color:#a5afc0;
   max-width:340px;
-  font-size:16px;
-  line-height:1.6;
+  font-size:17px;
+  line-height:1.65;
 }
+
+/*
+  One restrained surface instead of six competing colors.
+  This makes the section feel like one premium system.
+*/
 
 .service-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:1px;
 
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.09);
   background:rgba(255,255,255,.10);
 
   border-radius:28px;
   overflow:hidden;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.16);
 }
 
+/* Individual service */
+
 .service{
-  min-height:185px;
+  position:relative;
 
-  background:rgba(255,255,255,.055);
+  min-height:215px;
 
-  padding:26px;
+  padding:30px 27px 29px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.065),
+      rgba(255,255,255,.035)
+    );
+
+  color:#fff;
 
   transition:
-    background .3s ease,
-    transform .3s var(--ease);
+    background .28s ease,
+    box-shadow .28s ease;
+}
+
+/*
+  Explicitly remove the old rainbow treatment.
+*/
+
+.service:nth-child(1),
+.service:nth-child(2),
+.service:nth-child(3),
+.service:nth-child(4),
+.service:nth-child(5),
+.service:nth-child(6){
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.065),
+      rgba(255,255,255,.035)
+    );
 }
 
 .service:hover{
-  background:rgba(255,255,255,.09);
-  transform:translateY(-2px);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(91,120,255,.105),
+      rgba(255,255,255,.045)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07);
 }
 
-.service:nth-child(2){
-  background:rgba(81,200,255,.08);
+/*
+  Small Web Craft accent.
+  Deliberately not a huge glow.
+*/
+
+.service:before{
+  content:"";
+
+  display:block;
+
+  width:32px;
+  height:3px;
+
+  margin-bottom:25px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5b78ff,
+      #55cdfc
+    );
 }
 
-.service:nth-child(3){
-  background:rgba(139,108,255,.08);
-}
-
-.service:nth-child(4){
-  background:rgba(101,217,176,.07);
-}
-
-.service:nth-child(5){
-  background:rgba(255,190,110,.06);
-}
-
-.service:nth-child(6){
-  background:rgba(100,130,255,.07);
-}
+/* Service title */
 
 .service h3{
-  font:700 21px Manrope,sans-serif;
-  letter-spacing:-.05em;
-  margin:0 0 10px;
+  margin:0 0 13px;
+
+  font:750 23px/1.2 Manrope,sans-serif;
+
+  letter-spacing:-.035em;
+
+  color:#f7f9ff;
 }
+
+/* Service description */
 
 .service p{
   margin:0;
-  color:#9da8ba;
-  font-size:12.5px;
-  line-height:1.6;
+
+  max-width:340px;
+
+  color:#b8c1d0;
+
+  font-family:'DM Sans',sans-serif;
+
+  font-size:17px;
+  line-height:1.62;
+
+  font-weight:400;
+
+  letter-spacing:-.005em;
 }
 
+/*
+  Business Automation gets its own premium row.
+*/
+
 .automation{
-  background:rgba(255,255,255,.055);
-
-  border-top:1px solid rgba(255,255,255,.08);
-
-  padding:27px;
+  position:relative;
 
   grid-column:1/-1;
+
+  padding:30px 29px 31px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(91,120,255,.115),
+      rgba(85,205,252,.055) 48%,
+      rgba(255,255,255,.04)
+    );
+
+  border-top:1px solid rgba(255,255,255,.10);
+}
+
+.automation:before{
+  content:"";
+
+  display:block;
+
+  width:50px;
+  height:3px;
+
+  margin-bottom:20px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5b78ff,
+      #55cdfc
+    );
 }
 
 .automation b{
-  font:700 15px Manrope,sans-serif;
-  letter-spacing:-.02em;
+  display:block;
+
+  margin-bottom:10px;
+
+  font:750 23px/1.2 Manrope,sans-serif;
+
+  letter-spacing:-.035em;
+
+  color:#f8faff;
 }
 
 .automation p{
-  margin:6px 0 0;
-  color:#9da8ba;
-  font-size:13px;
-  line-height:1.6;
-  max-width:640px;
+  margin:0;
+
+  max-width:760px;
+
+  color:#c0c9d7;
+
+  font-family:'DM Sans',sans-serif;
+
+  font-size:17px;
+  line-height:1.65;
+
+  font-weight:400;
 }
 
 /* =========================================================
@@ -1570,12 +1684,15 @@ details p{
   }
 
   .service-grid{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .service{
+    min-height:205px;
   }
 
   /*
-    Mobile/tablet deliberately becomes normal document flow.
-    No sticky transformed scenes.
+    Tablet/mobile uses normal document flow.
   */
 
   .scene-wrap{
@@ -1708,6 +1825,40 @@ details p{
     grid-template-columns:1fr;
   }
 
+  .service{
+    min-height:auto;
+    padding:27px 23px 28px;
+  }
+
+  .service:before{
+    width:30px;
+    margin-bottom:21px;
+  }
+
+  .service h3{
+    margin-bottom:11px;
+    font-size:21px;
+    line-height:1.25;
+  }
+
+  .service p{
+    font-size:16.5px;
+    line-height:1.62;
+  }
+
+  .automation{
+    padding:28px 23px 29px;
+  }
+
+  .automation b{
+    font-size:21px;
+  }
+
+  .automation p{
+    font-size:16.5px;
+    line-height:1.62;
+  }
+
   .process-step{
     grid-template-columns:45px 1fr;
   }
@@ -1818,6 +1969,10 @@ details p{
   .btn{
     transition:none;
   }
+
+  .service{
+    transition:none;
+  }
 }
 </style>
 </head>
@@ -1859,9 +2014,7 @@ details p{
 
 <main id="top" class="journey">
 
-<!-- =======================================================
-     HERO
-======================================================= -->
+<!-- HERO -->
 
 <section class="scene-wrap" data-scene="hero">
 
@@ -1917,6 +2070,7 @@ details p{
           width="780"
           height="1020"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         >
 
@@ -1928,9 +2082,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     MANIFESTO
-======================================================= -->
+<!-- MANIFESTO -->
 
 <section
   class="scene-wrap scene--dark"
@@ -1992,9 +2144,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     SERVICES
-======================================================= -->
+<!-- SERVICES -->
 
 <section
   id="services"
@@ -2049,7 +2199,7 @@ details p{
           </div>
 
           <div class="service">
-            <h3>SEO & Performance</h3>
+            <h3>SEO &amp; Performance</h3>
             <p>
               Technical foundations for discoverability, speed and better experiences.
             </p>
@@ -2093,9 +2243,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     PROCESS
-======================================================= -->
+<!-- PROCESS -->
 
 <section
   id="process"
@@ -2181,9 +2329,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     PRICING
-======================================================= -->
+<!-- PRICING -->
 
 <section
   id="pricing"
@@ -2234,8 +2380,8 @@ details p{
             <ul>
               <li>Up to 6 pages</li>
               <li>Custom design system</li>
-              <li>SEO & performance setup</li>
-              <li>Hosting & monitoring included</li>
+              <li>SEO &amp; performance setup</li>
+              <li>Hosting &amp; monitoring included</li>
               <li>2 weeks turnaround</li>
             </ul>
 
@@ -2266,8 +2412,8 @@ details p{
             <ul>
               <li>Unlimited pages</li>
               <li>CMS-driven content</li>
-              <li>Booking, forms & integrations</li>
-              <li>Priority support & updates</li>
+              <li>Booking, forms &amp; integrations</li>
+              <li>Priority support &amp; updates</li>
               <li>4–6 weeks turnaround</li>
             </ul>
 
@@ -2297,7 +2443,7 @@ details p{
 
             <ul>
               <li>Everything in Growth</li>
-              <li>Business automation & workflows</li>
+              <li>Business automation &amp; workflows</li>
               <li>Admin dashboard</li>
               <li>Database/API integrations</li>
               <li>Dedicated support line</li>
@@ -2322,9 +2468,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     AUDIT
-======================================================= -->
+<!-- AUDIT -->
 
 <section
   id="audit"
@@ -2406,9 +2550,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     WHY WEB CRAFT
-======================================================= -->
+<!-- WHY WEB CRAFT -->
 
 <section
   class="scene-wrap"
@@ -2511,9 +2653,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     FAQ
-======================================================= -->
+<!-- FAQ -->
 
 <section
   class="scene-wrap"
@@ -2642,9 +2782,7 @@ details p{
 
 </section>
 
-<!-- =======================================================
-     FINAL CTA / CONTACT
-======================================================= -->
+<!-- FINAL CTA / CONTACT -->
 
 <section
   id="contact"
@@ -2797,9 +2935,7 @@ details p{
 
 </main>
 
-<!-- =======================================================
-     FOOTER
-======================================================= -->
+<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -2850,18 +2986,10 @@ const scenes = $$('.scene-wrap');
 /* =========================================================
    CRISP CINEMATIC SCROLL ENGINE
 
-   IMPORTANT:
-   The old engine continuously changed:
-   - scale
-   - rotation
-   - vw translation
-   - vh translation
-
-   That caused the browser to repeatedly rasterize large
-   text blocks and could make the page look soft.
-
-   This version uses ONLY a small vertical translation
-   and opacity.
+   No scale.
+   No rotation.
+   No horizontal transforms.
+   Only subtle vertical movement + opacity.
 ========================================================= */
 
 if(!reduce){
@@ -2910,13 +3038,6 @@ if(!reduce){
 
       if(!inner) return;
 
-      /*
-        Keep movement extremely small.
-        No scale.
-        No rotation.
-        No horizontal transform.
-      */
-
       let y = 0;
       let opacity = 1;
 
@@ -2953,10 +3074,6 @@ if(!reduce){
         opacity =
           1 - (.55 * e);
       }
-
-      /*
-        Small additional exit fade.
-      */
 
       if(r.bottom < vh * .55){
 
