@@ -651,7 +651,7 @@ img{
 }
 
 /* =========================================================
-   SERVICES — PREMIUM HIGH CLARITY SYSTEM
+   SERVICES — PREMIUM HIGH VISIBILITY
 ========================================================= */
 
 .services-layout{
@@ -673,155 +673,139 @@ img{
   line-height:1.65;
 }
 
-/*
-  One restrained surface instead of six competing colors.
-  This makes the section feel like one premium system.
-*/
+/* Bright, readable service palette */
 
 .service-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:1px;
 
-  border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.10);
+  border:1px solid rgba(15,23,42,.22);
+  background:#0e1119;
 
   border-radius:28px;
   overflow:hidden;
 
   box-shadow:
-    0 25px 70px rgba(0,0,0,.16);
+    0 25px 70px rgba(0,0,0,.18);
 }
-
-/* Individual service */
 
 .service{
   position:relative;
 
-  min-height:215px;
+  min-height:225px;
 
-  padding:30px 27px 29px;
+  padding:32px 28px 31px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.065),
-      rgba(255,255,255,.035)
-    );
-
-  color:#fff;
+  color:#111827;
 
   transition:
     background .28s ease,
-    box-shadow .28s ease;
+    box-shadow .28s ease,
+    transform .28s var(--ease);
 }
 
-/*
-  Explicitly remove the old rainbow treatment.
-*/
+/* Clearly visible pastel sequence */
 
-.service:nth-child(1),
-.service:nth-child(2),
-.service:nth-child(3),
-.service:nth-child(4),
-.service:nth-child(5),
+.service:nth-child(1){
+  background:#d9ebff;
+}
+
+.service:nth-child(2){
+  background:#d4f3ff;
+}
+
+.service:nth-child(3){
+  background:#e4dcff;
+}
+
+.service:nth-child(4){
+  background:#d7f4e8;
+}
+
+.service:nth-child(5){
+  background:#ffebca;
+}
+
 .service:nth-child(6){
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.065),
-      rgba(255,255,255,.035)
-    );
+  background:#dedfff;
 }
 
 .service:hover{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(91,120,255,.105),
-      rgba(255,255,255,.045)
-    );
-
+  background:#f5f8ff;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.07);
+    inset 0 0 0 2px rgba(79,111,255,.16);
 }
 
-/*
-  Small Web Craft accent.
-  Deliberately not a huge glow.
-*/
+/* Accent */
 
 .service:before{
   content:"";
 
   display:block;
 
-  width:32px;
-  height:3px;
+  width:42px;
+  height:4px;
 
-  margin-bottom:25px;
+  margin-bottom:24px;
 
   border-radius:999px;
 
   background:
     linear-gradient(
       90deg,
-      #5b78ff,
+      #4f6fff,
       #55cdfc
     );
 }
 
-/* Service title */
-
 .service h3{
-  margin:0 0 13px;
+  margin:0 0 14px;
 
-  font:750 23px/1.2 Manrope,sans-serif;
+  font:800 26px/1.18 Manrope,sans-serif;
 
-  letter-spacing:-.035em;
+  letter-spacing:-.045em;
 
-  color:#f7f9ff;
+  color:#111827;
 }
-
-/* Service description */
 
 .service p{
   margin:0;
 
-  max-width:340px;
+  max-width:390px;
 
-  color:#b8c1d0;
+  color:#425066;
 
   font-family:'DM Sans',sans-serif;
 
-  font-size:17px;
-  line-height:1.62;
+  font-size:18px;
+  line-height:1.55;
 
-  font-weight:400;
+  font-weight:500;
 
   letter-spacing:-.005em;
 }
 
-/*
-  Business Automation gets its own premium row.
-*/
+/* Business Automation */
 
 .automation{
   position:relative;
 
   grid-column:1/-1;
 
-  padding:30px 29px 31px;
+  padding:32px 30px 33px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(91,120,255,.115),
-      rgba(85,205,252,.055) 48%,
-      rgba(255,255,255,.04)
+      #151c2b 0%,
+      #101827 55%,
+      #17223a 100%
     );
 
-  border-top:1px solid rgba(255,255,255,.10);
+  border-top:1px solid rgba(255,255,255,.12);
+
+  color:#fff;
 }
 
 .automation:before{
@@ -830,7 +814,7 @@ img{
   display:block;
 
   width:50px;
-  height:3px;
+  height:4px;
 
   margin-bottom:20px;
 
@@ -849,11 +833,11 @@ img{
 
   margin-bottom:10px;
 
-  font:750 23px/1.2 Manrope,sans-serif;
+  font:800 26px/1.2 Manrope,sans-serif;
 
-  letter-spacing:-.035em;
+  letter-spacing:-.045em;
 
-  color:#f8faff;
+  color:#fff;
 }
 
 .automation p{
@@ -861,16 +845,16 @@ img{
 
   max-width:760px;
 
-  color:#c0c9d7;
+  color:#cbd5e1;
 
   font-family:'DM Sans',sans-serif;
 
-  font-size:17px;
-  line-height:1.65;
+  font-size:18px;
+  line-height:1.58;
 
-  font-weight:400;
+  font-weight:500;
 }
-
+ 
 /* =========================================================
    PROCESS
 ========================================================= */
