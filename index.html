@@ -1950,56 +1950,47 @@ details p{
 ========================================================= */
 
 .contact-form{
-  max-width:850px;
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:10px;
-}
-
-.contact-form{
   position:relative;
-  z-index:20;
+  z-index:50;
+  isolation:isolate;
 }
 
 .contact-form input,
 .contact-form textarea{
   width:100%;
-  padding:15px;
-
   min-width:0;
   min-height:50px;
-
   display:block;
-  position:relative;
-  z-index:21;
 
-  appearance:none;
-  -webkit-appearance:none;
+  padding:15px;
 
-  background:#ffffff !important;
-  color:#111827 !important;
-  -webkit-text-fill-color:#111827 !important;
-  caret-color:#111827 !important;
-  opacity:1 !important;
+  font-family:"DM Sans",sans-serif;
+  font-size:16px;
+  font-weight:400;
+  line-height:1.4;
 
-  font-size:16px !important;
-  line-height:1.4 !important;
+  background:#ffffff;
+  color:#111827;
+  -webkit-text-fill-color:#111827;
+  caret-color:#111827;
 
-  -webkit-user-select:text !important;
-  user-select:text !important;
-  -webkit-touch-callout:default !important;
+  opacity:1;
+  visibility:visible;
+
+  appearance:auto;
+  -webkit-appearance:auto;
 
   border:1px solid #343b49;
   border-radius:12px;
-
   outline:none;
+
+  -webkit-user-select:text;
+  user-select:text;
+  -webkit-touch-callout:default;
 
   transition:
     border-color .25s ease,
-    box-shadow .25s ease; 
+    box-shadow .25s ease;
 }
 
 .contact-form input:focus,
@@ -2321,6 +2312,11 @@ details p{
 ========================================================= */
 
 @media(max-width:600px){
+
+  .final .scene-inner{
+    transform:none !important;
+    opacity:1 !important;
+  }
 
   /* Keep mobile form text visible and prevent browser input auto-zoom. */
   .contact-form input,
@@ -4894,19 +4890,7 @@ if(contactForm){
 }
 
 
-/* =========================================================
-   CONTACT INPUT RENDERING
-========================================================= */
-
-$(".contact-form input, .contact-form textarea").forEach(
-  field => {
-    field.style.setProperty("color", "#111827", "important");
-    field.style.setProperty("-webkit-text-fill-color", "#111827", "important");
-    field.style.setProperty("caret-color", "#111827", "important");
-    field.style.setProperty("opacity", "1", "important");
-  }
-);
-
+/* Contact inputs intentionally use native browser editing behavior. */
 
 /* =========================================================
    COPY / SELECTION PROTECTION
