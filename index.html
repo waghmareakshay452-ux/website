@@ -4,40 +4,98 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Web Craft — Premium Websites for Ambitious Businesses</title>
-<meta name="description" content="Web Craft designs and builds premium, fast and trustworthy websites — plus the automation behind them — for businesses that want a stronger digital presence.">
-<link rel="canonical" href="https://webcraft-audit.netlify.app/">
+<title>Web Craft — Websites & Automation That Generate Enquiries</title>
 
-<meta property="og:title" content="Web Craft — Premium Websites for Ambitious Businesses">
-<meta property="og:description" content="Premium website design, development and business automation, built around clarity, trust and better customer experiences.">
+<meta
+  name="description"
+  content="Web Craft builds premium websites and business automation systems that help businesses turn visitors into enquiries."
+>
+
+<meta name="robots" content="index,follow">
+
+<link
+  rel="canonical"
+  href="https://webcraft-audit.netlify.app/"
+>
+
+<meta
+  property="og:title"
+  content="Web Craft — Websites & Automation That Generate Enquiries"
+>
+
+<meta
+  property="og:description"
+  content="Premium websites and business automation systems built to turn visitors into enquiries."
+>
+
+<meta
+  property="og:image"
+  content="https://webcraft-audit.netlify.app/assets/webcraft-hero.png"
+>
+
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://webcraft-audit.netlify.app/">
 
-<meta name="theme-color" content="#0b0e15">
+<meta
+  property="og:url"
+  content="https://webcraft-audit.netlify.app/"
+>
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta
+  name="twitter:title"
+  content="Web Craft — Websites & Automation That Generate Enquiries"
+>
+
+<meta
+  name="twitter:description"
+  content="Premium websites and business automation systems built to turn visitors into enquiries."
+>
+
+<meta
+  name="twitter:image"
+  content="https://webcraft-audit.netlify.app/assets/webcraft-hero.png"
+>
+
+<link rel="icon" href="/favicon.ico">
+
+<meta name="theme-color" content="#05070b">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+  rel="stylesheet"
+>
 
 <style>
+
+/* =========================================================
+   FOUNDATION
+========================================================= */
+
 :root{
-  --bg:#f5f7fb;
-  --ink:#10131a;
-  --muted:#667085;
-  --muted-2:#8993a5;
-  --line:rgba(16,19,26,.10);
+  --bg:#f7f9fc;
   --white:#fff;
 
-  --blue:#5b78ff;
-  --cyan:#55cdfc;
-  --violet:#9277ff;
-  --green:#65d9b0;
+  --ink:#05070b;
+  --muted:#536074;
+  --muted-2:#748096;
 
-  --dark:#0b0e15;
-  --dark-2:#101521;
-  --dark-line:rgba(255,255,255,.10);
+  --line:rgba(5,7,11,.11);
+
+  --blue:#1f6fff;
+  --cyan:#00c8f5;
+  --violet:#7657ff;
+  --green:#16b989;
+
+  --dark:#05070b;
+  --dark-2:#0b1018;
+  --dark-3:#101927;
 
   --max:1280px;
+
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 
@@ -46,31 +104,49 @@
 }
 
 html{
+  scroll-behavior:smooth;
   background:var(--bg);
-  scroll-behavior:auto;
 }
 
 body{
   margin:0;
-  background:var(--bg);
+  overflow-x:hidden;
+
   color:var(--ink);
-  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+
+  font-family:"DM Sans",sans-serif;
   line-height:1.5;
+
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
-  overflow-x:hidden;
 }
 
-body:before{
+body::before{
   content:"";
+
   position:fixed;
   inset:0;
-  z-index:-2;
+
+  z-index:-5;
   pointer-events:none;
+
   background:
-    radial-gradient(circle at 12% 12%,rgba(81,200,255,.12),transparent 27%),
-    radial-gradient(circle at 88% 25%,rgba(139,108,255,.10),transparent 29%),
-    linear-gradient(180deg,#fafbff 0%,#f1f4fa 100%);
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(31,111,255,.07),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(0,200,245,.055),
+      transparent 29%
+    ),
+    linear-gradient(
+      180deg,
+      #fff 0%,
+      #f7f9fc 100%
+    );
 }
 
 a{
@@ -97,21 +173,25 @@ img{
   margin:auto;
 }
 
+
 /* =========================================================
-   NAVIGATION
+   NAV
 ========================================================= */
 
 .nav{
   position:fixed;
-  z-index:100;
+
   top:16px;
   left:0;
   right:0;
+
+  z-index:100;
 }
 
 .nav-inner{
   width:min(calc(100% - 40px),var(--max));
-  height:58px;
+  height:60px;
+
   margin:auto;
   padding:0 10px 0 20px;
 
@@ -119,46 +199,54 @@ img{
   align-items:center;
   justify-content:space-between;
 
-  border:1px solid rgba(255,255,255,.78);
-  background:rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:999px;
 
-  backdrop-filter:blur(18px) saturate(140%);
-  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  background:rgba(255,255,255,.88);
+
+  backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);
 
   box-shadow:
-    0 10px 35px rgba(30,40,65,.07),
-    inset 0 1px 0 rgba(255,255,255,.9);
-
-  border-radius:999px;
+    0 12px 40px rgba(20,35,65,.09),
+    inset 0 1px 0 rgba(255,255,255,.95);
 }
 
 .logo{
   font-family:Manrope,sans-serif;
-  font-weight:800;
   font-size:20px;
+  font-weight:800;
   letter-spacing:-.06em;
 }
 
 .navlinks{
   display:flex;
-  gap:27px;
+  align-items:center;
+  gap:25px;
+
+  color:#4b5563;
+
   font-size:13px;
-  color:#555e70;
+  font-weight:600;
 }
 
 .navlinks a{
   position:relative;
-  transition:color .25s ease;
 }
 
-.navlinks a:after{
+.navlinks a::after{
   content:"";
+
   position:absolute;
+
   left:0;
   right:100%;
   bottom:-5px;
+
   height:1px;
-  background:var(--ink);
+
+  background:var(--blue);
+
   transition:right .25s var(--ease);
 }
 
@@ -166,9 +254,10 @@ img{
   color:var(--ink);
 }
 
-.navlinks a:hover:after{
+.navlinks a:hover::after{
   right:0;
 }
+
 
 /* =========================================================
    BUTTONS
@@ -182,26 +271,29 @@ img{
 
   min-height:46px;
 
+  padding:12px 19px;
+
   border:1px solid var(--ink);
+  border-radius:999px;
+
   background:var(--ink);
   color:#fff;
-
-  border-radius:999px;
-  padding:12px 19px;
 
   font-size:13px;
   font-weight:700;
 
   transition:
-    transform .35s var(--ease),
-    box-shadow .35s var(--ease),
+    transform .3s var(--ease),
+    box-shadow .3s var(--ease),
     background .25s ease,
     border-color .25s ease;
 }
 
 .btn:hover{
   transform:translateY(-2px);
-  box-shadow:0 14px 34px rgba(16,19,26,.16);
+
+  box-shadow:
+    0 15px 35px rgba(5,7,11,.18);
 }
 
 .btn:disabled{
@@ -211,19 +303,20 @@ img{
 }
 
 .btn.secondary{
-  background:rgba(255,255,255,.58);
   color:var(--ink);
-  border-color:var(--line);
+  background:#fff;
+  border-color:rgba(5,7,11,.14);
 }
 
 .btn.light{
-  background:#fff;
   color:var(--ink);
+  background:#fff;
   border-color:#fff;
 }
 
+
 /* =========================================================
-   MAIN JOURNEY
+   PAGE JOURNEY
 ========================================================= */
 
 .journey{
@@ -231,38 +324,37 @@ img{
 }
 
 .scene-wrap{
-  height:150svh;
   position:relative;
+
+  min-height:100svh;
+
+  overflow:hidden;
 }
 
 .scene{
-  height:100svh;
-  width:100%;
-  position:sticky;
-  top:0;
+  position:relative;
+
+  min-height:100svh;
 
   display:flex;
   align-items:center;
 
   overflow:hidden;
-  isolation:isolate;
 }
 
 .scene-inner{
+  position:relative;
+  z-index:2;
+
   width:min(calc(100% - 40px),var(--max));
   margin:auto;
 
-  /*
-    CRISP MODE:
-    Never scale or rotate the container.
-    This prevents text from becoming soft.
-  */
-  transform:translateY(42px);
+  transform:translateY(30px);
   opacity:.45;
 
   transition:
-    transform .75s var(--ease),
-    opacity .65s var(--ease);
+    transform .7s var(--ease),
+    opacity .6s var(--ease);
 }
 
 .scene-wrap.is-active .scene-inner{
@@ -271,13 +363,8 @@ img{
 }
 
 .scene-wrap.is-past .scene-inner{
-  transform:translateY(42px);
-  opacity:.28;
-}
-
-.scene-content{
-  position:relative;
-  z-index:2;
+  transform:translateY(30px);
+  opacity:.35;
 }
 
 .kicker{
@@ -285,69 +372,100 @@ img{
   align-items:center;
   gap:9px;
 
+  color:#374151;
+
   font-size:13px;
   font-weight:700;
-  letter-spacing:.01em;
-
-  color:#4b5669;
 }
 
-.kicker:before{
+.kicker::before{
   content:"";
 
   width:7px;
   height:7px;
 
+  flex:none;
+
   border-radius:50%;
 
-  background:linear-gradient(
-    135deg,
-    var(--blue),
-    var(--cyan)
-  );
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
 
   box-shadow:
-    0 0 0 4px rgba(79,111,255,.08);
-
-  flex:none;
+    0 0 0 4px rgba(31,111,255,.08);
 }
 
-.scene h1,
-.scene h2{
+h1,
+h2,
+h3{
   font-family:Manrope,sans-serif;
-  margin:0;
-  letter-spacing:-.085em;
-  line-height:.91;
 }
+
+h1,
+h2{
+  letter-spacing:-.075em;
+  line-height:.92;
+}
+
 
 /* =========================================================
    HERO
 ========================================================= */
 
+.scene-wrap[data-scene="hero"]{
+  background:
+    radial-gradient(
+      circle at 78% 35%,
+      rgba(31,111,255,.18),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 92% 78%,
+      rgba(0,200,245,.11),
+      transparent 28%
+    ),
+    linear-gradient(
+      115deg,
+      #05070b 0%,
+      #08101a 52%,
+      #0b1722 100%
+    );
+
+  color:#fff;
+}
+
 .hero{
   position:relative;
+
+  padding-top:50px;
 }
 
 .hero h1{
   position:relative;
   z-index:3;
 
-  font-size:clamp(58px,9vw,130px);
-  max-width:1030px;
+  max-width:1080px;
 
-  margin:24px 0 30px;
+  margin:25px 0 30px;
+
+  font-size:clamp(58px,9vw,130px);
+
+  color:#fff;
 }
 
 .hero h1 span{
   display:inline;
 
-  color:#8993a8;
-
-  background:linear-gradient(
-    100deg,
-    #68cfff 0%,
-    #9277ff 100%
-  );
+  background:
+    linear-gradient(
+      100deg,
+      #1f6fff 0%,
+      #00c8f5 100%
+    );
 
   -webkit-background-clip:text;
   background-clip:text;
@@ -367,98 +485,38 @@ img{
 }
 
 .hero-copy p{
-  max-width:530px;
+  max-width:550px;
+
   margin:0;
 
-  color:#566174;
+  color:#aeb8c8;
+
   font-size:18px;
-  line-height:1.55;
+  line-height:1.6;
 }
 
 .actions{
   display:flex;
-  gap:10px;
   flex-wrap:wrap;
+  gap:10px;
 }
-
-/* =========================================================
-   HERO DARK BACKGROUND
-========================================================= */
-
-.scene-wrap[data-scene="hero"] .scene{
-  background:
-    radial-gradient(
-      circle at 78% 38%,
-      rgba(54,101,180,.18),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 92% 78%,
-      rgba(112,82,210,.15),
-      transparent 27%
-    ),
-    linear-gradient(
-      115deg,
-      #080b12 0%,
-      #0c111c 52%,
-      #111a2b 100%
-    );
-
-  color:#fff;
-}
-
-.scene-wrap[data-scene="hero"] .scene:before{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 62% 70%,
-      rgba(81,200,255,.09),
-      transparent 22%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(8,11,18,.16),
-      transparent 60%
-    );
-
-  pointer-events:none;
-}
-
-.scene-wrap[data-scene="hero"] .kicker{
-  color:#aeb9cb;
-}
-
-.scene-wrap[data-scene="hero"] .hero h1{
-  color:#f7f9ff;
-}
-
-.scene-wrap[data-scene="hero"] .hero-copy p{
-  color:#aab5c7;
-}
-
-/* =========================================================
-   HERO DEVICE
-========================================================= */
 
 .hero-stage{
   position:absolute;
-  z-index:1;
 
   right:-7%;
   bottom:-7%;
 
+  z-index:1;
+
   width:min(67vw,860px);
   height:min(78vh,760px);
-
-  pointer-events:none;
 
   display:flex;
   align-items:center;
   justify-content:center;
+
+  pointer-events:none;
 }
 
 .hero-device-image{
@@ -472,22 +530,15 @@ img{
 
   filter:
     drop-shadow(
-      0 30px 48px rgba(0,0,0,.30)
-    )
-    drop-shadow(
-      0 0 25px rgba(76,137,255,.06)
+      0 30px 50px rgba(0,0,0,.35)
     );
 
   transform:none!important;
 
   user-select:none;
   -webkit-user-drag:none;
-
-  /*
-    Prevent unnecessary compositor tricks.
-  */
-  backface-visibility:visible;
 }
+
 
 /* =========================================================
    DARK SECTIONS
@@ -495,43 +546,112 @@ img{
 
 .scene--dark{
   color:#fff;
-  background:#0e1119;
-}
-
-.scene--dark:before{
-  content:"";
-
-  position:absolute;
-  inset:-20%;
 
   background:
     radial-gradient(
-      circle at 70% 30%,
-      rgba(81,200,255,.17),
-      transparent 25%
+      circle at 80% 20%,
+      rgba(31,111,255,.13),
+      transparent 27%
     ),
     radial-gradient(
-      circle at 20% 70%,
-      rgba(139,108,255,.14),
-      transparent 28%
-    );
-
-  z-index:-1;
+      circle at 15% 80%,
+      rgba(0,200,245,.07),
+      transparent 25%
+    ),
+    #05070b;
 }
 
 .scene--dark .kicker{
-  color:#aab4c5;
-}
-
-.scene--dark .muted{
-  color:#9da8bb;
+  color:#aeb8c8;
 }
 
 .scene--dark .btn.secondary{
   color:#fff;
-  background:rgba(255,255,255,.06);
-  border-color:rgba(255,255,255,.2);
+
+  background:rgba(255,255,255,.05);
+
+  border-color:rgba(255,255,255,.18);
 }
+
+
+/* =========================================================
+   MANIFESTO
+========================================================= */
+
+.manifesto{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:50px;
+
+  align-items:end;
+}
+
+.manifesto h2{
+  max-width:850px;
+
+  margin:22px 0 0;
+
+  font-size:clamp(50px,7vw,94px);
+}
+
+.manifesto p{
+  max-width:450px;
+
+  margin:0;
+
+  color:#aeb8c8;
+
+  font-size:17px;
+  line-height:1.65;
+}
+
+.metric-row{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:10px;
+
+  margin-top:32px;
+}
+
+.metric{
+  min-height:90px;
+
+  display:flex;
+  align-items:center;
+
+  padding:22px;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+
+  background:rgba(255,255,255,.045);
+
+  transition:
+    transform .3s var(--ease),
+    background .3s ease,
+    border-color .3s ease;
+}
+
+.metric:hover{
+  transform:translateY(-3px);
+
+  background:rgba(255,255,255,.08);
+
+  border-color:
+    rgba(0,200,245,.22);
+}
+
+.metric span{
+  color:#d0d7e2;
+
+  font-size:13px;
+  font-weight:600;
+}
+
 
 /* =========================================================
    ARCHITECTURE
@@ -540,9 +660,8 @@ img{
 .arch{
   position:absolute;
   inset:0;
-  z-index:0;
+
   pointer-events:none;
-  overflow:hidden;
 }
 
 .arch-line{
@@ -552,9 +671,10 @@ img{
   height:80vw;
 
   right:-42vw;
-  top:6vh;
+  top:5vh;
 
-  border:1px solid rgba(120,139,180,.15);
+  border:1px solid rgba(31,111,255,.14);
+
   border-radius:50%;
 
   transform:rotate(-20deg);
@@ -567,7 +687,7 @@ img{
   right:-18vw;
   top:20vh;
 
-  border-color:rgba(81,200,255,.11);
+  border-color:rgba(0,200,245,.13);
 }
 
 .arch-dot{
@@ -576,170 +696,89 @@ img{
   width:9px;
   height:9px;
 
+  right:22%;
+  top:31%;
+
   border-radius:50%;
 
   background:#fff;
 
   box-shadow:
-    0 0 30px rgba(81,200,255,.8);
-
-  right:22%;
-  top:31%;
+    0 0 30px rgba(0,200,245,.8);
 }
+
 
 /* =========================================================
-   MANIFESTO
-========================================================= */
-
-.manifesto{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-  align-items:end;
-}
-
-.manifesto h2{
-  font-size:clamp(48px,7vw,92px);
-  max-width:850px;
-  margin-top:22px;
-}
-
-.manifesto p{
-  max-width:410px;
-  color:#a9b3c5;
-  margin:0;
-  font-size:17px;
-  line-height:1.6;
-}
-
-.metric-row{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:30px;
-}
-
-.metric{
-  padding:22px;
-
-  min-height:82px;
-
-  display:flex;
-  align-items:center;
-
-  border-radius:20px;
-
-  background:rgba(255,255,255,.055);
-  border:1px solid rgba(255,255,255,.08);
-
-  transition:
-    background .3s ease,
-    border-color .3s ease,
-    transform .3s var(--ease);
-}
-
-.metric:hover{
-  transform:translateY(-3px);
-  background:rgba(255,255,255,.08);
-  border-color:rgba(255,255,255,.15);
-}
-
-.metric span{
-  font-size:13px;
-  color:#c4cbda;
-  font-weight:600;
-}
-
-/* =========================================================
-   SERVICES — PREMIUM HIGH VISIBILITY
+   SERVICES
 ========================================================= */
 
 .services-layout{
   display:grid;
+
   grid-template-columns:.55fr 1.45fr;
+
   gap:70px;
+
   align-items:start;
 }
 
 .services-layout h2{
+  margin:22px 0 0;
+
   font-size:clamp(50px,7vw,94px);
-  margin-top:22px;
 }
 
-.services-layout>div>p{
-  color:#a5afc0;
-  max-width:340px;
+.services-layout > div > p{
+  max-width:350px;
+
+  margin-top:28px;
+
+  color:#aeb8c8;
+
   font-size:17px;
   line-height:1.65;
 }
 
-/* Bright, readable service palette */
-
 .service-grid{
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
+
   gap:1px;
 
-  border:1px solid rgba(15,23,42,.22);
-  background:#0e1119;
-
-  border-radius:28px;
   overflow:hidden;
 
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:28px;
+
+  background:#05070b;
+
   box-shadow:
-    0 25px 70px rgba(0,0,0,.18);
+    0 30px 80px rgba(0,0,0,.18);
 }
 
 .service{
-  position:relative;
-
   min-height:225px;
 
-  padding:32px 28px 31px;
+  padding:31px 27px;
 
-  color:#111827;
+  color:#05070b;
+
+  background:#fff;
 
   transition:
-    background .28s ease,
-    box-shadow .28s ease,
-    transform .28s var(--ease);
-}
-
-/* Clearly visible pastel sequence */
-
-.service:nth-child(1){
-  background:#d9ebff;
-}
-
-.service:nth-child(2){
-  background:#d4f3ff;
-}
-
-.service:nth-child(3){
-  background:#e4dcff;
-}
-
-.service:nth-child(4){
-  background:#d7f4e8;
-}
-
-.service:nth-child(5){
-  background:#ffebca;
-}
-
-.service:nth-child(6){
-  background:#dedfff;
+    background .3s ease,
+    box-shadow .3s ease;
 }
 
 .service:hover{
-  background:#f5f8ff;
+  background:#f7f9fc;
+
   box-shadow:
-    inset 0 0 0 2px rgba(79,111,255,.16);
+    inset 0 0 0 2px rgba(31,111,255,.14);
 }
 
-/* Accent */
-
-.service:before{
+.service::before{
   content:"";
 
   display:block;
@@ -754,61 +793,76 @@ img{
   background:
     linear-gradient(
       90deg,
-      #4f6fff,
-      #55cdfc
+      var(--blue),
+      var(--cyan)
+    );
+}
+
+.service:nth-child(3)::before,
+.service:nth-child(6)::before{
+  background:
+    linear-gradient(
+      90deg,
+      var(--violet),
+      var(--blue)
+    );
+}
+
+.service:nth-child(4)::before{
+  background:
+    linear-gradient(
+      90deg,
+      var(--green),
+      var(--cyan)
     );
 }
 
 .service h3{
-  margin:0 0 14px;
+  margin:0 0 13px;
 
-  font:800 26px/1.18 Manrope,sans-serif;
+  color:#05070b;
+
+  font-size:25px;
+  line-height:1.2;
 
   letter-spacing:-.045em;
-
-  color:#111827;
 }
 
 .service p{
-  margin:0;
-
   max-width:390px;
 
-  color:#425066;
+  margin:0;
 
-  font-family:'DM Sans',sans-serif;
+  color:#43526a;
 
-  font-size:18px;
+  font-size:17px;
   line-height:1.55;
-
-  font-weight:500;
-
-  letter-spacing:-.005em;
 }
 
-/* Business Automation */
-
 .automation{
-  position:relative;
-
   grid-column:1/-1;
 
-  padding:32px 30px 33px;
+  padding:32px;
+
+  color:#fff;
 
   background:
+    radial-gradient(
+      circle at 82% 30%,
+      rgba(0,200,245,.15),
+      transparent 28%
+    ),
     linear-gradient(
       135deg,
-      #151c2b 0%,
-      #101827 55%,
-      #17223a 100%
+      #05070b,
+      #0b1018 65%,
+      #101927
     );
 
   border-top:1px solid rgba(255,255,255,.12);
-
-  color:#fff;
 }
 
-.automation:before{
+.automation::before{
   content:"";
 
   display:block;
@@ -823,8 +877,8 @@ img{
   background:
     linear-gradient(
       90deg,
-      #5b78ff,
-      #55cdfc
+      var(--blue),
+      var(--cyan)
     );
 }
 
@@ -833,42 +887,44 @@ img{
 
   margin-bottom:10px;
 
-  font:800 26px/1.2 Manrope,sans-serif;
+  font-size:26px;
+  line-height:1.2;
 
   letter-spacing:-.045em;
-
-  color:#fff;
 }
 
 .automation p{
-  margin:0;
-
   max-width:760px;
+
+  margin:0;
 
   color:#cbd5e1;
 
-  font-family:'DM Sans',sans-serif;
-
   font-size:18px;
-  line-height:1.58;
-
-  font-weight:500;
+  line-height:1.6;
 }
- 
+
+
 /* =========================================================
    PROCESS
 ========================================================= */
 
 .process-layout{
   display:grid;
+
   grid-template-columns:.8fr 1.2fr;
+
   gap:80px;
+
   align-items:center;
 }
 
 .process-layout h2{
-  font-size:clamp(54px,7vw,98px);
-  margin-top:22px;
+  max-width:650px;
+
+  margin:22px 0;
+
+  font-size:clamp(52px,7vw,96px);
 }
 
 .process-list{
@@ -877,11 +933,10 @@ img{
 
 .process-step{
   display:grid;
-  grid-template-columns:70px 1fr auto;
 
-  align-items:center;
+  grid-template-columns:60px 1fr;
 
-  gap:20px;
+  gap:18px;
 
   padding:24px 0;
 
@@ -896,24 +951,32 @@ img{
 }
 
 .process-step b{
+  color:#6b7280;
+
   font:700 13px Manrope,sans-serif;
-  color:#7c8799;
 }
 
 .process-step h3{
-  font:700 29px Manrope,sans-serif;
+  margin:0 0 8px;
+
+  font-size:27px;
+
   letter-spacing:-.05em;
-  margin:0;
 }
 
 .process-step span{
-  color:#7c8799;
-  font-size:12px;
+  grid-column:2;
+
+  color:#68748a;
+
+  font-size:13px;
+  line-height:1.5;
 }
 
 .process-orbit{
-  height:420px;
   position:relative;
+
+  height:350px;
 
   display:flex;
   align-items:center;
@@ -923,76 +986,79 @@ img{
 .orbit-ring{
   position:absolute;
 
-  width:330px;
-  height:330px;
+  width:290px;
+  height:290px;
 
-  border:1px solid rgba(79,111,255,.20);
+  border:1px solid rgba(31,111,255,.2);
+
   border-radius:50%;
 }
 
 .orbit-ring:nth-child(2){
-  width:250px;
-  height:250px;
+  width:215px;
+  height:215px;
 
-  border-color:rgba(81,200,255,.22);
+  border-color:rgba(0,200,245,.23);
 
   transform:rotate(30deg);
 }
 
 .orbit-core{
-  width:130px;
-  height:130px;
+  position:relative;
+  z-index:2;
 
-  border-radius:36px;
+  width:120px;
+  height:120px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:34px;
 
   background:
     linear-gradient(
       135deg,
       #fff,
-      #dff5ff
+      #eafcff
     );
 
   box-shadow:
-    0 30px 80px rgba(65,104,190,.18);
+    0 30px 80px rgba(31,111,255,.15);
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  color:#05070b;
 
   font:800 20px Manrope,sans-serif;
-  letter-spacing:-.05em;
-
-  z-index:2;
 }
 
 .orbit-dot{
   position:absolute;
 
-  width:13px;
-  height:13px;
+  width:12px;
+  height:12px;
 
   border-radius:50%;
 
   background:var(--blue);
 
   box-shadow:
-    0 0 25px rgba(79,111,255,.55);
+    0 0 25px rgba(31,111,255,.55);
 }
 
 .orbit-dot.one{
-  top:38px;
-  right:23%;
+  top:35px;
+  right:25%;
 }
 
 .orbit-dot.two{
-  bottom:70px;
-  left:18%;
+  bottom:55px;
+  left:20%;
 }
 
 .orbit-dot.three{
   top:48%;
-  right:8%;
+  right:10%;
 }
+
 
 /* =========================================================
    PRICING
@@ -1000,123 +1066,138 @@ img{
 
 .pricing-layout{
   display:grid;
+
   grid-template-columns:.65fr 1.35fr;
+
   gap:50px;
+
   align-items:start;
 }
 
 .pricing-layout h2{
-  font-size:clamp(52px,7vw,94px);
-  margin-top:22px;
+  margin:22px 0;
+
+  font-size:clamp(50px,7vw,92px);
 }
 
-.pricing-layout>div>p{
-  color:#a3adbd;
-  max-width:330px;
-  line-height:1.6;
+.pricing-layout > div > p{
+  max-width:350px;
+
+  color:#aeb8c8;
+
+  line-height:1.65;
 }
 
 .pricing{
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
+
   gap:10px;
 }
 
 .price{
   min-height:520px;
 
-  border:1px solid rgba(255,255,255,.10);
-
-  background:rgba(255,255,255,.055);
-
-  border-radius:28px;
-
-  padding:28px;
-
   display:flex;
   flex-direction:column;
 
+  padding:28px;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:28px;
+
+  background:rgba(255,255,255,.045);
+
   transition:
-    transform .35s var(--ease),
-    background .35s ease,
-    border-color .35s ease;
+    transform .3s var(--ease),
+    background .3s ease,
+    border-color .3s ease;
 }
 
 .price:hover{
   transform:translateY(-5px);
-  background:rgba(255,255,255,.075);
-  border-color:rgba(255,255,255,.16);
+
+  background:rgba(255,255,255,.07);
+
+  border-color:rgba(255,255,255,.17);
 }
 
 .price.pop{
+  border-color:rgba(31,111,255,.38);
+
   background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(0,200,245,.12),
+      transparent 30%
+    ),
     linear-gradient(
       145deg,
-      rgba(91,120,255,.16),
-      rgba(255,255,255,.07)
+      rgba(31,111,255,.18),
+      rgba(255,255,255,.05)
     );
 
-  color:#fff;
-
-  border-color:rgba(125,145,255,.35);
-
   box-shadow:
-    0 30px 90px rgba(20,29,46,.22);
+    0 30px 90px rgba(10,20,40,.22);
 }
 
 .price .tag{
+  margin-bottom:27px;
+
+  color:#8994a7;
+
   font-size:12px;
   font-weight:600;
-  color:#8d99ac;
-  margin-bottom:28px;
-}
-
-.price.pop .tag{
-  color:#b5c0d2;
 }
 
 .price h3{
-  font:800 24px Manrope,sans-serif;
+  margin:0 0 14px;
+
+  font-size:24px;
+
   letter-spacing:-.05em;
-  margin:0 0 13px;
 }
 
 .amount{
-  font:800 34px/1.05 Manrope,sans-serif;
+  margin-bottom:27px;
+
+  font:800 34px/1.1 Manrope,sans-serif;
+
   letter-spacing:-.06em;
-  margin-bottom:28px;
 }
 
 .amount small{
-  font:500 11px 'DM Sans',sans-serif;
   color:#8792a4;
+
+  font:500 11px "DM Sans",sans-serif;
+
   letter-spacing:0;
 }
 
 .price ul{
   list-style:none;
-  padding:0;
-  margin:0;
 
-  border-top:1px solid rgba(255,255,255,.10);
+  margin:0;
+  padding:0;
+
+  border-top:1px solid rgba(255,255,255,.1);
 }
 
 .price li{
   padding:11px 0;
 
-  border-bottom:1px solid rgba(255,255,255,.10);
+  border-bottom:1px solid rgba(255,255,255,.1);
+
+  color:#bdc6d4;
 
   font-size:12px;
-  color:#b5becd;
-}
-
-.price.pop li{
-  color:#c7cfdd;
 }
 
 .price .btn{
   margin-top:auto;
 }
+
 
 /* =========================================================
    AUDIT
@@ -1124,52 +1205,66 @@ img{
 
 .audit-layout{
   display:grid;
+
   grid-template-columns:.8fr 1.2fr;
+
   gap:70px;
+
   align-items:center;
 }
 
 .audit-layout h2{
+  margin:22px 0;
+
   font-size:clamp(50px,7vw,90px);
-  margin-top:22px;
 }
 
-.audit-layout p{
+.audit-layout > div > p{
+  max-width:440px;
+
   color:#667287;
-  max-width:400px;
-  line-height:1.6;
+
+  font-size:17px;
+  line-height:1.65;
 }
 
 .audit-card{
-  background:
-    linear-gradient(
-      145deg,
-      #121824,
-      #0e131d
-    );
+  padding:34px;
 
   color:#fff;
 
-  border-radius:34px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:32px;
 
-  padding:34px;
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(0,200,245,.13),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #05070b,
+      #0b1018
+    );
 
   box-shadow:
     0 35px 100px rgba(25,35,55,.18);
-
-  border:1px solid rgba(255,255,255,.08);
 }
 
 .audit-card label{
-  font-size:11px;
   color:#9da8ba;
+
+  font-size:11px;
   font-weight:700;
-  letter-spacing:.04em;
+  letter-spacing:.05em;
 }
 
 .audit-form{
   display:flex;
+
   gap:9px;
+
   margin-top:12px;
 }
 
@@ -1177,26 +1272,23 @@ img{
   min-width:0;
   flex:1;
 
-  border:1px solid #353d4b;
-
-  background:#191f2a;
+  padding:15px 18px;
 
   color:#fff;
 
+  border:1px solid #343b49;
   border-radius:999px;
-
-  padding:15px 18px;
 
   outline:none;
 
-  transition:
-    border-color .25s ease,
-    background .25s ease;
+  background:#171d27;
 }
 
 .audit-form input:focus{
-  border-color:#6d9aff;
-  background:#1c2330;
+  border-color:var(--blue);
+
+  box-shadow:
+    0 0 0 3px rgba(31,111,255,.1);
 }
 
 .audit-form input::placeholder{
@@ -1206,11 +1298,59 @@ img{
 .audit-status{
   min-height:22px;
 
+  margin-top:13px;
+
   color:#aab4c4;
 
   font-size:11px;
+}
 
-  margin-top:13px;
+.audit-value{
+  margin-top:18px;
+
+  padding:18px;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+
+  background:rgba(255,255,255,.035);
+}
+
+.audit-value-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+
+  margin-bottom:13px;
+}
+
+.audit-value-head strong{
+  font:700 15px Manrope,sans-serif;
+}
+
+.audit-value-head span{
+  color:#8f9bad;
+
+  font-size:11px;
+}
+
+.audit-value-grid{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:8px;
+}
+
+.audit-value-grid span{
+  padding:9px 10px;
+
+  color:#b9c3d2;
+
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;
+
+  font-size:12px;
 }
 
 .audit-result{
@@ -1226,11 +1366,10 @@ img{
 .score{
   padding:15px;
 
+  border:1px solid #303846;
   border-radius:16px;
 
-  background:#191f2a;
-
-  border:1px solid #303846;
+  background:#151b25;
 }
 
 .score small{
@@ -1244,81 +1383,430 @@ img{
 }
 
 .score strong{
+  display:block;
+
+  margin:2px 0;
+
   font:800 29px Manrope,sans-serif;
+
   letter-spacing:-.06em;
 }
+
+.audit-next-step{
+  display:none;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-top:16px;
+  padding:14px 15px;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+
+  background:rgba(255,255,255,.035);
+}
+
+.audit-next-step strong{
+  font:700 14px/1.35 Manrope,sans-serif;
+}
+
+.audit-next-step .btn{
+  min-height:40px;
+
+  padding:10px 15px;
+
+  flex:none;
+}
+
+
+/* =========================================================
+   WORK / CONCEPT PROJECTS
+========================================================= */
+
+.work-layout{
+  display:grid;
+
+  grid-template-columns:.72fr 1.28fr;
+
+  gap:70px;
+
+  align-items:start;
+}
+
+.work-layout h2{
+  margin:22px 0;
+
+  font-size:clamp(52px,7vw,92px);
+}
+
+.work-accent{
+  display:block;
+
+  color:#6378ff;
+}
+
+.work-intro{
+  max-width:420px;
+
+  margin:0;
+
+  color:#68758a;
+
+  font-size:17px;
+  line-height:1.65;
+}
+
+.concept-grid{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:12px;
+}
+
+.concept-card{
+  min-height:430px;
+
+  display:flex;
+  flex-direction:column;
+
+  padding:14px;
+
+  border:1px solid rgba(5,7,11,.08);
+  border-radius:24px;
+
+  box-shadow:
+    0 18px 60px rgba(18,25,40,.08);
+}
+
+.concept-blue{
+  background:#e7f2ff;
+}
+
+.concept-violet{
+  background:#eeeaff;
+}
+
+.concept-green{
+  background:#e6f7ef;
+}
+
+.concept-window{
+  height:185px;
+
+  overflow:hidden;
+
+  padding:14px;
+
+  border-radius:17px;
+
+  background:#111827;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.concept-bar{
+  display:flex;
+
+  gap:5px;
+
+  margin-bottom:22px;
+}
+
+.concept-bar i{
+  display:block;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:#8994a8;
+}
+
+.concept-lines{
+  display:grid;
+
+  gap:10px;
+}
+
+.concept-lines b{
+  display:block;
+
+  height:12px;
+
+  border-radius:5px;
+
+  background:rgba(255,255,255,.13);
+}
+
+.concept-lines b:nth-child(1){
+  width:72%;
+  height:27px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      rgba(255,255,255,.25)
+    );
+}
+
+.concept-lines b:nth-child(2){
+  width:88%;
+}
+
+.concept-lines b:nth-child(3){
+  width:58%;
+}
+
+.concept-lines b:nth-child(4){
+  width:80%;
+}
+
+.concept-card > span{
+  margin:22px 4px 9px;
+
+  color:#657084;
+
+  font-size:10px;
+  font-weight:700;
+
+  letter-spacing:.08em;
+}
+
+.concept-card h3{
+  margin:0 4px 10px;
+
+  color:#111827;
+
+  font-size:25px;
+  line-height:1.1;
+
+  letter-spacing:-.045em;
+}
+
+.concept-card p{
+  margin:0 4px;
+
+  color:#566174;
+
+  font-size:14px;
+  line-height:1.55;
+}
+
 
 /* =========================================================
    WHY
 ========================================================= */
 
+.scene-wrap[data-scene="why"]{
+  background:
+    radial-gradient(
+      circle at 8% 20%,
+      rgba(0,200,245,.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 80%,
+      rgba(31,111,255,.06),
+      transparent 30%
+    ),
+    #f7f9fc;
+}
+
 .why-layout{
   display:grid;
+
   grid-template-columns:.8fr 1.2fr;
+
   gap:70px;
 }
 
 .why-layout h2{
+  margin:22px 0;
+
   font-size:clamp(54px,7vw,96px);
-  margin-top:22px;
 }
 
 .why-grid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:10px;
 }
 
 .why-card{
+  min-height:190px;
+
   padding:26px;
 
-  border-radius:25px;
+  border:1px solid rgba(5,7,11,.1);
+  border-top:3px solid var(--blue);
+  border-radius:24px;
 
-  border:1px solid var(--line);
+  background:#fff;
 
-  background:rgba(255,255,255,.62);
-
-  min-height:190px;
+  box-shadow:
+    0 16px 45px rgba(15,23,42,.07);
 
   transition:
     transform .3s var(--ease),
     box-shadow .3s ease;
 }
 
-.why-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 40px rgba(35,45,70,.08);
-}
-
 .why-card:nth-child(2){
-  background:#eaf8ff;
+  border-top-color:var(--cyan);
 }
 
 .why-card:nth-child(3){
-  background:#f0ecff;
+  border-top-color:var(--violet);
 }
 
 .why-card:nth-child(4){
-  background:#eafaf4;
+  border-top-color:var(--green);
+}
+
+.why-card:hover{
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 22px 55px rgba(15,23,42,.12);
 }
 
 .why-card b{
-  font:700 12px Manrope,sans-serif;
-  color:#4a5468;
+  color:#111827;
+
+  font-size:12px;
+  font-weight:800;
 }
 
 .why-card h3{
-  font:700 24px Manrope,sans-serif;
-  letter-spacing:-.05em;
   margin:14px 0 8px;
+
+  color:#05070b;
+
+  font-size:25px;
+
+  letter-spacing:-.05em;
 }
 
 .why-card p{
-  font-size:13px;
-  color:#68748a;
   margin:0;
+
+  color:#374151;
+
+  font-size:16px;
   line-height:1.55;
 }
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-layout{
+  display:grid;
+
+  grid-template-columns:.9fr 1.1fr;
+
+  gap:90px;
+
+  align-items:center;
+}
+
+.about-layout h2{
+  margin:22px 0;
+
+  font-size:clamp(52px,7vw,94px);
+}
+
+.about-layout h2 span{
+  display:block;
+
+  color:#6bd4ff;
+}
+
+.about-copy{
+  max-width:560px;
+}
+
+.founder-mark{
+  width:64px;
+  height:64px;
+
+  display:grid;
+  place-items:center;
+
+  margin-bottom:22px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #dce8ff
+    );
+
+  color:#111827;
+
+  font:800 18px Manrope,sans-serif;
+}
+
+.about-copy p{
+  margin:0;
+
+  color:#c2cbd9;
+
+  font-size:20px;
+  line-height:1.55;
+}
+
+.trust-row{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-top:24px;
+}
+
+.trust-row span{
+  padding:9px 12px;
+
+  color:#aeb8c8;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:999px;
+
+  font-size:11px;
+}
+
+.contact-links{
+  display:flex;
+
+  gap:20px;
+
+  margin-top:28px;
+}
+
+.contact-links a{
+  padding-bottom:4px;
+
+  color:#fff;
+
+  border-bottom:1px solid rgba(255,255,255,.35);
+
+  font-size:13px;
+  font-weight:700;
+}
+
 
 /* =========================================================
    FAQ
@@ -1326,13 +1814,16 @@ img{
 
 .faq-layout{
   display:grid;
+
   grid-template-columns:.75fr 1.25fr;
+
   gap:70px;
 }
 
 .faq-layout h2{
+  margin:22px 0;
+
   font-size:clamp(54px,7vw,94px);
-  margin-top:22px;
 }
 
 .faq{
@@ -1340,131 +1831,147 @@ img{
 }
 
 details{
-  border-bottom:1px solid var(--line);
   padding:21px 0;
+
+  border-bottom:1px solid var(--line);
 }
 
 summary{
-  cursor:pointer;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:20px;
 
-  font:700 20px Manrope,sans-serif;
-  letter-spacing:-.04em;
+  cursor:pointer;
 
   list-style:none;
-}
 
-summary:after{
-  content:"+";
+  font:700 20px Manrope,sans-serif;
 
-  font:500 22px Manrope,sans-serif;
-
-  color:#8a94a5;
-
-  transition:transform .3s ease;
-}
-
-details[open] summary:after{
-  transform:rotate(45deg);
+  letter-spacing:-.04em;
 }
 
 summary::-webkit-details-marker{
   display:none;
 }
 
-details p{
-  max-width:700px;
+summary::after{
+  content:"+";
 
-  color:#68748a;
+  color:#8a94a5;
+
+  font-size:22px;
+  font-weight:400;
+
+  transition:transform .25s ease;
+}
+
+details[open] summary::after{
+  transform:rotate(45deg);
+}
+
+details p{
+  max-width:720px;
 
   margin:15px 0 0;
+
+  color:#68748a;
 
   font-size:14px;
   line-height:1.65;
 }
+
 
 /* =========================================================
    FINAL CTA
 ========================================================= */
 
 .final{
+  color:#fff;
+
   background:
     radial-gradient(
       circle at 78% 35%,
-      rgba(81,200,255,.09),
+      rgba(31,111,255,.18),
       transparent 28%
     ),
-    #0e1119;
-
-  color:#fff;
-}
-
-.final .scene-inner{
-  position:relative;
+    radial-gradient(
+      circle at 25% 80%,
+      rgba(0,200,245,.08),
+      transparent 26%
+    ),
+    #05070b;
 }
 
 .final h2{
+  max-width:1100px;
+
+  margin:22px 0;
+
   font-size:clamp(58px,9vw,125px);
-  max-width:1050px;
-  margin-top:22px;
 }
 
-.final p{
-  max-width:500px;
-  color:#a6b0c0;
-  font-size:18px;
-  line-height:1.55;
+.final > .scene > .scene-inner > p{
+  max-width:550px;
+
   margin:28px 0;
+
+  color:#a6b0c0;
+
+  font-size:18px;
+  line-height:1.6;
 }
 
-.final-glow{
-  position:absolute;
-
-  width:650px;
-  height:650px;
-
-  border-radius:50%;
-
-  right:-170px;
-  top:-220px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(81,200,255,.20),
-      rgba(139,108,255,.09) 35%,
-      transparent 68%
-    );
-
-  filter:blur(10px);
-
-  pointer-events:none;
-}
 
 /* =========================================================
    CONTACT FORM
 ========================================================= */
 
+.contact-form{
+  max-width:850px;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+}
+
 .contact-form input,
 .contact-form textarea{
+  width:100%;
+
+  padding:15px;
+
+  color:#fff;
+
+  border:1px solid #343b49;
+  border-radius:12px;
+
+  outline:none;
+
+  background:#171d27;
+
   transition:
     border-color .25s ease,
-    background .25s ease,
     box-shadow .25s ease;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus{
-  border-color:#627eff!important;
-
-  background:#1a212d!important;
+  border-color:var(--blue);
 
   box-shadow:
-    0 0 0 3px rgba(91,120,255,.10);
+    0 0 0 3px rgba(31,111,255,.1);
+}
+
+.contact-form textarea{
+  min-height:115px;
+
+  resize:vertical;
+
+  grid-column:1/-1;
 }
 
 .contact-form input::placeholder,
@@ -1472,18 +1979,80 @@ details p{
   color:#707b8e;
 }
 
+.contact-status{
+  grid-column:1/-1;
+
+  min-height:20px;
+
+  color:#aab4c4;
+
+  font-size:12px;
+}
+
+
+/* =========================================================
+   LEGAL
+========================================================= */
+
+.legal-strip{
+  color:#fff;
+
+  background:#080b11;
+
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.legal-inner{
+  width:min(calc(100% - 40px),var(--max));
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+
+  padding:24px 0;
+}
+
+.legal-inner details{
+  padding:14px 16px;
+
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:16px;
+
+  background:rgba(255,255,255,.025);
+}
+
+.legal-inner summary{
+  color:#fff;
+
+  font-size:13px;
+}
+
+.legal-inner p{
+  max-width:800px;
+
+  margin:12px 0 2px;
+
+  color:#9da8b9;
+
+  font-size:12px;
+  line-height:1.65;
+}
+
+
 /* =========================================================
    FOOTER
 ========================================================= */
 
 .footer{
-  position:relative;
-
-  background:#0e1119;
+  padding:28px 0 45px;
 
   color:#8792a4;
 
-  padding:28px 0 45px;
+  background:#05070b;
 
   border-top:1px solid rgba(255,255,255,.08);
 }
@@ -1503,48 +2072,16 @@ details p{
 
 .footer-links{
   display:flex;
+
+  flex-wrap:wrap;
+
   gap:18px;
 }
 
-.footer a{
-  transition:color .2s ease;
-}
-
 .footer a:hover{
-  color:#fff;
+  color:#00c8f5;
 }
 
-/* =========================================================
-   ARCHITECTURE BACKGROUND
-========================================================= */
-
-.architecture-viewport{
-  position:fixed;
-
-  inset:0;
-
-  z-index:-1;
-
-  pointer-events:none;
-
-  overflow:hidden;
-}
-
-.architecture-viewport .path{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  width:120vw;
-  height:80vh;
-
-  transform:translate(-50%,-50%);
-
-  border-top:1px solid rgba(79,111,255,.055);
-
-  border-radius:50%;
-}
 
 /* =========================================================
    CUSTOM CURSOR
@@ -1568,7 +2105,7 @@ details p{
 
   border-radius:50%;
 
-  background:#10131a;
+  background:#05070b;
 
   transform:translate(-50%,-50%);
 }
@@ -1577,8 +2114,7 @@ details p{
   width:31px;
   height:31px;
 
-  border:1px solid rgba(16,19,26,.38);
-
+  border:1px solid rgba(5,7,11,.35);
   border-radius:50%;
 
   transform:translate(-50%,-50%);
@@ -1589,6 +2125,8 @@ details p{
 }
 
 .cursor-label{
+  color:#05070b;
+
   font-size:9px;
   font-weight:800;
 
@@ -1613,6 +2151,7 @@ details p{
   }
 }
 
+
 /* =========================================================
    TABLET
 ========================================================= */
@@ -1631,19 +2170,25 @@ details p{
     margin-bottom:24px;
   }
 
-  .hero{
-    align-items:flex-start;
+  .hero-stage{
+    right:-18%;
+
+    width:min(78vw,760px);
+
+    opacity:.72;
   }
 
-  .work-layout,
   .services-layout,
   .process-layout,
   .pricing-layout,
   .audit-layout,
+  .work-layout,
   .why-layout,
+  .about-layout,
   .faq-layout{
     grid-template-columns:1fr;
-    gap:38px;
+
+    gap:40px;
   }
 
   .pricing{
@@ -1658,9 +2203,18 @@ details p{
     margin-top:25px;
   }
 
+  .concept-grid{
+    grid-template-columns:1fr;
+  }
+
+  .concept-card{
+    min-height:0;
+  }
+
   .manifesto{
     grid-template-columns:1fr;
-    gap:28px;
+
+    gap:30px;
   }
 
   .metric-row{
@@ -1671,31 +2225,14 @@ details p{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .service{
-    min-height:205px;
-  }
-
-  /*
-    Tablet/mobile uses normal document flow.
-  */
-
   .scene-wrap{
-    height:auto!important;
-    overflow:visible;
+    min-height:auto;
   }
 
   .scene{
-    height:auto!important;
-    min-height:0;
+    min-height:auto;
 
-    position:relative!important;
-    top:auto;
-
-    overflow:visible;
-
-    padding:90px 0;
-
-    align-items:stretch;
+    padding:100px 0;
   }
 
   .scene-inner{
@@ -1707,9 +2244,8 @@ details p{
     transition:none;
   }
 
-  .arch,
-  .architecture-viewport{
-    display:none;
+  .hero{
+    padding-top:70px;
   }
 
   .hero-stage{
@@ -1719,21 +2255,22 @@ details p{
     bottom:auto;
 
     width:min(100%,680px);
+    height:45vh;
 
-    height:46vh;
     min-height:330px;
 
-    margin:22px auto -15px;
+    margin:25px auto -15px;
   }
 
-  .hero-device-image{
-    object-position:center;
+  .process-orbit{
+    height:320px;
   }
 
-  .portfolio-window{
-    height:48vh;
+  .about-layout{
+    align-items:start;
   }
 }
+
 
 /* =========================================================
    MOBILE
@@ -1741,97 +2278,101 @@ details p{
 
 @media(max-width:600px){
 
-  .wrap,
-  .nav-inner,
-  .scene-inner,
-  .footer-inner{
-    width:calc(100% - 24px);
-  }
-
   .nav{
     top:9px;
   }
 
   .nav-inner{
-    height:50px;
-    padding-left:16px;
+    width:calc(100% - 20px);
+
+    height:52px;
+
+    padding-left:15px;
   }
 
   .nav-cta{
-    padding:10px 14px;
     min-height:40px;
+
+    padding:9px 13px;
+
+    font-size:11px;
   }
 
   .scene{
-    padding:72px 0;
+    padding:76px 0;
   }
 
   .scene-wrap[data-scene="hero"] .scene{
     padding-top:90px;
-    padding-bottom:35px;
+    padding-bottom:30px;
+  }
+
+  .scene-inner{
+    width:calc(100% - 24px);
   }
 
   .hero h1{
-    font-size:clamp(52px,15vw,76px);
     margin-top:20px;
+
+    font-size:clamp(50px,15vw,76px);
   }
 
   .hero-copy p{
     font-size:16px;
   }
 
+  .actions{
+    margin-top:22px;
+  }
+
   .hero-stage{
-    width:calc(100% + 30px);
+    width:calc(100% + 20px);
+
     height:42vh;
+
     min-height:300px;
-    margin:8px -15px -5px;
+
+    margin:10px -10px -5px;
+
+    opacity:.48;
   }
 
-  .portfolio-window{
-    height:330px;
-    border-radius:23px;
+  .manifesto h2,
+  .services-layout h2,
+  .process-layout h2,
+  .pricing-layout h2,
+  .audit-layout h2,
+  .work-layout h2,
+  .why-layout h2,
+  .about-layout h2,
+  .faq-layout h2{
+    line-height:.94;
   }
 
-  .portfolio-screen{
-    border-radius:18px;
+  .metric-row{
+    grid-template-columns:1fr;
   }
 
-  .portfolio-block{
-    padding:23px;
-  }
-
-  .portfolio-block h3{
-    font-size:35px;
-  }
-
-  .service-grid,
-  .why-grid{
+  .service-grid{
     grid-template-columns:1fr;
   }
 
   .service{
     min-height:auto;
-    padding:27px 23px 28px;
-  }
 
-  .service:before{
-    width:30px;
-    margin-bottom:21px;
+    padding:27px 23px;
   }
 
   .service h3{
-    margin-bottom:11px;
     font-size:21px;
-    line-height:1.25;
   }
 
   .service p{
-    font-size:16.5px;
-    line-height:1.62;
+    font-size:16px;
   }
 
   .automation{
-    padding:28px 23px 29px;
+    padding:28px 23px;
   }
 
   .automation b{
@@ -1839,38 +2380,43 @@ details p{
   }
 
   .automation p{
-    font-size:16.5px;
-    line-height:1.62;
+    font-size:16px;
   }
 
   .process-step{
     grid-template-columns:45px 1fr;
   }
 
-  .process-step span{
-    display:none;
+  .process-step h3{
+    font-size:22px;
   }
 
-  .process-step h3{
-    font-size:23px;
+  .process-step span{
+    font-size:12px;
   }
 
   .process-orbit{
-    height:310px;
+    height:270px;
   }
 
   .orbit-ring{
-    width:240px;
-    height:240px;
+    width:220px;
+    height:220px;
   }
 
   .orbit-ring:nth-child(2){
-    width:180px;
-    height:180px;
+    width:165px;
+    height:165px;
+  }
+
+  .orbit-core{
+    width:100px;
+    height:100px;
   }
 
   .audit-form{
     display:grid;
+
     grid-template-columns:1fr;
   }
 
@@ -1882,55 +2428,69 @@ details p{
     grid-template-columns:1fr 1fr;
   }
 
-  .final h2{
-    font-size:clamp(56px,15vw,78px);
+  .audit-card{
+    padding:24px;
+
+    border-radius:26px;
+  }
+
+  .audit-value-grid{
+    grid-template-columns:1fr;
+  }
+
+  .audit-next-step{
+    flex-direction:column;
+
+    align-items:flex-start;
+  }
+
+  .concept-card{
+    min-height:auto;
+  }
+
+  .why-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-copy p{
+    font-size:17px;
+  }
+
+  .contact-links{
+    flex-wrap:wrap;
+  }
+
+  .contact-form{
+    grid-template-columns:1fr;
+  }
+
+  .contact-form input,
+  .contact-form textarea,
+  .contact-status{
+    grid-column:1/-1;
+  }
+
+  .legal-inner{
+    width:calc(100% - 24px);
+
+    grid-template-columns:1fr;
   }
 
   .footer-inner{
+    width:calc(100% - 24px);
+
     display:block;
   }
 
   .footer-links{
     margin-top:16px;
-    flex-wrap:wrap;
   }
 
-  .arch-line{
-    width:150vw;
-    height:150vw;
-    right:-95vw;
-  }
-
-  .arch-line.two{
-    width:110vw;
-    height:110vw;
-    right:-65vw;
-  }
-
-  .contact-form{
-    grid-template-columns:1fr!important;
-  }
-
-  .contact-form input,
-  .contact-form textarea{
-    grid-column:1/-1!important;
-  }
-
-  .audit-card{
-    padding:24px;
-    border-radius:26px;
-  }
-
-  .manifesto h2,
-  .services-layout h2,
-  .process-layout h2,
-  .pricing-layout h2,
-  .audit-layout h2,
-  .why-layout h2,
-  .faq-layout h2{
-    line-height:.94;
+  .final h2{
+    font-size:clamp(52px,15vw,78px);
   }
 }
+
 
 /* =========================================================
    REDUCED MOTION
@@ -1942,558 +2502,164 @@ details p{
     scroll-behavior:auto;
   }
 
-  .scene-wrap .scene-inner,
-  .scene-wrap.is-active .scene-inner,
-  .scene-wrap.is-past .scene-inner{
-    transform:none!important;
-    opacity:1!important;
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
     transition:none!important;
   }
 
-  .btn{
-    transition:none;
-  }
-
-  .service{
-    transition:none;
+  .scene-inner{
+    transform:none!important;
+    opacity:1!important;
   }
 }
-
-/* =========================================================
-   WEB CRAFT — PREMIUM COLOR SYSTEM REFRESH
-   Obsidian + electric blue + cyan + violet
-========================================================= */
-
-:root{
-  --bg:#f6f8fc;
-  --ink:#0b1220;
-  --muted:#526074;
-  --muted-2:#7d899b;
-  --line:rgba(11,18,32,.11);
-  --white:#fff;
-
-  --blue:#356dff;
-  --cyan:#25c8f5;
-  --violet:#7657ff;
-  --green:#42d6a4;
-
-  --dark:#07111f;
-  --dark-2:#0b1728;
-  --dark-line:rgba(255,255,255,.12);
-}
-
-body{
-  background:#f6f8fc;
-  color:#0b1220;
-}
-
-body:before{
-  background:
-    radial-gradient(circle at 8% 8%,rgba(53,109,255,.10),transparent 25%),
-    radial-gradient(circle at 92% 20%,rgba(118,87,255,.09),transparent 27%),
-    linear-gradient(180deg,#fbfcff 0%,#f2f6fb 100%);
-}
-
-.nav-inner{
-  border-color:rgba(255,255,255,.86);
-  background:rgba(255,255,255,.84);
-  box-shadow:
-    0 12px 38px rgba(25,45,80,.09),
-    inset 0 1px 0 rgba(255,255,255,.96);
-}
-
-.logo{
-  color:#0b1220;
-}
-
-.navlinks{
-  color:#4b5870;
-}
-
-.btn{
-  background:#0b1220;
-  border-color:#0b1220;
-}
-
-.btn:hover{
-  box-shadow:0 16px 38px rgba(53,109,255,.20);
-}
-
-.btn.secondary{
-  background:rgba(255,255,255,.72);
-  border-color:rgba(11,18,32,.13);
-}
-
-.scene-wrap[data-scene="hero"] .scene{
-  background:
-    radial-gradient(circle at 78% 34%,rgba(37,200,245,.20),transparent 24%),
-    radial-gradient(circle at 92% 78%,rgba(118,87,255,.22),transparent 28%),
-    linear-gradient(120deg,#050a12 0%,#081526 52%,#101b35 100%);
-}
-
-.scene-wrap[data-scene="hero"] .scene:before{
-  background:
-    radial-gradient(circle at 62% 70%,rgba(53,109,255,.13),transparent 23%),
-    linear-gradient(90deg,rgba(5,10,18,.18),transparent 62%);
-}
-
-.hero h1 span{
-  background:linear-gradient(100deg,#55ddff 0%,#5d8dff 48%,#9a78ff 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.kicker:before{
-  background:linear-gradient(135deg,#356dff,#25c8f5);
-  box-shadow:0 0 0 4px rgba(53,109,255,.10);
-}
-
-.scene--dark{
-  background:
-    radial-gradient(circle at 78% 18%,rgba(37,200,245,.10),transparent 25%),
-    linear-gradient(135deg,#07111f,#0b1728 55%,#0c1830);
-}
-
-.scene--dark:before{
-  background:
-    radial-gradient(circle at 70% 30%,rgba(37,200,245,.14),transparent 25%),
-    radial-gradient(circle at 20% 70%,rgba(118,87,255,.13),transparent 28%);
-}
-
-.arch-line{
-  border-color:rgba(118,87,255,.16);
-}
-
-.arch-line.two{
-  border-color:rgba(37,200,245,.15);
-}
-
-.arch-dot{
-  box-shadow:0 0 30px rgba(37,200,245,.85);
-}
-
-.service-grid{
-  border-color:rgba(11,18,32,.20);
-  background:#0b1220;
-  box-shadow:0 28px 80px rgba(11,18,32,.16);
-}
-
-.service:nth-child(1){background:#eef6ff;}
-.service:nth-child(2){background:#eafaff;}
-.service:nth-child(3){background:#f1edff;}
-.service:nth-child(4){background:#eafbf5;}
-.service:nth-child(5){background:#fff6e7;}
-.service:nth-child(6){background:#eef0ff;}
-
-.service:before{
-  background:linear-gradient(90deg,#356dff,#25c8f5);
-}
-
-.service:nth-child(3):before,
-.service:nth-child(6):before{
-  background:linear-gradient(90deg,#7657ff,#a07cff);
-}
-
-.service:nth-child(4):before{
-  background:linear-gradient(90deg,#2fc99a,#25c8f5);
-}
-
-.service:hover{
-  background:#ffffff;
-  box-shadow:inset 0 0 0 2px rgba(53,109,255,.18);
-}
-
-.service h3{
-  color:#0b1220;
-}
-
-.service p{
-  color:#43526a;
-}
-
-.automation{
-  background:
-    radial-gradient(circle at 82% 30%,rgba(37,200,245,.16),transparent 25%),
-    linear-gradient(135deg,#0b1423 0%,#0a1729 55%,#111d3b 100%);
-  border-top-color:rgba(255,255,255,.13);
-}
-
-.automation:before{
-  background:linear-gradient(90deg,#356dff,#25c8f5);
-}
-
-.metric{
-  background:rgba(255,255,255,.06);
-  border-color:rgba(255,255,255,.10);
-}
-
-.metric:hover{
-  background:rgba(255,255,255,.09);
-  border-color:rgba(37,200,245,.22);
-}
-
-.orbit-ring{
-  border-color:rgba(53,109,255,.22);
-}
-
-.orbit-ring:nth-child(2){
-  border-color:rgba(37,200,245,.24);
-}
-
-.orbit-dot{
-  background:#356dff;
-  box-shadow:0 0 25px rgba(53,109,255,.58);
-}
-
-.price.pop{
-  background:
-    radial-gradient(circle at 80% 10%,rgba(37,200,245,.13),transparent 30%),
-    linear-gradient(145deg,rgba(53,109,255,.20),rgba(255,255,255,.07));
-  border-color:rgba(92,127,255,.40);
-}
-
-.audit-card{
-  background:
-    radial-gradient(circle at 80% 10%,rgba(37,200,245,.13),transparent 28%),
-    linear-gradient(145deg,#0b1423,#0a1728);
-}
-
-.audit-form input:focus{
-  border-color:#5d8dff;
-  box-shadow:0 0 0 3px rgba(53,109,255,.10);
-}
-
-.final-glow{
-  background:
-    radial-gradient(circle at 70% 25%,rgba(37,200,245,.16),transparent 28%),
-    radial-gradient(circle at 30% 75%,rgba(118,87,255,.14),transparent 30%);
-}
-
-.footer{
-  background:#07111f;
-}
-
-.footer a:hover{
-  color:#55ddff;
-}
-
-
-/* =========================================================
-   WHY SECTION — CRISP BLACK + ELECTRIC ACCENTS
-   Keep this text on a clean, non-composited layer so it
-   stays sharp while the rest of the page animates.
-========================================================= */
-
-.scene-wrap[data-scene="why"] .scene-inner{
-  transform:none !important;
-  opacity:1 !important;
-  transition:none !important;
-}
-
-.scene-wrap[data-scene="why"]{
-  background:
-    radial-gradient(circle at 8% 20%, rgba(37,200,245,.08), transparent 28%),
-    radial-gradient(circle at 92% 80%, rgba(118,87,255,.07), transparent 30%),
-    #f7f9fc;
-  color:#05070b;
-}
-
-.scene-wrap[data-scene="why"] .kicker{
-  color:#111827 !important;
-}
-
-.scene-wrap[data-scene="why"] .kicker:before{
-  background:linear-gradient(90deg,#1f6fff,#00c8f5);
-  box-shadow:0 0 0 4px rgba(31,111,255,.10);
-}
-
-.scene-wrap[data-scene="why"] .why-layout h2{
-  color:#05070b !important;
-  text-shadow:none !important;
-}
-
-.scene-wrap[data-scene="why"] .why-card{
-  background:#ffffff !important;
-  border:1px solid rgba(5,7,11,.12);
-  box-shadow:0 16px 45px rgba(15,23,42,.07);
-  color:#05070b;
-}
-
-.scene-wrap[data-scene="why"] .why-card:nth-child(1){
-  border-top:3px solid #1f6fff;
-}
-
-.scene-wrap[data-scene="why"] .why-card:nth-child(2){
-  border-top:3px solid #00c8f5;
-}
-
-.scene-wrap[data-scene="why"] .why-card:nth-child(3){
-  border-top:3px solid #7657ff;
-}
-
-.scene-wrap[data-scene="why"] .why-card:nth-child(4){
-  border-top:3px solid #19b887;
-}
-
-.scene-wrap[data-scene="why"] .why-card:hover{
-  background:#ffffff !important;
-  box-shadow:0 22px 55px rgba(15,23,42,.12);
-}
-
-.scene-wrap[data-scene="why"] .why-card b{
-  color:#111827 !important;
-  font-weight:800;
-}
-
-.scene-wrap[data-scene="why"] .why-card h3{
-  color:#05070b !important;
-  font-size:26px;
-  font-weight:800;
-}
-
-.scene-wrap[data-scene="why"] .why-card p{
-  color:#374151 !important;
-  font-size:16px;
-  font-weight:500;
-}
-
-
-/* =========================================================
-   WEB CRAFT — FOUR-COLOR PREMIUM SYSTEM
-   Base palette: Obsidian / Soft White / Electric Blue / Cyan
-========================================================= */
-:root{
-  --bg:#F7F9FC;
-  --ink:#05070B;
-  --muted:#4B5563;
-  --muted-2:#6B7280;
-  --line:rgba(5,7,11,.12);
-  --white:#FFFFFF;
-  --blue:#1F6FFF;
-  --cyan:#00C8F5;
-  --violet:#1F6FFF;
-  --green:#00C8F5;
-  --dark:#05070B;
-  --dark-2:#0B1018;
-  --dark-line:rgba(255,255,255,.12);
-}
-body{
-  background:#F7F9FC;
-  color:#05070B;
-}
-body:before{
-  background:
-    radial-gradient(circle at 12% 12%,rgba(31,111,255,.07),transparent 27%),
-    radial-gradient(circle at 88% 25%,rgba(0,200,245,.055),transparent 29%),
-    linear-gradient(180deg,#FFFFFF 0%,#F7F9FC 100%);
-}
-.nav-inner{
-  border-color:rgba(255,255,255,.88);
-  background:rgba(255,255,255,.88);
-}
-.navlinks{color:#4B5563}
-.navlinks a:hover{color:#05070B}
-.navlinks a:after{background:#1F6FFF}
-.btn{
-  background:#05070B;
-  border-color:#05070B;
-}
-.btn:hover{box-shadow:0 14px 34px rgba(5,7,11,.18)}
-.btn.secondary{
-  background:#FFFFFF;
-  color:#05070B;
-  border-color:rgba(5,7,11,.14);
-}
-.btn.light{
-  background:#FFFFFF;
-  color:#05070B;
-  border-color:#FFFFFF;
-}
-.kicker{color:#374151}
-.kicker:before{
-  background:linear-gradient(135deg,#1F6FFF,#00C8F5);
-  box-shadow:0 0 0 4px rgba(31,111,255,.08);
-}
-.scene-wrap[data-scene="hero"] .scene{
-  background:
-    radial-gradient(circle at 78% 38%,rgba(31,111,255,.18),transparent 24%),
-    radial-gradient(circle at 92% 78%,rgba(0,200,245,.11),transparent 27%),
-    linear-gradient(115deg,#05070B 0%,#08101A 52%,#0B1722 100%);
-}
-.scene-wrap[data-scene="hero"] .scene:before{
-  background:
-    radial-gradient(circle at 62% 70%,rgba(0,200,245,.09),transparent 22%),
-    linear-gradient(90deg,rgba(5,7,11,.16),transparent 60%);
-}
-.scene-wrap[data-scene="hero"] .hero h1 span{
-  background:linear-gradient(100deg,#1F6FFF 0%,#00C8F5 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-}
-.scene--dark{background:#05070B}
-.scene--dark:before{
-  background:
-    radial-gradient(circle at 70% 30%,rgba(31,111,255,.17),transparent 25%),
-    radial-gradient(circle at 20% 70%,rgba(0,200,245,.09),transparent 28%);
-}
-.scene--dark .btn.secondary{
-  color:#FFFFFF;
-  background:rgba(255,255,255,.05);
-  border-color:rgba(255,255,255,.18);
-}
-.service-grid{
-  border-color:rgba(5,7,11,.18);
-  background:#05070B;
-}
-.service,
-.service:nth-child(1),
-.service:nth-child(2),
-.service:nth-child(3),
-.service:nth-child(4),
-.service:nth-child(5),
-.service:nth-child(6){
-  background:#FFFFFF;
-  color:#05070B;
-}
-.service:hover{background:#F7F9FC}
-.service:before,
-.automation:before{
-  background:linear-gradient(90deg,#1F6FFF,#00C8F5);
-}
-.service h3{color:#05070B}
-.service p{color:#374151}
-.automation{
-  background:linear-gradient(135deg,#05070B 0%,#0B1018 60%,#0D1720 100%);
-  border-top-color:rgba(255,255,255,.12);
-}
-.process-step{border-color:var(--line)}
-.process-step h3{color:#05070B}
-.process-step b,.process-step span{color:#6B7280}
-.orbit-ring{border-color:rgba(31,111,255,.22)}
-.orbit-ring:nth-child(2){border-color:rgba(0,200,245,.24)}
-.orbit-core{
-  background:linear-gradient(135deg,#FFFFFF,#EAFBFF);
-}
-.orbit-dot{background:#1F6FFF;box-shadow:0 0 25px rgba(31,111,255,.55)}
-.price.pop{
-  background:linear-gradient(145deg,rgba(31,111,255,.16),rgba(255,255,255,.07));
-  border-color:rgba(31,111,255,.38);
-}
-.audit-card{
-  background:linear-gradient(145deg,#05070B,#0B1018);
-}
-.audit-form input:focus{border-color:#1F6FFF}
-.why-card:nth-child(2),
-.why-card:nth-child(3),
-.why-card:nth-child(4){background:#FFFFFF}
-.why-card:nth-child(2){border-top-color:#1F6FFF!important}
-.why-card:nth-child(3){border-top-color:#00C8F5!important}
-.why-card:nth-child(4){border-top-color:#1F6FFF!important}
-.final{
-  background:#05070B;
-}
-.final-glow{
-  background:
-    radial-gradient(circle at 72% 34%,rgba(31,111,255,.20),transparent 28%),
-    radial-gradient(circle at 24% 76%,rgba(0,200,245,.10),transparent 26%);
-}
-.footer{background:#05070B;color:#FFFFFF}
-.footer-links a:hover{color:#00C8F5}
 
 </style>
 </head>
 
+
 <body>
 
-<div class="architecture-viewport" aria-hidden="true">
-  <div class="path"></div>
-</div>
+<!-- =======================================================
+     ARCHITECTURE BACKGROUND
+======================================================= -->
+
+<div
+  class="architecture-viewport"
+  aria-hidden="true"
+></div>
+
+
+<!-- =======================================================
+     CUSTOM CURSOR
+======================================================= -->
 
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 <div class="cursor-label"></div>
 
+
+<!-- =======================================================
+     NAVIGATION
+======================================================= -->
+
 <header class="nav">
+
   <div class="nav-inner">
 
-    <a class="logo" href="#top">
+    <a
+      class="logo"
+      href="#top"
+      aria-label="Web Craft home"
+    >
       Web Craft.
     </a>
 
-    <nav class="navlinks">
+    <nav
+      class="navlinks"
+      aria-label="Primary navigation"
+    >
+
       <a href="#services">Services</a>
+
+      <a href="#work">Work</a>
+
       <a href="#process">Process</a>
+
       <a href="#pricing">Pricing</a>
+
       <a href="#audit">Audit</a>
+
+      <a href="#about">About</a>
+
     </nav>
 
     <a
       class="btn nav-cta magnetic"
-      data-cursor="BOOK A CALL"
+      data-cursor="START"
       href="#contact"
     >
-      Book a Call ↗
+      Start a Project ↗
     </a>
 
   </div>
+
 </header>
 
-<main id="top" class="journey">
 
-<!-- HERO -->
+<!-- =======================================================
+     MAIN
+======================================================= -->
 
-<section class="scene-wrap" data-scene="hero">
+<main
+  id="top"
+  class="journey"
+>
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section
+  class="scene-wrap"
+  data-scene="hero"
+>
 
   <div class="scene">
 
     <div class="scene-inner hero">
 
-      <div class="scene-content">
+      <div class="kicker">
+        Websites + automation for businesses that want more enquiries
+      </div>
 
-        <div class="kicker">
-          Premium digital experiences
-        </div>
+      <h1>
+        Websites that turn
+        <span>attention into enquiries.</span>
+      </h1>
 
-        <h1>
-          Your business deserves a
-          <span>better digital presence.</span>
-        </h1>
+      <div class="hero-copy">
 
-        <div class="hero-copy">
+        <p>
+          Web Craft builds premium websites and the systems behind them —
+          from lead capture to follow-up — so visitors understand your offer,
+          trust your business, and have a clear reason to get in touch.
+        </p>
 
-          <p>
-            We design and build fast, modern websites — and the automation
-            behind them — so businesses look professional, build trust,
-            and convert more of the visitors they already get.
-          </p>
+        <div class="actions">
 
-          <div class="actions">
+          <a
+            class="btn magnetic"
+            data-cursor="AUDIT"
+            href="#audit"
+          >
+            Free Website Audit ↗
+          </a>
 
-            <a
-              class="btn magnetic"
-              data-cursor="AUDIT"
-              href="#audit"
-            >
-              Free Website Audit ↗
-            </a>
-
-          </div>
+          <a
+            class="btn secondary magnetic"
+            data-cursor="WORK"
+            href="#work"
+          >
+            See Our Approach ↗
+          </a>
 
         </div>
 
       </div>
 
+
       <div
         class="hero-stage"
-        id="heroStage"
         aria-hidden="true"
       >
 
         <img
           class="hero-device-image"
           src="/assets/webcraft-hero.png"
-          alt=""
+          alt="Web Craft premium website interface displayed on a laptop"
           width="780"
           height="1020"
           loading="eager"
@@ -2509,7 +2675,10 @@ body:before{
 
 </section>
 
-<!-- MANIFESTO -->
+
+<!-- =======================================================
+     MANIFESTO
+======================================================= -->
 
 <section
   class="scene-wrap scene--dark"
@@ -2519,9 +2688,13 @@ body:before{
   <div class="scene">
 
     <div class="arch">
+
       <div class="arch-line"></div>
+
       <div class="arch-line two"></div>
+
       <div class="arch-dot"></div>
+
     </div>
 
     <div class="scene-inner">
@@ -2535,16 +2708,16 @@ body:before{
           </div>
 
           <h2>
-            Good businesses can look invisible online.
+            A good website should make the next step obvious.
           </h2>
 
         </div>
 
         <p>
-          Outdated, slow, confusing or difficult-to-update websites create
-          friction before a conversation even starts. Web Craft turns that
-          friction into a clear digital experience — then automates the
-          busywork around it.
+          If a visitor cannot understand your offer, trust your business,
+          or see what to do next, the website creates friction.
+          We remove that friction first — then connect the website
+          to the workflows that keep enquiries moving.
         </p>
 
       </div>
@@ -2552,15 +2725,15 @@ body:before{
       <div class="metric-row">
 
         <div class="metric">
-          <span>Clearer positioning</span>
+          <span>Clear positioning</span>
         </div>
 
         <div class="metric">
-          <span>Faster customer journeys</span>
+          <span>Clear conversion paths</span>
         </div>
 
         <div class="metric">
-          <span>Built for real devices</span>
+          <span>Automation that follows through</span>
         </div>
 
       </div>
@@ -2571,7 +2744,10 @@ body:before{
 
 </section>
 
-<!-- SERVICES -->
+
+<!-- =======================================================
+     SERVICES
+======================================================= -->
 
 <section
   id="services"
@@ -2592,73 +2768,113 @@ body:before{
           </div>
 
           <h2>
-            The website, and the system behind it.
+            One digital system.
+            Built around your business.
           </h2>
 
           <p>
-            Design, code and automation — only the capabilities needed
-            to create a complete, dependable digital presence.
+            We combine strategy, premium web design, development and
+            automation into one connected experience — without unnecessary
+            complexity.
           </p>
 
         </div>
 
+
         <div class="service-grid">
 
-          <div class="service">
-            <h3>Website Design</h3>
+          <article class="service">
+
+            <h3>
+              Website Design
+            </h3>
+
             <p>
               High-clarity layouts, visual direction and responsive UX.
             </p>
-          </div>
 
-          <div class="service">
-            <h3>Website Development</h3>
+          </article>
+
+
+          <article class="service">
+
+            <h3>
+              Website Development
+            </h3>
+
             <p>
               Fast, maintainable frontends and functional business experiences.
             </p>
-          </div>
 
-          <div class="service">
-            <h3>Website Redesign</h3>
+          </article>
+
+
+          <article class="service">
+
+            <h3>
+              Website Redesign
+            </h3>
+
             <p>
               Transform outdated websites into modern digital experiences.
             </p>
-          </div>
 
-          <div class="service">
-            <h3>SEO &amp; Performance</h3>
+          </article>
+
+
+          <article class="service">
+
+            <h3>
+              SEO &amp; Performance
+            </h3>
+
             <p>
-              Technical foundations for discoverability, speed and better experiences.
+              Technical foundations for discoverability, speed and better
+              experiences.
             </p>
-          </div>
 
-          <div class="service">
-            <h3>Maintenance</h3>
+          </article>
+
+
+          <article class="service">
+
+            <h3>
+              Maintenance
+            </h3>
+
             <p>
               Ongoing updates, monitoring and support after launch.
             </p>
-          </div>
 
-          <div class="service">
-            <h3>Google Business Profile</h3>
+          </article>
+
+
+          <article class="service">
+
+            <h3>
+              Google Business Profile
+            </h3>
+
             <p>
               Improve local visibility for the searches that matter.
             </p>
-          </div>
 
-          <div class="automation">
+          </article>
+
+
+          <article class="automation">
 
             <b>
               Business Automation
             </b>
 
             <p>
-              Lead capture, qualification, follow-ups and internal workflows
-              — connected directly to the website so enquiries move without
-              manual chasing.
+              Capture the lead, qualify the opportunity, send the right
+              follow-up and keep your pipeline moving. The website becomes
+              the front door to a system — not a static brochure.
             </p>
 
-          </div>
+          </article>
 
         </div>
 
@@ -2670,7 +2886,10 @@ body:before{
 
 </section>
 
-<!-- PROCESS -->
+
+<!-- =======================================================
+     PROCESS
+======================================================= -->
 
 <section
   id="process"
@@ -2691,7 +2910,7 @@ body:before{
           </div>
 
           <h2>
-            Five moves. One finished experience.
+            From first visit to first conversation.
           </h2>
 
           <div
@@ -2700,6 +2919,7 @@ body:before{
           >
 
             <div class="orbit-ring"></div>
+
             <div class="orbit-ring"></div>
 
             <div class="orbit-core">
@@ -2707,43 +2927,84 @@ body:before{
             </div>
 
             <i class="orbit-dot one"></i>
+
             <i class="orbit-dot two"></i>
+
             <i class="orbit-dot three"></i>
 
           </div>
 
         </div>
 
+
         <div class="process-list">
 
           <div class="process-step">
+
             <b>01</b>
-            <h3>Discover</h3>
-            <span>Understand the business, audience and goals</span>
+
+            <div>
+              <h3>
+                Tell us what’s not working.
+              </h3>
+
+              <span>
+                We understand the business, audience, offer and friction.
+              </span>
+            </div>
+
           </div>
 
+
           <div class="process-step">
+
             <b>02</b>
-            <h3>Design</h3>
-            <span>Shape the visual direction and experience</span>
+
+            <div>
+              <h3>
+                We find the opportunity.
+              </h3>
+
+              <span>
+                We identify the clearest positioning, conversion path
+                and system gaps.
+              </span>
+            </div>
+
           </div>
 
+
           <div class="process-step">
+
             <b>03</b>
-            <h3>Build</h3>
-            <span>Develop the website and required functionality</span>
+
+            <div>
+              <h3>
+                We build the system.
+              </h3>
+
+              <span>
+                Website, lead capture, integrations and automation work together.
+              </span>
+            </div>
+
           </div>
 
+
           <div class="process-step">
+
             <b>04</b>
-            <h3>Launch</h3>
-            <span>Test, optimize and launch</span>
-          </div>
 
-          <div class="process-step">
-            <b>05</b>
-            <h3>Improve</h3>
-            <span>Ongoing performance, SEO and workflow refinement</span>
+            <div>
+              <h3>
+                You launch and grow.
+              </h3>
+
+              <span>
+                We test, launch and support the next improvements after go-live.
+              </span>
+            </div>
+
           </div>
 
         </div>
@@ -2756,7 +3017,10 @@ body:before{
 
 </section>
 
-<!-- PRICING -->
+
+<!-- =======================================================
+     PRICING
+======================================================= -->
 
 <section
   id="pricing"
@@ -2777,17 +3041,26 @@ body:before{
           </div>
 
           <h2>
-            Simple. Transparent.
+            Simple.
+            Transparent.
           </h2>
 
           <p>
-            Informational pricing only. There is no online checkout or
-            automated payment — projects are agreed in conversation.
+            Setup covers the initial strategy, design and build.
+            The monthly fee covers hosting, monitoring, maintenance,
+            updates and ongoing support.
+          </p>
+
+          <p>
+            There is no online checkout. Projects are agreed directly
+            in conversation.
           </p>
 
         </div>
 
+
         <div class="pricing">
+
 
           <article class="price">
 
@@ -2800,26 +3073,46 @@ body:before{
             </h3>
 
             <div class="amount">
-              $999 <small>setup</small><br>
-              + $79 <small>/ month</small>
+              $999
+              <small>setup</small>
+              <br>
+              + $79
+              <small>/ month</small>
             </div>
 
             <ul>
-              <li>Up to 6 pages</li>
-              <li>Custom design system</li>
-              <li>SEO &amp; performance setup</li>
-              <li>Hosting &amp; monitoring included</li>
-              <li>2 weeks turnaround</li>
+
+              <li>
+                Up to 6 pages
+              </li>
+
+              <li>
+                Custom design system
+              </li>
+
+              <li>
+                SEO &amp; performance setup
+              </li>
+
+              <li>
+                Hosting &amp; monitoring
+              </li>
+
+              <li>
+                2 weeks turnaround
+              </li>
+
             </ul>
 
             <a
               class="btn light"
               href="#contact"
             >
-              Book a Call
+              Discuss Your Project ↗
             </a>
 
           </article>
+
 
           <article class="price pop">
 
@@ -2832,26 +3125,46 @@ body:before{
             </h3>
 
             <div class="amount">
-              $1,999 <small>setup</small><br>
-              + $149 <small>/ month</small>
+              $1,999
+              <small>setup</small>
+              <br>
+              + $149
+              <small>/ month</small>
             </div>
 
             <ul>
-              <li>Unlimited pages</li>
-              <li>CMS-driven content</li>
-              <li>Booking, forms &amp; integrations</li>
-              <li>Priority support &amp; updates</li>
-              <li>4–6 weeks turnaround</li>
+
+              <li>
+                Unlimited pages
+              </li>
+
+              <li>
+                CMS-driven content
+              </li>
+
+              <li>
+                Booking, forms &amp; integrations
+              </li>
+
+              <li>
+                Priority support &amp; updates
+              </li>
+
+              <li>
+                4–6 weeks turnaround
+              </li>
+
             </ul>
 
             <a
               class="btn light"
               href="#contact"
             >
-              Book a Call
+              Discuss Your Project ↗
             </a>
 
           </article>
+
 
           <article class="price">
 
@@ -2864,26 +3177,46 @@ body:before{
             </h3>
 
             <div class="amount">
-              $3,999 <small>setup</small><br>
-              + $299 <small>/ month</small>
+              $3,999
+              <small>setup</small>
+              <br>
+              + $299
+              <small>/ month</small>
             </div>
 
             <ul>
-              <li>Everything in Growth</li>
-              <li>Business automation &amp; workflows</li>
-              <li>Admin dashboard</li>
-              <li>Database/API integrations</li>
-              <li>Dedicated support line</li>
+
+              <li>
+                Everything in Growth
+              </li>
+
+              <li>
+                Business automation &amp; workflows
+              </li>
+
+              <li>
+                Admin dashboard
+              </li>
+
+              <li>
+                Database/API integrations
+              </li>
+
+              <li>
+                Dedicated support line
+              </li>
+
             </ul>
 
             <a
               class="btn light"
               href="#contact"
             >
-              Book a Call
+              Discuss Your Project ↗
             </a>
 
           </article>
+
 
         </div>
 
@@ -2895,7 +3228,10 @@ body:before{
 
 </section>
 
-<!-- AUDIT -->
+
+<!-- =======================================================
+     FREE WEBSITE AUDIT
+======================================================= -->
 
 <section
   id="audit"
@@ -2927,6 +3263,7 @@ body:before{
 
         </div>
 
+
         <div class="audit-card">
 
           <label for="auditUrl">
@@ -2940,8 +3277,10 @@ body:before{
 
             <input
               id="auditUrl"
+              name="url"
               type="url"
               placeholder="https://yourwebsite.com"
+              autocomplete="url"
               required
             >
 
@@ -2954,6 +3293,7 @@ body:before{
 
           </form>
 
+
           <div
             class="audit-status"
             id="auditStatus"
@@ -2962,10 +3302,75 @@ body:before{
             No fabricated scores.
           </div>
 
+
+          <div class="audit-value">
+
+            <div class="audit-value-head">
+
+              <strong>
+                What you get
+              </strong>
+
+              <span>
+                No credit card. No pressure.
+              </span>
+
+            </div>
+
+            <div class="audit-value-grid">
+
+              <span>
+                Design &amp; clarity
+              </span>
+
+              <span>
+                Mobile experience
+              </span>
+
+              <span>
+                SEO signals
+              </span>
+
+              <span>
+                Performance signals
+              </span>
+
+              <span>
+                Conversion friction
+              </span>
+
+              <span>
+                Lead capture
+              </span>
+
+            </div>
+
+          </div>
+
+
           <div
             class="audit-result"
             id="auditResult"
           ></div>
+
+
+          <div
+            class="audit-next-step"
+            id="auditNextStep"
+          >
+
+            <strong>
+              Want us to fix what the audit finds?
+            </strong>
+
+            <a
+              class="btn light"
+              href="#contact"
+            >
+              Start a Project ↗
+            </a>
+
+          </div>
 
         </div>
 
@@ -2977,7 +3382,167 @@ body:before{
 
 </section>
 
-<!-- WHY WEB CRAFT -->
+
+<!-- =======================================================
+     CONCEPT WORK
+======================================================= -->
+
+<section
+  id="work"
+  class="scene-wrap"
+  data-scene="work"
+>
+
+  <div class="scene">
+
+    <div class="scene-inner">
+
+      <div class="work-layout">
+
+        <div>
+
+          <div class="kicker">
+            Concept work
+          </div>
+
+          <h2>
+            Built to show what
+            <span class="work-accent">
+              Web Craft can do.
+            </span>
+          </h2>
+
+          <p class="work-intro">
+            These are concept projects, not claimed client results.
+            They show how we approach different business problems before
+            real case studies replace them.
+          </p>
+
+        </div>
+
+
+        <div class="concept-grid">
+
+
+          <article class="concept-card concept-blue">
+
+            <div class="concept-window">
+
+              <div class="concept-bar">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+
+              <div class="concept-lines">
+                <b></b>
+                <b></b>
+                <b></b>
+                <b></b>
+              </div>
+
+            </div>
+
+            <span>
+              CONCEPT PROJECT · HVAC
+            </span>
+
+            <h3>
+              More enquiries from local search.
+            </h3>
+
+            <p>
+              Clear service pages, strong calls to action and a
+              mobile-first booking path.
+            </p>
+
+          </article>
+
+
+          <article class="concept-card concept-violet">
+
+            <div class="concept-window">
+
+              <div class="concept-bar">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+
+              <div class="concept-lines">
+                <b></b>
+                <b></b>
+                <b></b>
+                <b></b>
+              </div>
+
+            </div>
+
+            <span>
+              CONCEPT PROJECT · CREATOR
+            </span>
+
+            <h3>
+              Turn attention into an owned audience.
+            </h3>
+
+            <p>
+              A focused landing experience with lead capture
+              and automated follow-up.
+            </p>
+
+          </article>
+
+
+          <article class="concept-card concept-green">
+
+            <div class="concept-window">
+
+              <div class="concept-bar">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+
+              <div class="concept-lines">
+                <b></b>
+                <b></b>
+                <b></b>
+                <b></b>
+              </div>
+
+            </div>
+
+            <span>
+              CONCEPT PROJECT · HOME SERVICE
+            </span>
+
+            <h3>
+              Make trust visible before the first call.
+            </h3>
+
+            <p>
+              Proof-led structure, local credibility and a
+              frictionless enquiry journey.
+            </p>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     WHY WEB CRAFT
+======================================================= -->
 
 <section
   class="scene-wrap"
@@ -2997,14 +3562,17 @@ body:before{
           </div>
 
           <h2>
-            Quietly premium. Deliberately built.
+            Quietly premium.
+            Deliberately built.
           </h2>
 
         </div>
 
+
         <div class="why-grid">
 
-          <div class="why-card">
+
+          <article class="why-card">
 
             <b>
               Strategy before decoration
@@ -3019,9 +3587,10 @@ body:before{
               and what to do next.
             </p>
 
-          </div>
+          </article>
 
-          <div class="why-card">
+
+          <article class="why-card">
 
             <b>
               Craft in the details
@@ -3036,9 +3605,10 @@ body:before{
               work as one system.
             </p>
 
-          </div>
+          </article>
 
-          <div class="why-card">
+
+          <article class="why-card">
 
             <b>
               No invented proof
@@ -3052,9 +3622,10 @@ body:before{
               Real work and clear limitations matter more than made-up results.
             </p>
 
-          </div>
+          </article>
 
-          <div class="why-card">
+
+          <article class="why-card">
 
             <b>
               Built for growth
@@ -3068,6 +3639,93 @@ body:before{
               Maintainable code, sensible integrations and support after launch.
             </p>
 
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     ABOUT
+======================================================= -->
+
+<section
+  id="about"
+  class="scene-wrap scene--dark"
+  data-scene="about"
+>
+
+  <div class="scene">
+
+    <div class="scene-inner">
+
+      <div class="about-layout">
+
+        <div>
+
+          <div class="kicker">
+            About Web Craft
+          </div>
+
+          <h2>
+            Small team.
+            <span>Systems mindset.</span>
+          </h2>
+
+        </div>
+
+
+        <div class="about-copy">
+
+          <div class="founder-mark">
+            AK
+          </div>
+
+          <p>
+            I'm Akshay, founder of Web Craft. I build premium digital
+            experiences for businesses that want more than a good-looking
+            website — they want a clear customer journey and dependable
+            systems behind it.
+          </p>
+
+          <div class="trust-row">
+
+            <span>
+              Human-led projects
+            </span>
+
+            <span>
+              Manual payment after confirmation
+            </span>
+
+            <span>
+              Reply within 24 hours
+            </span>
+
+          </div>
+
+          <div class="contact-links">
+
+            <a
+              href="https://www.instagram.com/webcraft.flow/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram ↗
+            </a>
+
+            <a href="#contact">
+              Start a project ↗
+            </a>
+
           </div>
 
         </div>
@@ -3080,7 +3738,10 @@ body:before{
 
 </section>
 
-<!-- FAQ -->
+
+<!-- =======================================================
+     FAQ
+======================================================= -->
 
 <section
   class="scene-wrap"
@@ -3100,37 +3761,48 @@ body:before{
           </div>
 
           <h2>
-            Questions, answered.
+            Questions,
+            answered.
           </h2>
 
         </div>
 
+
         <div class="faq">
 
+
           <details>
+
             <summary>
               What does Web Craft do?
             </summary>
 
             <p>
-              We design and build websites, and connect them to the automation
-              a business needs — lead capture, follow-ups and internal workflows
-              — as one system.
+              We design and build websites, and connect them to the
+              automation a business needs — lead capture, follow-ups
+              and internal workflows — as one system.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               How does a project start?
             </summary>
 
             <p>
-              Book a call or send an enquiry. We discuss your business,
-              goals, scope and the right approach before any project decision.
+              Send an enquiry and tell us what you are trying to build,
+              improve or launch. We discuss your business, goals and scope
+              before any project decision.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               Do you redesign existing websites?
             </summary>
@@ -3139,65 +3811,79 @@ body:before{
               Yes. Existing websites are reviewed first so we can identify
               what should be kept, improved, replaced or removed.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               Do you provide SEO and maintenance?
             </summary>
 
             <p>
-              Yes, both are part of the service model — SEO and performance
-              setup are included from Starter, with ongoing maintenance
-              available on every plan.
+              Yes. SEO and performance foundations are included from Starter,
+              with ongoing maintenance and support available on every plan.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               What is business automation?
             </summary>
 
             <p>
-              Automating the repetitive parts of running a business online
-              — enquiry routing, follow-ups and internal notifications —
-              so leads don't sit unanswered.
+              It means automating repetitive parts of the customer journey —
+              enquiry routing, follow-ups and internal notifications —
+              so leads do not simply sit unanswered.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               Do you work internationally?
             </summary>
 
             <p>
-              Yes. Web Craft works with businesses in the US, UK,
-              Australia and Canada.
+              Yes. Web Craft can work with businesses internationally.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               How does the Free Website Audit work?
             </summary>
 
             <p>
-              Enter a public website URL and we review the homepage's
-              structure, SEO and performance signals — then walk through
-              the results together.
+              Enter a public website URL and the system reviews the
+              homepage structure, SEO and available performance signals.
             </p>
+
           </details>
 
+
           <details>
+
             <summary>
               How do payments work?
             </summary>
 
             <p>
-              There is no online checkout. Pricing is agreed in conversation
-              and handled directly between us.
+              There is no online checkout. Pricing is agreed directly
+              in conversation and payment is handled after confirmation.
             </p>
+
           </details>
+
 
         </div>
 
@@ -3209,7 +3895,10 @@ body:before{
 
 </section>
 
-<!-- FINAL CTA / CONTACT -->
+
+<!-- =======================================================
+     FINAL CTA + CONTACT
+======================================================= -->
 
 <section
   id="contact"
@@ -3218,8 +3907,6 @@ body:before{
 >
 
   <div class="scene">
-
-    <div class="final-glow"></div>
 
     <div class="scene-inner">
 
@@ -3235,115 +3922,66 @@ body:before{
       <p>
         Tell us what you are building, improving or launching.
         We will start with a conversation — not a checkout.
+        Expect a human reply within 24 hours.
       </p>
+
 
       <form
         class="contact-form"
         id="contactForm"
-        style="
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:10px;
-          max-width:850px;
-        "
       >
 
         <input
           name="name"
+          type="text"
           placeholder="Your name"
+          autocomplete="name"
           required
-          style="
-            border:1px solid #343b49;
-            background:#171d27;
-            color:#fff;
-            border-radius:12px;
-            padding:15px;
-            outline:none;
-          "
         >
 
         <input
           name="business"
+          type="text"
           placeholder="Business name"
+          autocomplete="organization"
           required
-          style="
-            border:1px solid #343b49;
-            background:#171d27;
-            color:#fff;
-            border-radius:12px;
-            padding:15px;
-            outline:none;
-          "
         >
 
         <input
           name="email"
           type="email"
           placeholder="Email"
+          autocomplete="email"
           required
-          style="
-            border:1px solid #343b49;
-            background:#171d27;
-            color:#fff;
-            border-radius:12px;
-            padding:15px;
-            outline:none;
-          "
         >
 
         <input
           name="phone"
+          type="tel"
           placeholder="Phone / WhatsApp"
-          style="
-            border:1px solid #343b49;
-            background:#171d27;
-            color:#fff;
-            border-radius:12px;
-            padding:15px;
-            outline:none;
-          "
+          autocomplete="tel"
         >
 
         <input
           name="website"
+          type="url"
           placeholder="Current website (optional)"
-          style="
-            grid-column:1/-1;
-            border:1px solid #343b49;
-            background:#171d27;
-            color:#fff;
-            border-radius:12px;
-            padding:15px;
-            outline:none;
-          "
+          autocomplete="url"
+          style="grid-column:1/-1;"
         >
 
         <textarea
           name="need"
           placeholder="What do you need?"
           required
-          style="
-            grid-column:1/-1;
-            min-height:110px;
-            resize:vertical;
-            border:1px solid #343b49;
-            background:#171d27;
-            color:#fff;
-            border-radius:12px;
-            padding:15px;
-            outline:none;
-          "
         ></textarea>
 
+
         <div
+          class="contact-status"
           id="contactStatus"
-          style="
-            grid-column:1/-1;
-            color:#aab4c4;
-            font-size:12px;
-            min-height:20px;
-          "
         ></div>
+
 
         <button
           class="btn light magnetic"
@@ -3360,9 +3998,60 @@ body:before{
 
 </section>
 
+
 </main>
 
-<!-- FOOTER -->
+
+<!-- =======================================================
+     PRIVACY + TERMS
+======================================================= -->
+
+<section
+  class="legal-strip"
+  aria-label="Legal information"
+>
+
+  <div class="legal-inner">
+
+    <details id="privacy">
+
+      <summary>
+        Privacy
+      </summary>
+
+      <p>
+        Web Craft uses information you submit through the website to respond
+        to enquiries and provide requested services. We do not sell submitted
+        contact information. Third-party services used to operate forms,
+        hosting or analytics may process data according to their own policies.
+      </p>
+
+    </details>
+
+
+    <details id="terms">
+
+      <summary>
+        Terms
+      </summary>
+
+      <p>
+        Website content, audit results and pricing are provided for
+        informational purposes. Project scope, timelines, deliverables,
+        payment terms and ongoing support are confirmed directly before work
+        begins.
+      </p>
+
+    </details>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
 <footer class="footer">
 
@@ -3372,10 +4061,19 @@ body:before{
       © 2026 Web Craft. Designed and built with care.
     </div>
 
+
     <div class="footer-links">
 
       <a href="#services">
         Services
+      </a>
+
+      <a href="#work">
+        Work
+      </a>
+
+      <a href="#process">
+        Process
       </a>
 
       <a href="#pricing">
@@ -3386,8 +4084,28 @@ body:before{
         Free Website Audit
       </a>
 
+      <a href="#about">
+        About
+      </a>
+
+      <a href="#privacy">
+        Privacy
+      </a>
+
+      <a href="#terms">
+        Terms
+      </a>
+
+      <a
+        href="https://www.instagram.com/webcraft.flow/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram ↗
+      </a>
+
       <a href="#contact">
-        Book a Call
+        Start a Project
       </a>
 
     </div>
@@ -3396,329 +4114,405 @@ body:before{
 
 </footer>
 
+
 <script>
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
-
-const reduce = matchMedia(
-  '(prefers-reduced-motion:reduce)'
-).matches;
-
-const fine = matchMedia(
-  '(pointer:fine)'
-).matches;
-
-const scenes = $$('.scene-wrap');
 
 /* =========================================================
-   CRISP CINEMATIC SCROLL ENGINE
-
-   No scale.
-   No rotation.
-   No horizontal transforms.
-   Only subtle vertical movement + opacity.
+   HELPERS
 ========================================================= */
 
-if(!reduce){
+const $ = selector =>
+  document.querySelector(selector);
 
-  let raf = 0;
+const $$ = selector =>
+  [...document.querySelectorAll(selector)];
 
-  const update = () => {
 
-    raf = 0;
+const reduceMotion =
+  window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-    const vh = innerHeight;
 
-    scenes.forEach((wrap) => {
+const finePointer =
+  window.matchMedia(
+    "(pointer:fine)"
+  ).matches;
 
-      const r =
-        wrap.getBoundingClientRect();
+
+/* =========================================================
+   CINEMATIC SCROLL
+========================================================= */
+
+const scenes =
+  $$(".scene-wrap");
+
+
+if(!reduceMotion){
+
+  let scrollFrame = 0;
+
+
+  function updateScenes(){
+
+    scrollFrame = 0;
+
+    const vh =
+      window.innerHeight;
+
+
+    scenes.forEach(scene => {
+
+      const rect =
+        scene.getBoundingClientRect();
+
+
+      const inner =
+        scene.querySelector(
+          ".scene-inner"
+        );
+
+
+      if(!inner){
+        return;
+      }
+
+
+      const active =
+        rect.top < vh * .72 &&
+        rect.bottom > vh * .28;
+
+
+      scene.classList.toggle(
+        "is-active",
+        active
+      );
+
+
+      scene.classList.toggle(
+        "is-past",
+        rect.bottom <= vh * .28
+      );
+
+
+      /*
+        Desktop gets a subtle vertical transition.
+
+        No scale.
+        No rotation.
+        No horizontal movement.
+
+        This keeps typography sharp.
+      */
+
+      if(
+        window.innerWidth <= 1000
+      ){
+
+        inner.style.transform =
+          "none";
+
+        inner.style.opacity =
+          "1";
+
+        return;
+      }
+
 
       const progress =
         Math.min(
           1,
           Math.max(
             0,
-            (vh - r.top) /
-            Math.max(1,r.height - vh)
+            (vh - rect.top) /
+            Math.max(
+              1,
+              rect.height - vh
+            )
           )
         );
 
-      const inner =
-        wrap.querySelector(
-          '.scene-inner'
-        );
-
-      const active =
-        r.top < vh * .72 &&
-        r.bottom > vh * .28;
-
-      wrap.classList.toggle(
-        'is-active',
-        active
-      );
-
-      wrap.classList.toggle(
-        'is-past',
-        r.bottom <= vh * .28
-      );
-
-      if(!inner) return;
 
       let y = 0;
       let opacity = 1;
+
 
       if(progress < .34){
 
         const t =
           progress / .34;
 
-        const e =
+        const eased =
           t * t * (3 - 2 * t);
 
         y =
-          42 * (1 - e);
+          32 * (1 - eased);
 
         opacity =
-          .45 + (.55 * e);
+          .45 + (.55 * eased);
 
-      }else if(progress < .72){
+      }
+
+      else if(progress < .72){
 
         y = 0;
         opacity = 1;
 
-      }else{
+      }
+
+      else{
 
         const t =
           (progress - .72) / .28;
 
-        const e =
+        const eased =
           t * t * (3 - 2 * t);
 
         y =
-          42 * e;
+          32 * eased;
 
         opacity =
-          1 - (.55 * e);
+          1 - (.55 * eased);
+
       }
 
-      if(r.bottom < vh * .55){
-
-        const t =
-          Math.min(
-            1,
-            Math.max(
-              0,
-              (vh * .55 - r.bottom) /
-              (vh * .55)
-            )
-          );
-
-        y += t * 14;
-
-        opacity *=
-          1 - (t * .35);
-      }
 
       inner.style.transform =
         `translateY(${y}px)`;
 
       inner.style.opacity =
         opacity;
+
     });
-  };
 
-  addEventListener(
-    'scroll',
-    () => {
+  }
 
-      if(!raf){
 
-        raf =
-          requestAnimationFrame(
-            update
-          );
-      }
+  function requestSceneUpdate(){
 
-    },
+    if(!scrollFrame){
+
+      scrollFrame =
+        requestAnimationFrame(
+          updateScenes
+        );
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    requestSceneUpdate,
     {
       passive:true
     }
   );
 
-  addEventListener(
-    'resize',
-    () => {
 
-      if(!raf){
-
-        raf =
-          requestAnimationFrame(
-            update
-          );
-      }
-
-    }
+  window.addEventListener(
+    "resize",
+    requestSceneUpdate
   );
 
-  update();
+
+  updateScenes();
+
 }
+
 
 /* =========================================================
    CUSTOM CURSOR
 ========================================================= */
 
-if(fine && !reduce){
+if(
+  finePointer &&
+  !reduceMotion
+){
 
   document.body.classList.add(
-    'cursor-enabled'
+    "cursor-enabled"
   );
 
+
   const dot =
-    $('.cursor-dot');
+    $(".cursor-dot");
 
   const ring =
-    $('.cursor-ring');
+    $(".cursor-ring");
 
   const label =
-    $('.cursor-label');
+    $(".cursor-label");
+
 
   let x =
-    innerWidth / 2;
+    window.innerWidth / 2;
 
   let y =
-    innerHeight / 2;
+    window.innerHeight / 2;
 
-  let rx = x;
-  let ry = y;
+  let ringX = x;
+  let ringY = y;
 
-  addEventListener(
-    'pointermove',
-    e => {
+
+  window.addEventListener(
+    "pointermove",
+    event => {
 
       x =
-        e.clientX;
+        event.clientX;
 
       y =
-        e.clientY;
+        event.clientY;
+
 
       dot.style.left =
-        x + 'px';
+        `${x}px`;
 
       dot.style.top =
-        y + 'px';
+        `${y}px`;
 
       label.style.left =
-        x + 'px';
+        `${x}px`;
 
       label.style.top =
-        y + 'px';
+        `${y}px`;
+
     }
   );
 
+
   function cursorLoop(){
 
-    rx +=
-      (x - rx) * .18;
+    ringX +=
+      (x - ringX) * .18;
 
-    ry +=
-      (y - ry) * .18;
+    ringY +=
+      (y - ringY) * .18;
+
 
     ring.style.left =
-      rx + 'px';
+      `${ringX}px`;
 
     ring.style.top =
-      ry + 'px';
+      `${ringY}px`;
+
 
     requestAnimationFrame(
       cursorLoop
     );
+
   }
+
 
   cursorLoop();
 
-  $$('[data-cursor]').forEach(
-    el => {
 
-      el.addEventListener(
-        'mouseenter',
+  $$("[data-cursor]").forEach(
+    element => {
+
+      element.addEventListener(
+        "mouseenter",
         () => {
 
           label.textContent =
-            el.dataset.cursor;
+            element.dataset.cursor;
 
           ring.style.width =
-            '48px';
+            "48px";
 
           ring.style.height =
-            '48px';
+            "48px";
+
         }
       );
 
-      el.addEventListener(
-        'mouseleave',
+
+      element.addEventListener(
+        "mouseleave",
         () => {
 
           label.textContent =
-            '';
+            "";
 
           ring.style.width =
-            '31px';
+            "31px";
 
           ring.style.height =
-            '31px';
+            "31px";
+
         }
       );
 
     }
   );
+
 }
+
 
 /* =========================================================
    MAGNETIC BUTTONS
 ========================================================= */
 
-if(fine && !reduce){
+if(
+  finePointer &&
+  !reduceMotion
+){
 
-  $$('.magnetic').forEach(
-    el => {
+  $$(".magnetic").forEach(
+    element => {
 
-      el.addEventListener(
-        'pointermove',
-        e => {
+      element.addEventListener(
+        "pointermove",
+        event => {
 
-          const b =
-            el.getBoundingClientRect();
+          const rect =
+            element.getBoundingClientRect();
+
 
           const dx =
             (
-              e.clientX -
-              (b.left + b.width / 2)
+              event.clientX -
+              (
+                rect.left +
+                rect.width / 2
+              )
             ) * .08;
+
 
           const dy =
             (
-              e.clientY -
-              (b.top + b.height / 2)
+              event.clientY -
+              (
+                rect.top +
+                rect.height / 2
+              )
             ) * .08;
 
-          el.style.transform =
+
+          element.style.transform =
             `translate(${dx}px,${dy}px)`;
+
         }
       );
 
-      el.addEventListener(
-        'pointerleave',
+
+      element.addEventListener(
+        "pointerleave",
         () => {
 
-          el.style.transform =
-            '';
+          element.style.transform =
+            "";
+
         }
       );
 
     }
   );
+
 }
+
 
 /* =========================================================
    URL NORMALIZATION
@@ -3726,68 +4520,105 @@ if(fine && !reduce){
 
 function normalizeUrl(value){
 
-  value =
+  const clean =
     value.trim();
 
-  return /^https?:\/\//i.test(value)
-    ? value
-    : 'https://' + value;
+
+  if(
+    /^https?:\/\//i.test(
+      clean
+    )
+  ){
+
+    return clean;
+
+  }
+
+
+  return `https://${clean}`;
+
 }
+
 
 /* =========================================================
    WEBSITE AUDIT
 ========================================================= */
 
 const auditForm =
-  $('#auditForm');
+  $("#auditForm");
+
 
 if(auditForm){
 
   auditForm.addEventListener(
-    'submit',
-    async e => {
+    "submit",
+    async event => {
 
-      e.preventDefault();
+      event.preventDefault();
+
 
       const input =
-        $('#auditUrl');
+        $("#auditUrl");
 
       const status =
-        $('#auditStatus');
+        $("#auditStatus");
 
-      const out =
-        $('#auditResult');
+      const result =
+        $("#auditResult");
 
-      const btn =
-        e.submitter;
+      const nextStep =
+        $("#auditNextStep");
+
+      const button =
+        event.submitter ||
+        auditForm.querySelector(
+          "button"
+        );
+
 
       const url =
         normalizeUrl(
           input.value
         );
 
-      btn.disabled = true;
 
-      btn.textContent =
-        'Analyzing…';
+      button.disabled =
+        true;
 
-      out.style.display =
-        'none';
+      button.textContent =
+        "Analyzing…";
+
+
+      result.style.display =
+        "none";
+
+      result.innerHTML =
+        "";
+
+
+      if(nextStep){
+
+        nextStep.style.display =
+          "none";
+
+      }
+
 
       status.textContent =
-        'Fetching the public website and checking available signals…';
+        "Fetching the public website and checking available signals…";
+
 
       try{
 
-        const res =
+        const response =
           await fetch(
-            '/.netlify/functions/audit',
+            "/.netlify/functions/audit",
             {
-              method:'POST',
+              method:"POST",
 
               headers:{
-                'Content-Type':
-                  'application/json'
+                "Content-Type":
+                  "application/json"
               },
 
               body:
@@ -3797,124 +4628,164 @@ if(auditForm){
             }
           );
 
+
         const data =
-          await res.json();
+          await response.json();
+
 
         if(
-          !res.ok ||
+          !response.ok ||
           !data.success
         ){
 
           throw new Error(
             data.error ||
-            'The website could not be analyzed.'
+            "The website could not be analyzed."
           );
+
         }
+
 
         const scores =
           data.scores || {};
 
-        out.innerHTML =
-          Object.entries(scores)
-            .map(
-              ([key,value]) => {
 
-                const label =
-                  key.replace(
+        result.innerHTML =
+          Object.entries(
+            scores
+          )
+          .map(
+            ([key,value]) => {
+
+              const label =
+                key
+                  .replace(
                     /([A-Z])/g,
-                    ' $1'
-                  );
+                    " $1"
+                  )
+                  .trim();
 
-                const score =
-                  typeof value === 'number'
-                    ? Math.round(value)
-                    : '—';
 
-                return `
-                  <div class="score">
-                    <small>${label}</small>
-                    <strong>${score}</strong>
-                    <small>/ 100</small>
-                  </div>
-                `;
-              }
-            )
-            .join('');
+              const score =
+                typeof value === "number"
+                  ? Math.round(value)
+                  : "—";
 
-        out.style.display =
-          'grid';
+
+              return `
+                <div class="score">
+                  <small>${label}</small>
+                  <strong>${score}</strong>
+                  <small>/ 100</small>
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+
+        result.style.display =
+          "grid";
+
+
+        if(nextStep){
+
+          nextStep.style.display =
+            "flex";
+
+        }
+
 
         status.textContent =
           data.insufficientData
-            ? 'Review completed with limited public data.'
-            : 'Review completed from the website response.';
+            ? "Review completed with limited public data."
+            : "Review completed from the website response.";
 
-      }catch(err){
+
+      }
+
+      catch(error){
 
         status.textContent =
-          err.message ||
-          'We could not complete the review. Please check the URL and try again.';
+          error.message ||
+          "We could not complete the review. Please check the URL and try again.";
 
-      }finally{
+      }
 
-        btn.disabled = false;
+      finally{
 
-        btn.textContent =
-          'Analyze ↗';
+        button.disabled =
+          false;
+
+        button.textContent =
+          "Analyze ↗";
+
       }
 
     }
   );
+
 }
+
 
 /* =========================================================
    CONTACT FORM
 ========================================================= */
 
 const contactForm =
-  $('#contactForm');
+  $("#contactForm");
+
 
 if(contactForm){
 
   contactForm.addEventListener(
-    'submit',
-    async e => {
+    "submit",
+    async event => {
 
-      e.preventDefault();
+      event.preventDefault();
+
 
       const form =
-        e.currentTarget;
+        event.currentTarget;
 
       const status =
-        $('#contactStatus');
+        $("#contactStatus");
 
-      const btn =
+      const button =
         form.querySelector(
-          'button'
+          "button"
         );
 
-      btn.disabled =
+
+      button.disabled =
         true;
 
+      button.textContent =
+        "Sending…";
+
+
       status.textContent =
-        'Sending…';
+        "Sending your enquiry…";
+
 
       const payload =
         Object.fromEntries(
           new FormData(form)
         );
 
+
       try{
 
-        const res =
+        const response =
           await fetch(
-            '/.netlify/functions/contact',
+            "/.netlify/functions/contact",
             {
-              method:'POST',
+              method:"POST",
 
               headers:{
-                'Content-Type':
-                  'application/json'
+                "Content-Type":
+                  "application/json"
               },
 
               body:
@@ -3924,42 +4795,117 @@ if(contactForm){
             }
           );
 
+
         const data =
-          await res.json();
+          await response.json();
+
 
         if(
-          !res.ok ||
+          !response.ok ||
           !data.success
         ){
 
           throw new Error(
             data.message ||
             data.error ||
-            'We could not send the enquiry.'
+            "We could not send the enquiry."
           );
+
         }
 
+
         status.textContent =
-          'Thanks — your enquiry was sent. We’ll be in touch.';
+          "Thanks — your enquiry was sent. We’ll be in touch within 24 hours.";
+
 
         form.reset();
 
-      }catch(err){
+      }
+
+      catch(error){
 
         status.textContent =
-          err.message ||
-          'Something went wrong. Please try again.';
+          error.message ||
+          "Something went wrong. Please try again.";
 
-      }finally{
+      }
 
-        btn.disabled =
+      finally{
+
+        button.disabled =
           false;
+
+        button.textContent =
+          "Send Enquiry ↗";
+
       }
 
     }
   );
+
 }
+
+
+/* =========================================================
+   NAVIGATION — CLOSE URL HASH WITHOUT JUMPING BADLY
+========================================================= */
+
+document.querySelectorAll(
+  'a[href^="#"]'
+).forEach(
+  link => {
+
+    link.addEventListener(
+      "click",
+      event => {
+
+        const targetId =
+          link.getAttribute(
+            "href"
+          );
+
+
+        if(
+          !targetId ||
+          targetId === "#"
+        ){
+
+          return;
+
+        }
+
+
+        const target =
+          document.querySelector(
+            targetId
+          );
+
+
+        if(!target){
+
+          return;
+
+        }
+
+
+        event.preventDefault();
+
+
+        target.scrollIntoView({
+          behavior:
+            reduceMotion
+              ? "auto"
+              : "smooth",
+          block:"start"
+        });
+
+      }
+    );
+
+  }
+);
+
 </script>
 
 </body>
-</html>
+          </html>
