@@ -927,8 +927,127 @@ h2{
 
 
 /* =========================================================
+   AUTOMATION SYSTEMS
+========================================================= */
+
+.automation-showcase{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(0,200,245,.14), transparent 28%),
+    radial-gradient(circle at 15% 85%, rgba(31,111,255,.12), transparent 30%),
+    #05070b;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:30px;
+  padding:clamp(28px,5vw,58px);
+}
+
+.automation-showcase::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg, transparent 35%, rgba(255,255,255,.035), transparent 65%);
+}
+
+.automation-head{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:55px;
+  align-items:end;
+}
+
+.automation-head h2{
+  max-width:760px;
+  margin:18px 0 0;
+  color:#fff;
+  font-size:clamp(48px,6vw,86px);
+  line-height:.94;
+  letter-spacing:-.055em;
+}
+
+.automation-head p{
+  max-width:520px;
+  margin:0;
+  color:#aeb8c8;
+  font-size:18px;
+  line-height:1.65;
+}
+
+.automation-flow{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  margin-top:45px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+  background:rgba(255,255,255,.1);
+}
+
+.automation-node{
+  min-height:145px;
+  padding:23px 20px;
+  background:rgba(8,12,18,.94);
+}
+
+.automation-node small{
+  display:block;
+  margin-bottom:28px;
+  color:#657186;
+  font:700 11px Manrope,sans-serif;
+  letter-spacing:.12em;
+}
+
+.automation-node b{
+  display:block;
+  color:#fff;
+  font-size:19px;
+  letter-spacing:-.035em;
+}
+
+.automation-node span{
+  display:block;
+  margin-top:9px;
+  color:#8995a8;
+  font-size:13px;
+  line-height:1.45;
+}
+
+.automation-note{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  gap:25px;
+  align-items:center;
+  margin-top:24px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+
+.automation-note b{
+  color:#fff;
+  font-size:18px;
+}
+
+.automation-note span{
+  color:#8e9aad;
+  font-size:13px;
+  line-height:1.5;
+  text-align:right;
+}
+
+
+/* =========================================================
    PROCESS
 ========================================================= */
+
+
 
 .process-layout{
   display:grid;
@@ -2187,6 +2306,29 @@ details p{
 }
 
 
+@media(max-width:1000px){
+
+  .automation-head{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .automation-flow{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .automation-note{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .automation-note span{
+    text-align:left;
+  }
+
+}
+
+
 /* =========================================================
    TABLET
 ========================================================= */
@@ -2312,6 +2454,31 @@ details p{
 ========================================================= */
 
 @media(max-width:600px){
+
+  .automation-showcase{
+    padding:26px 20px;
+    border-radius:24px;
+  }
+
+  .automation-head h2{
+    font-size:clamp(46px,14vw,72px);
+  }
+
+  .automation-flow{
+    grid-template-columns:1fr;
+    margin-top:32px;
+  }
+
+  .automation-node{
+    min-height:auto;
+    padding:20px;
+  }
+
+  .automation-node small{
+    margin-bottom:14px;
+  }
+
+
 
   .final .scene-inner{
     transform:none !important;
@@ -2923,6 +3090,96 @@ details p{
 
           </article>
 
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     AUTOMATION SYSTEMS
+======================================================= -->
+
+<section
+  id="automation"
+  class="scene-wrap scene--dark"
+  data-scene="automation"
+>
+
+  <div class="scene">
+
+    <div class="scene-inner">
+
+      <div class="automation-showcase">
+
+        <div class="automation-head">
+
+          <div>
+
+            <div class="kicker">
+              Automation systems
+            </div>
+
+            <h2>
+              Build the system
+              behind the website.
+            </h2>
+
+          </div>
+
+          <p>
+            A website can generate an enquiry. A connected system can help
+            make sure that enquiry gets captured, organized, followed up
+            and moved toward a real conversation — without adding more
+            repetitive work to your day.
+          </p>
+
+        </div>
+
+
+        <div class="automation-flow">
+
+          <div class="automation-node">
+            <small>01</small>
+            <b>Capture</b>
+            <span>Turn visits and enquiries into structured leads.</span>
+          </div>
+
+          <div class="automation-node">
+            <small>02</small>
+            <b>Qualify</b>
+            <span>Organize the opportunities worth your attention.</span>
+          </div>
+
+          <div class="automation-node">
+            <small>03</small>
+            <b>Reach out</b>
+            <span>Trigger personalized outreach and next steps.</span>
+          </div>
+
+          <div class="automation-node">
+            <small>04</small>
+            <b>Follow up</b>
+            <span>Keep conversations moving with controlled workflows.</span>
+          </div>
+
+          <div class="automation-node">
+            <small>05</small>
+            <b>Hand off</b>
+            <span>Stop automation when a real conversation begins.</span>
+          </div>
+
+        </div>
+
+
+        <div class="automation-note">
+          <b>Less repetitive work. More consistent follow-through.</b>
+          <span>Built around your existing tools and business process.</span>
         </div>
 
       </div>
