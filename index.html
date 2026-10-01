@@ -3975,16 +3975,12 @@ details p{
 
       <form
         class="contact-form"
-        id="contactForm"
         name="contact"
         method="POST"
         data-netlify="true"
       >
-        <input
-          type="hidden"
-          name="form-name"
-          value="contact"
-        >
+
+        <input type="hidden" name="form-name" value="contact">
 
         <input
           name="name"
@@ -4031,22 +4027,14 @@ details p{
           required
         ></textarea>
 
-
-        <div
-          class="contact-status"
-          id="contactStatus"
-        ></div>
-
-
         <button
-          class="btn light magnetic"
+          class="btn light"
           type="submit"
         >
           Send Enquiry ↗
         </button>
 
       </form>
-
     </div>
 
   </div>
@@ -4788,106 +4776,8 @@ if(auditForm){
    CONTACT FORM
 ========================================================= */
 
-const contactForm =
-  $("#contactForm");
+/* Contact form intentionally uses the native browser submission path. */
 
-
-if(contactForm){
-
-  contactForm.addEventListener(
-    "submit",
-    async event => {
-
-      event.preventDefault();
-
-
-      const form =
-        event.currentTarget;
-
-      const status =
-        $("#contactStatus");
-
-      const button =
-        form.querySelector(
-          "button"
-        );
-
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Sending…";
-
-
-      status.textContent =
-        "Sending your enquiry…";
-
-
-      const formData =
-        new FormData(form);
-
-
-      try{
-
-        const response =
-          await fetch(
-            "/",
-            {
-              method:"POST",
-
-              headers:{
-                "Content-Type":
-                  "application/x-www-form-urlencoded"
-              },
-
-              body:
-                new URLSearchParams(
-                  formData
-                ).toString()
-            }
-          );
-
-
-        if(!response.ok){
-
-          throw new Error(
-            "We could not send the enquiry. Please try again."
-          );
-
-        }
-
-
-        status.textContent =
-          "Thanks — your enquiry was sent. We’ll be in touch within 24 hours.";
-
-
-        form.reset();
-
-      }
-
-      catch(error){
-
-        status.textContent =
-          error.message ||
-          "Something went wrong. Please try again.";
-
-      }
-
-      finally{
-
-        button.disabled =
-          false;
-
-        button.textContent =
-          "Send Enquiry ↗";
-
-      }
-
-    }
-  );
-
-}
 
 
 /* Contact inputs intentionally use native browser editing behavior. */
