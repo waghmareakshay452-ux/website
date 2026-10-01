@@ -1968,10 +1968,20 @@ details p{
   min-width:0;
   min-height:50px;
 
-  color:#fff !important;
-  -webkit-text-fill-color:#fff !important;
-  caret-color:#fff !important;
+  display:block;
+  appearance:none;
+  -webkit-appearance:none;
+
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  caret-color:#ffffff !important;
   opacity:1 !important;
+  text-shadow:0 0 0 #ffffff !important;
+  color-scheme:dark;
+
+  -webkit-user-select:text !important;
+  user-select:text !important;
+  -webkit-touch-callout:default !important;
 
   border:1px solid #343b49;
   border-radius:12px;
@@ -4875,6 +4885,26 @@ if(contactForm){
   );
 
 }
+
+
+/* =========================================================
+   CONTACT INPUT RENDERING
+========================================================= */
+
+$(".contact-form input, .contact-form textarea").forEach(
+  field => {
+    const forceVisible = () => {
+      field.style.setProperty("color", "#ffffff", "important");
+      field.style.setProperty("-webkit-text-fill-color", "#ffffff", "important");
+      field.style.setProperty("caret-color", "#ffffff", "important");
+      field.style.setProperty("opacity", "1", "important");
+    };
+
+    field.addEventListener("focus", forceVisible);
+    field.addEventListener("input", forceVisible);
+    forceVisible();
+  }
+);
 
 
 /* =========================================================
