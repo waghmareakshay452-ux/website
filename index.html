@@ -3929,7 +3929,15 @@ details p{
       <form
         class="contact-form"
         id="contactForm"
+        name="contact"
+        method="POST"
+        data-netlify="true"
       >
+        <input
+          type="hidden"
+          name="form-name"
+          value="contact"
+        >
 
         <input
           name="name"
@@ -4769,46 +4777,35 @@ if(contactForm){
         "Sending your enquiry…";
 
 
-      const payload =
-        Object.fromEntries(
-          new FormData(form)
-        );
+      const formData =
+        new FormData(form);
 
 
       try{
 
         const response =
           await fetch(
-            "/.netlify/functions/contact",
+            "/",
             {
               method:"POST",
 
               headers:{
                 "Content-Type":
-                  "application/json"
+                  "application/x-www-form-urlencoded"
               },
 
               body:
-                JSON.stringify(
-                  payload
-                )
+                new URLSearchParams(
+                  formData
+                ).toString()
             }
           );
 
 
-        const data =
-          await response.json();
-
-
-        if(
-          !response.ok ||
-          !data.success
-        ){
+        if(!response.ok){
 
           throw new Error(
-            data.message ||
-            data.error ||
-            "We could not send the enquiry."
+            "We could not send the enquiry. Please try again."
           );
 
         }
@@ -4819,8 +4816,6 @@ if(contactForm){
 
 
         form.reset();
-
-      }
 
       catch(error){
 
