@@ -1959,25 +1959,34 @@ details p{
   gap:10px;
 }
 
+.contact-form{
+  position:relative;
+  z-index:20;
+}
+
 .contact-form input,
 .contact-form textarea{
   width:100%;
-
   padding:15px;
 
   min-width:0;
   min-height:50px;
 
   display:block;
+  position:relative;
+  z-index:21;
+
   appearance:none;
   -webkit-appearance:none;
 
-  color:#ffffff !important;
-  -webkit-text-fill-color:#ffffff !important;
-  caret-color:#ffffff !important;
+  background:#ffffff !important;
+  color:#111827 !important;
+  -webkit-text-fill-color:#111827 !important;
+  caret-color:#111827 !important;
   opacity:1 !important;
-  text-shadow:0 0 0 #ffffff !important;
-  color-scheme:dark;
+
+  font-size:16px !important;
+  line-height:1.4 !important;
 
   -webkit-user-select:text !important;
   user-select:text !important;
@@ -1988,11 +1997,9 @@ details p{
 
   outline:none;
 
-  background:#171d27;
-
   transition:
     border-color .25s ease,
-    box-shadow .25s ease;
+    box-shadow .25s ease; 
 }
 
 .contact-form input:focus,
@@ -4893,16 +4900,10 @@ if(contactForm){
 
 $(".contact-form input, .contact-form textarea").forEach(
   field => {
-    const forceVisible = () => {
-      field.style.setProperty("color", "#ffffff", "important");
-      field.style.setProperty("-webkit-text-fill-color", "#ffffff", "important");
-      field.style.setProperty("caret-color", "#ffffff", "important");
-      field.style.setProperty("opacity", "1", "important");
-    };
-
-    field.addEventListener("focus", forceVisible);
-    field.addEventListener("input", forceVisible);
-    forceVisible();
+    field.style.setProperty("color", "#111827", "important");
+    field.style.setProperty("-webkit-text-fill-color", "#111827", "important");
+    field.style.setProperty("caret-color", "#111827", "important");
+    field.style.setProperty("opacity", "1", "important");
   }
 );
 
