@@ -240,6 +240,11 @@ select{
   letter-spacing:-.06em;
 }
 
+.mobile-portfolio-link{
+  display:none;
+}
+
+
 .navlinks{
   display:flex;
   align-items:center;
@@ -2339,6 +2344,19 @@ details p{
     display:none;
   }
 
+  .mobile-portfolio-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
+    color:var(--ink);
+    font-size:12px;
+    font-weight:700;
+    padding:9px 10px;
+    border:1px solid rgba(20,35,65,.14);
+    border-radius:999px;
+  }
+
   .hero-copy{
     display:block;
   }
@@ -2768,6 +2786,14 @@ details p{
       aria-label="Web Craft home"
     >
       Web Craft.
+    </a>
+
+    <a
+      class="mobile-portfolio-link"
+      href="/portfolio.html"
+      aria-label="View Web Craft portfolio"
+    >
+      Portfolio ↗
     </a>
 
     <nav
